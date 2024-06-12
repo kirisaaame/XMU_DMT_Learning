@@ -1,0 +1,1 @@
+{"name":"Local: 4","url":"c:\\Users\\kirisaaame\\Desktop\\CPPfile\\数据结构实验4\\4.cpp","tests":[{"id":1701310694031,"input":"4 5\n0 1 2\n0 2 2\n0 3 3\n1 2 4\n2 3 2\n1\n4 5\n0 1 2\n0 2 2\n0 3 3\n1 2 4\n2 3 2\n0 3 8","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\kirisaaame\\Desktop\\CPPfile\\数据结构实验4\\4.cpp","group":"local","local":true}

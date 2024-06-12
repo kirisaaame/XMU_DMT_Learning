@@ -1,0 +1,317 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper]{geometry}
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{diagbox}
+\usepackage{amsmath,amsfonts,graphicx,amssymb,bm,amsthm}
+%\usepackage{algorithm,algorithmicx}
+\usepackage[ruled]{algorithm2e}
+\usepackage[noend]{algpseudocode}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usetikzlibrary{arrows,automata}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{ctex}
+
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\makeatother
+
+\setlength{\headheight}{14pt}
+\setlength{\parindent}{0 in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\hfill$\blacktriangleleft$\end{trivlist}}
+\newenvironment{answer}[1][Answer]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1.}\hskip \labelsep]}{\hfill$\lhd$\end{trivlist}}
+
+\newcommand\E{\mathbb{E}}
+
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+  }}%
+\def\cdddot#1{% three dots 
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}\hbox{\onedot}%
+  }}%
+}
+
+
+\title{Homework Set \#1}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+    \pagestyle{fancy}
+    \lhead{}
+    \chead{}
+    \rhead{GAMES 001, 2024 Spring}
+
+    \begin{center}
+        {\LARGE \bf Homework \#1}\\
+        {Due: 2024-4-16 00:00 \quad$|$\quad 7 Questions, 100 Pts}\\
+        {Name: XXX}
+    \end{center}
+
+    \begin{question}{1 (16') (向量空间)}~
+    
+    格拉斯曼定律是整个色度学中最核心的内容，其做出了如下假设：
+    \begin{enumerate}
+        \item[\rmnum{1}] 人眼能且仅能感知颜色的三种特征，即：色相（hue）、饱和度（saturation）和亮度（luminance）。
+        \item[\rmnum{2}] 两种色光，若它们对人眼的色觉刺激相同，则它们在色光混合实验中的表现就完全相同，无论这两种色光的光谱组成如何。
+        \item[\rmnum{3}] 无论两种色光的功率谱如何，只要它们具有相同的色相和饱和度，混合时就会产生另一种具有相同色相和饱和度的色光。
+        \item[\rmnum{4}] \textbf{（Abney定律）}混合色光的亮度等于各组分色光的亮度之和。
+    \end{enumerate}
+    根据格拉斯曼定律\rmnum{2}，我们可以对于不同的色光 $C$，定义一个等价关系 $\sim$，若 $C_1 \sim C_2$，则 $C_1$ 和 $C_2$ 在人眼看来是相同的。
+    
+    于是我们可以使用 $[C]$ 来表示色光 $C$ 对人眼的刺激（即色光 $C$ 的颜色），则 $[C]$ 可以视为色光 $C$ 关于 $\sim$ 的等价类，且根据格拉斯曼定律\rmnum{1}, $[C]$ 将仅包含三个参数。
+    
+    定义加法 $C_1 \oplus C_2$ 为 $C_1$ 与 $C_2$ 混合后得到的色光，则在 $\{[C]\}$ 上定义加法运算为
+    \[[C_1] + [C_2] = [C_1 \oplus C_2].\]
+    
+    \begin{enumerate}
+        \item [a (4')] 请证明以上加法是良定义的，即$\forall c_1 \in [C_1]$, $c_2 \in [C_2]$, $c_1 \oplus c_2 \in [C_1 \oplus C_2]$。
+    \end{enumerate}
+    
+    对于色光 $C$，若其功率谱为 $P(\lambda)$， 那么定义 $\alpha \odot C$（$\alpha \in \mathbb{R}$）为：将 $C$ 的功率谱变为 $\alpha P(\lambda)$ 而不改变 $C$ 的其他特征所得到的色光。于是可以在 $\{[C]\}$ 上定义数乘运算为
+    \[\alpha \cdot [C] = [\alpha \odot C].\]
+    
+    \begin{enumerate}
+        \item [b (4')] 请证明以上数乘是良定义的，即$\forall \alpha \in \mathbb{R}$, $c \in [C]$, $\alpha \odot c \in [\alpha \odot C]$。
+        \item [c (4')] 请证明配置了如上加法运算与数乘运算的空间 $\{[C]\}$ 为线性空间。
+    \end{enumerate}
+    
+    对于 $[C]$ 定义其上亮度为 $L_V([C])$。
+    
+    \begin{enumerate}
+        \item [d (4')] 请根据格拉斯曼定律证明以上运算为线性算子。
+    \end{enumerate}
+    
+    \end{question}
+
+    \begin{question}{2 (20') (矩阵特征值)}~
+    
+    对于矩阵 $\vb{A}$ 定义其上多项式为
+    \[f(\vb{A}) = c_k \vb{A}^k + c_{k-1} \vb{A}^{k-1} + \cdots + c_1 \vb{A} + c_0 \vb{I}, \]
+    其中 $\vb{I}$ 为单位矩阵。
+    
+    \begin{enumerate}
+        \item [a (4')] 证明若 $\lambda$ 为 $\vb{A}$ 的特征值，则 $f(\lambda)$ 为 $f(\vb{A})$ 的特征值。
+        \item [b (4')] 若 $\vb{A}$ 的特征值为 $\{\lambda_1, \ldots, \lambda_n\}$，则 $f(\vb{A})$ 的全部特征值为 $\{f(\lambda_1), \ldots, f(\lambda_n)\}$。
+    \end{enumerate}
+    
+    有了这些工具，我们便可以定义矩阵上的指数运算 $e^{\vb{A}}$ 为
+    \[ e^{\vb{A}} = \sum_{k=0}^\infty \frac{1}{k!} \vb{A}^k = \lim_{k \to \infty} \qty(\vb{I} + \frac{\vb{A}}{k})^k. \]
+    
+    \begin{enumerate}
+        \item [c (4')] 证明 $e^{\vb{X}^{\vb{T}}} = \qty(e^{\vb{X}})^{\vb{T}}$。
+        \item [*d (2')]（Jacobi's formula）证明对于任意方阵 $\vb{B}$，满足 $\det(e^{\vb{B}}) = e^{\Tr(\vb{B})}$。
+        
+        这一性质将为常微分方程求解提供重要的性质保证。
+    \end{enumerate}
+    
+    对于由 $\vb*{a}$ 和 $\vb*{b}$ 定义的平面，其上有一个生成子
+    \[ \vb{G} = \vb*{b} \vb*{a}^{\vb{T}} - \vb*{a} \vb*{b}^{\vb{T}}\]
+    与投影算符
+    \[ \vb{P} = -\vb{G}^2.\]
+    
+    \begin{enumerate}
+        \item [e (4')] 请给出 $\vb{P}$ 关于 $\vb*{a}$ 和 $\vb*{b}$ 的表达式。
+        \item [*f (2')] 请给出 $\vb{R}(\theta) = e^{\vb{G}\theta}$ 的表达式，并验证其为 $\{\vb*{a}, \vb*{b}\}$ 平面上的旋转矩阵。
+    \end{enumerate}
+
+
+    \end{question}
+
+    \begin{question}{3 (11') (矩阵范数)}~
+    
+    对于 $\mathbb{R}^n$ 上的向量 $\vb*{x}$ 定义运算 $\norm{\cdot}_p \in \mathbb{R}^n \to \mathbb{R}$ 为
+    \[ \norm{\vb*{x}}_p = \qty(\sum_{i=1}^n x_i^p)^{1/p}, \]
+    其中 $x_i$ 为 $\vb*{x}$ 的第 $i$ 个分量。
+    
+    \begin{enumerate}
+        \item [a (4')] 请证明运算 $\norm{\cdot}_p$ 构成 $\mathbb{R}^n$ 上的一个范数，即 $L_p$ 范数。
+    \end{enumerate}
+    
+    此后我们便可以在矩阵上定义范数。
+    
+    \begin{enumerate}
+        \item [b (3')] 诱导范数
+        
+        对于 $\mathbb{R}^{m, n}$ 上的矩阵 $\vb{A}$ 定义运算 $\norm{\cdot}_{ip} \in \mathbb{R}^{m, n} \to \mathbb{R}$ 为
+        \[ \norm{\vb{A}}_{ip} = \max{\frac{\norm{\vb{A}\vb*{x}}}{\norm{\vb*{x}}}}, \quad \vb*{x} \neq \vb*{0}.\]
+        
+        \begin{enumerate}
+            \item [\rmnum{1}] 请分别给出 $p = 1, 2, \infty$ 时 $\norm{\vb{A}}_{ip}$ 的表达式。
+            \item [\rmnum{2}] 请证明该运算构成 $\mathbb{R}^{m, n}$ 上的一个范数.
+        \end{enumerate}
+    \end{enumerate}
+    
+    我们还可以通过矩阵的元素与其奇异值定义范数。
+    
+    定义逐元素范数 $\norm{\cdot}_{ep} \in \mathbb{R}^{m, n} \to \mathbb{R}$ 为
+    \[ \norm{\vb{A}}_{ep} = \qty(\sum_{i=1}^m\sum_{j=1}^n a_{i, j}^p)^{1/p}.\]
+    
+    对于矩阵 $\vb{A}$ 的全体特征值 $\{\sigma_1, \ldots, \sigma_k\}, k = \min\{m, n\}$ 定义 Schatten 范数为
+    \[ \norm{\vb{A}}_{sp} = \qty(\sum_{i=1}^k \sigma_i^p)^{1/p}. \]
+    
+    \begin{enumerate}
+        \item [*c (2')] 在不使用特征值的情况下，仅利用对于矩阵 $\vb{A}$ 的运算写出 $p = 1, 2$ 时 Scatten 范数的表达式。
+        \item [*d (2')] 证明 $p = 2$ 的情况下，Scatten 范数与逐元素范数等价。
+    \end{enumerate}
+    \end{question}
+
+    % \begin{question}{4 (？') (旋转矩阵)}~
+    % 定义 $n$ 维空间上旋转矩阵所构成的空间为 $SO(n)$。
+    
+    % \begin{enumerate}
+    %     \item [a (?')] 请证明 $SO(n)$ 构成一个群。
+    %     \item [b (?')] 若一个群中任意两个元素的乘积与其相对位置无关，该群为 Abel 群。$SO(n)$ 是否构成 Abel 群？若是，请证明；若不是，请举出一个例子。
+    % \end{enumerate}
+    % \end{question}
+    
+    % \begin{question}{4 (？') (Minkowski 空间)}~
+    % Minkowski 空间 $M \subset \mathbb{R}^n$ 是带有内积 \[ \langle u , v \rangle = u_1v_1 - \sum_{i=2}^n u_iv_i \] 的内积空间。
+    
+    % \begin{enumerate}
+    %     \item [a (?')] 证明 Minkowski 空间中的三角不等式 $\norm{u+v} \ge \norm{u} + \norm{v}$。
+    % \end{enumerate}
+    % \end{question}
+    
+        
+    \begin{question}{4 (16') (度量张量)}~
+    
+    为了在任意曲线坐标系中进行矢量微积分，我们定义任意局部坐标点 $(x^1, x^2, x^3)$ 处当局部坐标有微小的增量时，矢径 $\dd \vb*{r}$ 与坐标的微分 $\dd x^i (i = 1, 2, 3)$ 之间的关系
+    \[ \dd \vb*{r} = \vb*{g}_i \dd x^i, \]
+    中的
+    \[ \vb*{g}_i = \pdv{x}{x^i} \vb*{i} + \pdv{y}{x^i} \vb*{j} + \pdv{z}{x^i} \vb*{k} \quad (i = 1, 2, 3) \]
+    为协变基或者自然局部基矢量，其中 $\vb*{i, j, k}$ 为笛卡尔坐标。
+    
+    以球坐标为例，$(x^1, x^2, x^3) = (r, \theta, \phi)$，对应于笛卡尔坐标
+    \[ (x, y, z) = (x^1 \sin x^2 \cos x^3, x^1 \sin x^2 \sin x^3, x^1 \cos x^2). \]
+    
+    \begin{enumerate}
+        \item [a (4')] 请给出球坐标下的协变基相对于笛卡尔坐标系的表达式。
+    \end{enumerate}
+    
+    定义一组 3 个与协变基矢量 $\vb*{g}_i$ 互为对偶的逆变基矢量 $\vb*{g}^i$，满足对偶条件
+    \[ \vb*{g}^j \vdot \vb*{g}_i = \delta^j_i, \]
+    其中 $\delta^j_i$ 为克罗内克张量，定义为
+    \begin{equation*}
+        \delta^\beta_\alpha = \begin{cases}
+        1, & \alpha = \beta, \\
+        0, & \alpha \neq \beta.
+        \end{cases}
+    \end{equation*}
+    
+    \begin{enumerate}
+        \item [b (4')] 请给出球坐标下的逆变基相对于笛卡尔坐标系的表达式。
+        \item [c (4')] 请给出矢径发生微小变化时长度的变化，即 $\abs{\dd \vb*{r}}^2 = \dd \vb*{r} \vdot \dd \vb*{r} = \dd r^i \dd r_i$。
+        \item [d (4')] 请给出两个矢径 $\vb*{r}_1$ 与 $\vb*{r}_2$ 之间夹角的表达式，
+        \[ \cos \psi = \frac{\vb*{r}_1 \vdot \vb*{r}_2}{\abs{\vb*{r}_1}\abs{\vb*{r}_1}}. \]
+    \end{enumerate}
+    \end{question}
+
+
+    \begin{question}{5 (10') (矩阵求导)}~
+    
+    在弹性体仿真中，我们常常会遇到应变 $\epsilon_{ij}$，其描述了材料中的一个区域变化后 $\hat{\vb*{r}}$ 相对于变化前 $\vb*{r}$ 沿各个方向上的变动情况。
+    
+    \begin{enumerate}
+        \item [*a (2')] 请根据定义 $\dd \hat{\vb*{r}} \vdot \dd \hat{\vb*{r}} - \dd \vb*{r} \vdot \dd \vb*{r} = 2\epsilon_{ij} \dd x^i \dd x^j$ 出发，证明 $\epsilon_{ij}$ 是对称二阶张量的分量。式中 $\dd x^i$ 是介质的拉格朗日坐标的微分。
+    \end{enumerate}
+    
+    对于任意二阶张量 $\vb{\epsilon} = \epsilon^i_{\cdot j} \vb*{g}_i \vb*{g}^j$ 定义其主不变量
+    \begin{equation*}
+    \begin{aligned}
+        \mathcal{J}_1 &= \epsilon^i_{\cdot i}, \\
+        \mathcal{J}_2 &= \frac{1}{2}\qty(\epsilon^i_{\cdot i}\epsilon^j_{\cdot j} - \epsilon^i_{\cdot j}\epsilon^j_{\cdot i}), \\
+        \mathcal{J}_3 &= \det \vb{\epsilon},
+    \end{aligned}
+    \end{equation*}
+    与前三阶矩
+    \begin{equation*}
+    \begin{aligned}
+        \mathcal{J}_1^* &= \Tr(\vb{\epsilon}), \\
+        \mathcal{J}_2^* &= \Tr(\vb{\epsilon} \vdot \vb{\epsilon}), \\
+        \mathcal{J}_3^* &= \Tr(\vb{\epsilon} \vdot \vb{\epsilon} \vdot \vb{\epsilon}).
+    \end{aligned}
+    \end{equation*}
+    \begin{enumerate}
+        \item [*b (2')] 请利用前三阶矩来表示主不变量。
+        \item [*c (2')] 请利用主不变量来表示前三阶矩。
+    \end{enumerate}
+    
+    对于具有应变能密度 $\omega$ 的弹性材料，其满足格林公式
+    \[ \vb{\sigma} = \dv{\omega}{\vb{\epsilon}}, \]
+    其上切线模量定义为
+    \[ \vb{C} = \dv{\vb{\sigma}}{\vb{\epsilon}}. \]
+    
+    \begin{enumerate}
+        \item [**d (2')] 设线弹性材料的应变能密度为
+        \[ \omega(\vb{\epsilon}) = \frac{1}{2}\qty[a_0 \qty(\mathcal{J}_1^*)^2 + a_1 \mathcal{J}_2^*], \]
+        请求出 $\vb{\sigma}$ 和 $\vb{C}$ 的矢量表达式及协变分量表达式.
+        \item [*e (2')] 定义应力偏量 $\vb{\sigma}^\prime = \vb{\sigma} - \frac{1}{3} \mathcal{J}_1(\vb{\sigma}) \vb{I}$，等效应力 $\vb{\sigma}_{\tt{eq}} = \qty(\frac{2}{3} \vb{\sigma}^\prime \cddot \vb{\sigma}^\prime)^{1/2}$，请求出
+        \[ \dv{\vb{\sigma}_{\tt{eq}}}{\vb{\sigma}}. \]
+    \end{enumerate}
+    \end{question}
+ 
+    \begin{question}{6 (18') (矢量恒等式证明)}~
+    
+    请利用 Levi-Civita 符号的性质完成如下四道证明：
+    
+    \begin{enumerate}
+        \item [a (4')] \[ (\vb*{a} \times \vb*{b}) \times \vb*{c} = (\vb*{a} \vdot \vb*{c})\vb*{b} - (\vb*{b} \vdot \vb*{c})\vb*{a} \]
+        \item [b (4')] \[ \vb*{a} \times (\vb*{b} \times \vb*{c}) = (\vb*{a} \vdot \vb*{c})\vb*{b} - (\vb*{a} \vdot \vb*{b})\vb*{c} \]
+        \item [c (3')]
+        \begin{equation*}
+            \begin{aligned}
+                (\vb*{a} \times \vb*{b}) \times (\vb*{c} \times \vb*{d})& = (\vb*{a} \vdot \vb*{c} \times \vb*{d})\vb*{b} - (\vb*{b} \vdot \vb*{c} \times \vb*{d})\vb*{a} \\
+                & = (\vb*{a} \vdot \vb*{b} \times \vb*{d})\vb*{c} - (\vb*{a} \vdot \vb*{b} \times \vb*{c})\vb*{d} \\
+            \end{aligned}
+        \end{equation*}
+        \item [d (3')] \[ (\vb*{a} \times \vb*{b}) \vdot (\vb*{c} \times \vb*{d}) = (\vb*{a} \vdot \vb*{c})(\vb*{b} \vdot \vb*{d}) - (\vb*{a} \vdot \vb*{d})(\vb*{b} \vdot \vb*{c})  \]
+    \end{enumerate}
+    以下为两道有趣的张量性质
+    \begin{enumerate}
+        \item [*e (2')] 对于矢量 $\vb*{w}, \vb*{v}$，正交张量 $\vb{Q}$，有
+        \[ \qty(\vb{Q} \vdot \vb*{v}) \times \qty(\vb{Q} \vdot \vb*{w}) = \qty(\det \vb{Q}) \vb{Q} \vdot \qty(\vb*{v} \times \vb*{w}).  \]
+        \item [*f (2')] 对于矢量 $\vb*{w}, \vb*{v}$，正则（即行列式非零）的二阶张量 $\vb{B}$，有
+        \[ \qty(\vb{B} \vdot \vb*{v}) \times \qty(\vb{B} \vdot \vb*{w}) = \qty(\det \vb{B}) \qty(\vb{B}^{-1})^{\vb{T}} \vdot \qty(\vb*{v} \times \vb*{w}).  \]
+    \end{enumerate}
+    
+    \end{question}
+
+    \begin{question}{7 (9') (矢量对偶张量)}~
+    
+    对于叉乘，计算机实现中总是将矢量 $\vb*{\omega}$ 转换为与其对偶的二阶反对称张量 $\Omega$，满足
+    \[ \vb*{\omega} = -\frac{1}{2} \vb{\epsilon} \cddot \Omega, \]
+    其中 $\epsilon$ 为 Eddington 张量，其协变与逆变分量为
+    \[ \epsilon_{ijk} = \sqrt{g} e_{ijk}, \quad \epsilon^{ijk} = \frac{1}{\sqrt{g}} e^{ijk},\]
+    其中 $g = \det{g_{ij}}$。
+    
+    请证明：
+    \begin{enumerate}
+        \item [*a (3')] 对于任一矢量 $\vb*{u}$，将满足 $\Omega \vdot \vb*{u} = \vb*{\omega} \times \vb*{u}$
+        \item [*b (3')] \[ \Omega = -\vb*{\epsilon} \vdot \vb*{\omega} = -\vb*{\omega} \vdot \vb*{\epsilon} \]
+        \item [*c (3')] 对于任意与 $\vb*{\omega}$ 平行的矢量 $\vb*{v}$ 而言，有 $\Omega \vdot \vb*{v} = 0$
+
+    \end{enumerate}
+    
+    \end{question}
+\end{document}

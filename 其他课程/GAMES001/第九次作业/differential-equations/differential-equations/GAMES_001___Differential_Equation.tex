@@ -1,0 +1,192 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper]{geometry}
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{diagbox}
+\usepackage{amsmath,amsfonts,graphicx,amssymb,bm,amsthm, mathtools}
+\usepackage{algorithm,algorithmicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usetikzlibrary{arrows,automata}
+\usepackage{hyperref}
+\usepackage{soul}
+\usepackage{physics}
+\usepackage{ctex}
+\setlength{\headheight}{14pt}
+\setlength{\parindent}{0 in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{definition*}{Definition}
+
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\hfill$\blacktriangleleft$\end{trivlist}}
+\newenvironment{answer}[1][Answer]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1.}\hskip \labelsep]}{\hfill$\lhd$\end{trivlist}}
+
+\newcommand\E{\mathbb{E}}
+\newcommand{\cov}{\operatorname{cov}}
+\newcommand{\RR}{\mathbb{R}}
+
+
+\title{Homework Set \#9}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+    \pagestyle{fancy}
+    \lhead{Peking University}
+    \chead{}
+    \rhead{GAMES 001, 2024 Spring}
+
+    \begin{center}
+        {\LARGE \bf Homework \#9}\\
+        {Due: 2024-7-9 00:00 \quad$|$\quad 5 Questions, 100 Pts}\\
+        {Name: XXX}
+    \end{center}
+    
+    \begin{question}{1 (20') (常微分方程)}~\\
+    求解以下常微分方程：
+    \begin{enumerate}
+        \item [a (5')] $\qty(y')^2 + y^2 = 1.$
+        \item [b (5')] $y'' - 2y' + 2y = e^x \sin{x}.$
+        \item [c (5')] $xy' = \sqrt{x^6 - y^2} + 3y.$ 
+        \item [d (5')]
+        \[ \dv{\vb*{y}}{x} = \mqty( 3 & -1 & -1 \\ 1 & 1 & -1 \\ 1 & -1 & 1 ) \vb*{y}. \]
+    \end{enumerate}
+    
+    \end{question}
+
+    \begin{question}{2 (30') (辛积分器)}~\\
+    人们在求解常微分方程
+        \[ y'(t) = f(t, y(t)) \]
+    时，使用的最简单的方法便是根据已知量来计算对应的更新量
+    \[y(t + \Delta t) = y(t) + \Delta t f(t_n, y_n), \]
+    这一方法被称为欧拉法。
+
+    对于粒子运动而言，我们使用其位置 $x$ 与速度 $v$ 来表示其状态。对应地，其上的欧拉法更新策略为
+    \begin{equation*}
+        \begin{aligned}
+            x(t+\Delta t) &= x(t)+v(t) \Delta t, \\
+            v(t+\Delta t) &= v(t)+a(x(t)) \Delta t, \\
+        \end{aligned}
+    \end{equation*}
+    \begin{enumerate}
+        \item [a (5')] 请根据上述算法完成 \texttt{utils.py} 文件中的 \texttt{explicit\_euler} 函数。你应当注意到，由于该方法仅有一阶精度，我们在 \texttt{ode.py} 中将每一时间步切分为了 $100$ 个子时间步。
+    \end{enumerate}
+    
+    对于数值求解 Hamilton 方程
+    \[ \dot{p} = -\pdv{H}{q}, \quad \dot{q} = \pdv{H}{p}, \]
+    人们引入了辛积分器的概念。其中 $H$ 为 Hamilton 量，位置和动量坐标的集合 $z = (q, p)$ 被称为正则坐标。Hamilton 方程随时间的演化构成了一个辛同态，即 $2$-形式 $\dd{p} \wedge \dd{q}$ 保持不变。如果数值积分方案能够保持这个 $2$-形式，就被称为辛积分器。
+
+    对于可分离的 Hamilton 量
+    \[ H(p, q) = T(p) + V(q), \]
+    我们引入算符 $D_H(\cdot) = \qty{\cdot, H}$ 来返回被作用量的泊松括号，则 Hamilton 方程可以被简化为
+    \[ \dot{z} = D_H(z), \]
+    此时解为
+    \[ z(\tau) = \exp(\tau(D_T + D_V)) z(0). \]
+
+    一般而言，$D_T$ 与 $D_V$ 不对易，所以不能对其展开时任意合并算符，我们将解写为
+    \[ \exp(\tau(D_T + D_V)) = \prod_{i=1}^k \exp(c_i\tau D_T)\exp(d_i\tau D_V) + \order{\tau^{k+1}}. \]
+    其中，$\sum_{i=1}^k c_i = \sum_{i=1}^k d_i = 1$ 为实数系数，$k$ 为积分器的阶。
+
+    应当注意到，对于所有的 $z$ 而言，
+    \[ D^2_T(z) = \qty{\qty{z, T}, T} = \qty{(\dot{q}, 0), T} = (0, 0). \]
+    我们可将指数上的算符转换为线性算符。即，$\exp(c_i\tau D_T)$ 对应的映射为
+    \[ \mqty(q \\ p) \to \mqty(q + \tau c_i \pdv{T}{p}\qty(p) \\ p), \]
+    $\exp(d_i\tau D_V)$ 对应的映射为
+    \[ \mqty(q \\ p) \to \mqty(q \\ p - \tau d_i \pdv{V}{q}\qty(q)). \]
+    
+    \begin{enumerate}
+        \item [b (10')] 请根据上述描述推导出一阶的辛欧拉积分格式。
+        \item [c (10')] 请根据您所推导出的一阶辛欧拉积分格式完成 \texttt{utils.py} 文件中的 \texttt{symplectic\_euler} 函数。
+        \item [d (5')] 请推导出一些二阶与三阶的辛欧拉积分格式并进行测试。您可以思考这些格式所对应的精度阶数。 
+    \end{enumerate}
+    
+    \end{question}
+
+   \begin{question}{3 (20') (分离变量法)}~\\
+    对于一个正方形区域 $[0, 1] \times [0, 1]$，其上的电势满足 Laplace 方程
+    \[ \nabla^2 \phi = 0. \]
+    我们为该区域设置边界条件为
+    \[ \eval{\phi}_{x = 0} = \eval{\phi}_{x = 1} = 1, \]
+    \[ \eval{\phi}_{y = 0} = \eval{\phi}_{y = 1} = -1. \]
+    \begin{enumerate}
+        \item [a (8')] 请使用分离变量法求解上述方程。
+        \item [b (10')] 请使用 Jacobi 迭代算法数值求解上述方程，完成 \texttt{utils.py} 文件中的 \texttt{iter\_jacobi} 函数。Jacobi 迭代算法的离散方案请参考 \texttt{README.md}.
+        \item [c (2')] 请对比数值算法求解结果与解析解之间的差。 
+    \end{enumerate}
+   \end{question}
+
+   \begin{question}{4 (20') (Green 恒等式)}~\\
+    设区域 $V$ 内有连续可微的标量函数场 $\phi, \psi$
+
+    \begin{enumerate}
+        \item [a (5')] 请证明 Green 第一恒等式
+        \[ \int_V{\qty(\psi \nabla^2 \phi + \grad \phi \vdot \grad \psi) \dd{V}} = \oint_{\partial V}{\psi \pdv{\phi}{\vb*{n}}\dd{A}}. \]
+
+        \item [b (5')] 请证明 Green 第二恒等式
+        \[ \int_V{\qty(\psi \nabla^2 \phi - \phi \nabla^2 \psi) \dd{V}} = \oint_{\partial V}{\qty(\psi \pdv{\phi}{\vb*{n}} - \phi \pdv{\psi}{\vb*{n}})\dd{A}}. \]
+
+        \item [c (5')] 取 $G(\vb*{r}, \vb*{r}_0)$ 为
+        \[ \nabla^2 G(\vb*{r}, \vb*{r}_0) = \delta(\vb*{r} - \vb*{r}_0) \]
+        的基本解，$\psi$ 在区域内满足拉普拉斯方程。请证明 Green 第三恒等式
+        \[ \psi(\vb*{r}) = \int_{\partial V}{\qty(\psi(\vb*{r}') \pdv{G(\vb*{r}, \vb*{r'})}{\vb*{n}'} - G(\vb*{r}, \vb*{r'})\pdv{\psi(\vb*{r}')}{\vb*{n}'})\dd{A} } \]
+
+        \item [d (5')] 求斜半空间 $\qty{(x, y, z): ax + by + cz > 0}$ 的 Green 函数。
+    \end{enumerate}
+   \end{question}
+
+   \begin{question}{5 (10') (从 ODE 到 PDE)}~\\
+    回忆一下随机过程，我们定义一个 Gaussian 过程 $W_t$，对于
+    \[ \forall t_1, \ldots, t_k, \quad W_{t_1, \ldots, t_k} = (W_{t_1}, \ldots, W_{t_k}) \]
+    为多变量的高斯随机变量。其平均值 $m(t) = 0,$ 协方差 $K(s, t) = \min\qty{s, t},$ 对于 $t_1 < t_2$ 可以得到
+    \[ W_{t_2} = W_{t_1} + \sqrt{t_2 - t_1} N(0, 1), \]
+    其中 $N(0, 1)$ 为以 $0$ 为期望，方差为 $1$ 的正态分布。
+
+    我们在弱形式下可以得到关于该过程微分的定义。对于任意平方可积的函数 $f$，定义 It\^o 积分
+    \[ \int_0^T f(w, t) \dd{W_t} = \lim_{n \to \infty} \sum_{i=0}^{n-1} f(w_i, t_i) (W_{t_{i+1}} - W_{t_i}). \]
+
+    \begin{enumerate}
+        \item [a (4')] 请证明上述积分满足性质
+        \[ \E\qty(\int_S^T f(w, t) \dd{W_t}) = 0, \quad \E\qty(\int_S^T f(w, t) \dd{W_t})^2 = \E\qty(\int_S^T f^2(w, t) \dd{t}). \]
+        \item [b (2')] 请计算如下积分
+        \[ \int_0^t W_s \dd{W_s}. \]
+    \end{enumerate}
+
+    根据 b 问中的结果，我们可以形式化地认为有
+    \[ \qty(\dd{W_t})^2 = \dd{t}. \]
+
+    \begin{enumerate}
+        \item [c (2')] 对于二阶可微的函数 $f$ 考虑映射 $Y_t = f(X_t)$，其中 $\dd{X_t} = b(w, t) \dd{t} + \sigma(w, t) \dd{W_t}$ 满足 $\eval{X_t}_{t=0} = X_0.$ 请计算 $\dd{Y_t}$ 的表达式。
+    \end{enumerate}
+
+    对于一个 ODE 而言，将对应有一个一阶的 PDE 方程作为概率密度。即对于
+    \[ \dv{x}{t} = b(x), \quad \eval{x}_{t=0} = x_0, \]
+    若是 $x_0$ 满足一定分布 $p_0(x)$，那么该概率密度的演化满足
+    \[ \pdv{p}{t} + \pdv{(pb(x))}{x} = 0. \]
+
+    \begin{enumerate}
+        \item [d (2')] 对于一个随机微分方程
+        \[ \dd{X_t} = b(w, t) \dd{t} + \sigma(w, t) \dd{W_t}, \]
+        按照同样的方式定义概率密度为
+        \[ p(x, t) \dd{x} = \operatorname{Pr}[X_t \in [x, x + \dd{x})]. \]
+        请给出对应的概率密度的演化方程。
+    \end{enumerate}
+
+    上述结果表明，类似于解一阶偏微分方程时使用的特征线法，对于二阶偏微分方程应当使用带有随机游走的特征线。
+    
+   \end{question}
+    
+
+\end{document}

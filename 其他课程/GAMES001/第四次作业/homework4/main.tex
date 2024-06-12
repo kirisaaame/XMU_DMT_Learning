@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper]{geometry}
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{diagbox}
+\usepackage{amsmath,amsfonts,graphicx,amssymb,bm,amsthm}
+%\usepackage{algorithm,algorithmicx}
+\usepackage[ruled]{algorithm2e}
+\usepackage[noend]{algpseudocode}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usetikzlibrary{arrows,automata}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{ctex}
+
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\makeatother
+
+\setlength{\headheight}{14pt}
+\setlength{\parindent}{0 in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\hfill$\blacktriangleleft$\end{trivlist}}
+\newenvironment{answer}[1][Answer]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1.}\hskip \labelsep]}{\hfill$\lhd$\end{trivlist}}
+
+\newcommand\E{\mathbb{E}}
+
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+  }}%
+\def\cdddot#1{% three dots 
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}\hbox{\onedot}%
+  }}%
+}
+
+
+\title{Homework Set \#4}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+    \pagestyle{fancy}
+    \lhead{}
+    \chead{}
+    \rhead{GAMES 001, 2024 Spring}
+
+    \begin{center}
+        {\LARGE \bf Homework \#4}\\
+        {Due: 2024-5-14 00:00 \quad$|$\quad 1 Questions, 100 Pts}\\
+        {Name: XXX}
+    \end{center}
+
+    \begin{question}{1 (100') (插值)}~
+    假设采样点分布在$x_i=0, 1, 2, \cdots$的整点上，$x_i$对应的采样值是$y_i$，试求三阶厄米插值（课件第16页）在Catmull-Rom样条假设（课件第17页）下的基函数，最终应该得到的是如课件第25页所示那样的函数图形。
+    
+    提示：你可以先代入Catmull-Rom样条假设的条件将插值曲线$f(x)$写为仅包含采样值$y_i$而不包含$m_i$的形式，然后思考如果将这一关系转化为$f(x)=\sum B_i y_i$。注意最终得到的基函数是一个分段函数。
+    \end{question}
+
+\end{document}

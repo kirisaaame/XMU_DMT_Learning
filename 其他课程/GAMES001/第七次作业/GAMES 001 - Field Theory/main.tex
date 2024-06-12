@@ -1,0 +1,188 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper]{geometry}
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{diagbox}
+\usepackage{amsmath,amsfonts,graphicx,amssymb,bm,amsthm, mathtools}
+\usepackage{algorithm,algorithmicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usetikzlibrary{arrows,automata}
+\usepackage{hyperref}
+\usepackage{soul}
+\usepackage{physics}
+\usepackage{ctex}
+\setlength{\headheight}{14pt}
+\setlength{\parindent}{0 in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{definition*}{Definition}
+
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\hfill$\blacktriangleleft$\end{trivlist}}
+\newenvironment{answer}[1][Answer]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1.}\hskip \labelsep]}{\hfill$\lhd$\end{trivlist}}
+
+\newcommand\E{\mathbb{E}}
+\newcommand{\cov}{\operatorname{cov}}
+\newcommand{\RR}{\mathbb{R}}
+
+
+\title{Homework Set \#7}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+    \pagestyle{fancy}
+    \lhead{Peking University}
+    \chead{}
+    \rhead{GAMES 001, 2024 Spring}
+
+    \begin{center}
+        {\LARGE \bf Homework \#7}\\
+        {Due: 2024-6-25 00:00 \quad$|$\quad 5 Questions, 100 Pts}\\
+        {Name: XXX}
+    \end{center}
+
+    \begin{question}{1 (42') (矢量微分恒等式)}~\\
+
+    已知 $\varphi$ 为标量场函数，$\textbf{u},\ \textbf{v}$ 为矢量场函数，$\textbf{a}$ 为任意矢量，请证明如下恒等式：
+
+    \begin{enumerate}
+        \item [a (7')] \[\nabla(\varphi \textbf{v}) = \varphi(\nabla\textbf{v})+(\nabla\varphi)\textbf{v}\]
+        \item [b (7')] \[ \nabla(\textbf{u}\cdot \textbf{v}) = (\nabla\textbf{v})\cdot\textbf{u}+(\nabla\textbf{u})\cdot\textbf{v} \]
+        \item [c (7')]
+        \[ (\curl \textbf{v})\times\textbf{a}=[\textbf{v}\nabla-\nabla\textbf{v}]\cdot\textbf{a}\]
+        \item [d (7')] \[\nabla(\textbf{u}\cdot\textbf{v})=\textbf{u}\times(\nabla\times\textbf{v})+\textbf{v}\times(\nabla\times\textbf{u})+\textbf{u}\cdot(\nabla\textbf{v})+\textbf{v}\cdot(\nabla\textbf{u})  \]
+        \item [e (7')] \[ \nabla\times(\textbf{u}\times\textbf{v}) = \textbf{v}\cdot(\nabla\textbf{u})-\textbf{v}(\nabla\cdot\textbf{u})+\textbf{u}(\nabla\cdot\textbf{v})-\textbf{u}\cdot(\nabla\textbf{v})\]
+        \item [f (7')] 若$\curl\textbf{u}=0$，$\div\textbf{u}=0$，则$\textbf{u}$ 为调和函数，即\[\nabla\cdot\nabla\textbf{u}=0.\]
+    \end{enumerate}
+    
+    \end{question}
+
+    \begin{question}{2 (18') (亥姆霍兹分解)}~\\
+
+    \begin{enumerate}
+        \item [a (9')] 若矢量场 $\textbf{A}$ 满足 $\nabla\cdot\textbf{A}=0$，试证明必存在向量势函数 $\bm{\psi}$ 使得 $\textbf{A} = \nabla\times\bm{\psi}.$
+        \item [b (9')] 若矢量场 $\textbf{A}$ 满足 $\nabla\times\textbf{A}=0$，试证明必存在标量势函数 $\phi$ 使得 $\textbf{A} = \nabla\phi.$
+    \end{enumerate}
+    
+    \end{question}
+    
+    我们为一个集合 $V$ 配备了加法 $+: (V, V) \to V$ 和数乘 $(\RR, V) \to V$，便构成了一个（$\RR$ 上的）线性空间。其上的加法需要满足结合律、交换律，并具有单位元与逆元；其上的数乘需要关于加法满足分配律。该线性空间中的元素 $v \in V$ 被我们称为矢量。
+    
+    我们将标量线性函数 $\alpha: V \xrightarrow[]{\mathrm{linear}} \RR$ 为余矢量。包含了全体余矢量的空间 $V^*$ 被我们称为关于 $V$ 的对偶空间。若 $V$ 为有限维空间，那么 $\dim{V} = \dim{V^*}.$
+    对于有限维矢量空间 $V$ 中的任意一组基底 $\vb*{e}_1, \ldots, \vb*{e}_n$，将存在一组 $V^*$ 中唯一一组基底 $\alpha_1, \ldots, \alpha_n$ 满足
+    \begin{equation*}
+        \alpha_i(\vb*{e}_j) = \delta_{ij} = \begin{dcases}
+            1, & i = j, \\
+            0, & i \ne j.
+        \end{dcases}
+    \end{equation*}
+    这组基底被称为对偶基。这些对偶基可以提取出矢量在基底下的系数，即
+    \[ \vb*{v} = \alpha_1(\vb*{v}) \vb*{e}_1 + \cdots + \alpha_n(\vb*{v}) \vb*{e}_n. \]
+
+    我们扩展这一概念，称多元线性函数
+    \[ \omega: \underbrace{V \times \cdots \times V}_k \xrightarrow[]{\mathrm{multilinear}} \RR \]
+    为 $k$-形式。该 $k$-形式需要满足斜对称性，即
+    \[ \omega(\vb*{v}_1, \ldots, \vb*{v}_i, \ldots, \vb*{v}_j, \ldots, \vb*{v}_k) = -\omega(\vb*{v}_1, \ldots, \vb*{v}_j, \ldots, \vb*{v}_i, \ldots, \vb*{v}_k). \]
+    我们将包含了全体 $k$-形式的空间记作 $\operatorname{Alt}^k V = \bigwedge^k V^*$，并将流形 $M$ 上的 $k$-形式场记作 $\Gamma(\operatorname{Alt}^k TM) = \Omega^k(M)$。若 $\dim{V} = n$，那么排列组合可得
+    \[ \dim\qty(\bigwedge^k V^*) = \binom{n}{k} = \frac{n!}{k!(n-k)!}. \]
+    
+    \begin{question}{3 (15') (外积)}~\\
+    我们对于微分形式可以定义一种新的乘法，叫做外积
+    \[ \wedge: \bigwedge^k V^* \times \bigwedge^l V^* \to \bigwedge^{k+l} V^*, \]
+    满足结合律 $(\alpha \wedge \beta) \wedge \gamma = \alpha \wedge (\beta \wedge \gamma),$ 且 $1$-形式为关于该乘法的迷向向量，即对于任意的 $\alpha \in V^*$ 满足 $\alpha \wedge \alpha = 0.$
+
+    \begin{itemize}
+        \item [a (5')] 请验证对于任意的 $\alpha, \beta \in V^*$，满足 $\alpha \wedge \beta = -\beta \wedge \alpha$。
+        \item [b (5')] 更一般地，对于 $\sigma \in \bigwedge^k V^*, \omega \in \bigwedge^l V^*$，满足 $\sigma \wedge \omega = (-1)^{kl} \omega \wedge \sigma.$
+    \end{itemize}
+
+    由于外积运算的定义，我们可以对 $1$-形式做外积来得到 $k$-形式。对于 $\alpha_1, \ldots, \alpha_k \in V^*$，可以得到 $k$-形式 $\qty(\alpha_1 \wedge \cdots \wedge \alpha_k)$ 为
+    \[ \qty(\alpha_1 \wedge \cdots \wedge \alpha_k)\qty(\vb*{v}_1, \ldots, \vb*{v}_k) = \det\mqty(\alpha_1(\vb*{v}_1) & \cdots & \alpha_1(\vb*{v}_k) \\
+     \vdots & & \vdots \\ 
+     \alpha_k(\vb*{v}_1) & \cdots & \alpha_k(\vb*{v}_k)). \]
+
+
+    \begin{itemize}
+        \item [c (5')] 选取 $\qty(\RR^4)^*$ 中的基底为 $\dd{x}, \dd{y}, \dd{z}, \dd{t}.$对于 $2$-形式 $\alpha = u_{12} \dd{x} \wedge \dd{y} + u_{24} \dd{y} \wedge \dd{t} + u_{34} \dd{z} \wedge \dd{t}$ 与 $1$-形式 $\beta = w_2 \dd{y} + w_3 \dd{z}$，计算 $\alpha \wedge \beta$ 与 $\alpha \wedge \alpha.$
+    \end{itemize}
+
+    \end{question}
+
+    我们为矢量空间配置一个非退化的对称双线性形式
+    \[ \flat: V \to V^*, \]
+    则该矢量空间可以被称为度量空间。该度量可逆，其逆为 $\sharp = \flat^{-1}: V^* \to V$；对称，即 $\flat(\vb*{u})(\vb*{v}) = \flat(\vb*{v})(\vb*{u})$。我们将 $\flat(\vb*{u})$ 记作 $\vb*{u}^\flat \in V^*.$
+
+    对于三维平直空间 $\RR^3$ 而言，选取其正交基底为 $\vb*{e}_1, \vb*{e}_2, \vb*{e}_3$，则 $\vb*{e}_1^\flat, \vb*{e}_2^\flat, \vb*{e}_3^\flat$ 为 $(\RR^3)^*$ 上的对偶基底。那么对于任一矢量 $\vb*{u} = u_1\vb*{e}_1 + u_2\vb*{e}_2 + u_3\vb*{e}_3$ 可以被写为 $1$-形式
+    \[ \vb*{u}^b = u_1\vb*{e}_1^\flat + u_2\vb*{e}_2^\flat + u_3\vb*{e}_3^\flat \in (\RR^3)^* \]
+    或者 $2$-形式
+    \[ \star \vb*{u}^b = u_1\qty(\vb*{e}_2^\flat \wedge \vb*{e}_3^\flat) + u_2\qty(\vb*{e}_3^\flat \wedge \vb*{e}_1^\flat) + u_3\qty(\vb*{e}_1^\flat \wedge \vb*{e}_2^\flat) \in \bigwedge^2 (\RR^3)^*. \]
+    将 $3$-形式的基底 $\vb*{e}_1^\flat \wedge \vb*{e}_2^\flat \wedge \vb*{e}_3^\flat$ 简记为 $\det$，对于 $\vb*{a}, \vb*{b}, \vb*{w} \in \RR^3$，$\alpha = \vb*{a}^\flat, \beta = \vb*{b}^\flat, \omega = \star \vb*{w}^\flat$，可以得到：
+    \begin{itemize}
+        \item $1$-形式间的外积对应于叉乘 $\alpha \wedge \beta = \star(\vb*{a} \times \vb*{b})^\flat.$
+        \item $1$-形式与 $2$-形式间的外积对应于点乘 $\alpha \wedge \omega = \omega \wedge \alpha = \vb*{a} \vdot \vb*{w} \det.$
+        \item 作用在 $1$-形式上的内积对应于点乘 $i_{\vb*{a}} \beta = \vb*{a} \vdot \vb*{b}.$
+        \item 作用在 $2$-形式上的内积对应于叉乘 $i_{\vb*{a}} \omega = (\vb*{w} \times \vb*{a})^\flat.$
+        \item 作用在 $3$-形式上的内积给出该矢量与其 $2$-形式的对应 $i_{\vb*{w}} \det = \omega.$
+    \end{itemize}
+    其中描述的内积算子 $i_{\vb*{a}}: \bigwedge^k V^* \to \bigwedge^{k-1} V^*$，满足
+    \begin{itemize}
+        \item 对于所有的 $\beta \in V^*$，$i_{\vb*{a}} \beta = \beta(\vb*{a}).$
+        \item \textbf{Leibniz 规则}。 对于 $\eta \in \bigwedge^k V^*$，$i_{\vb*{a}} (\eta \wedge \sigma) = (i_{\vb*{a}}\eta) \wedge \sigma + (-1)^k \eta \wedge (i_{\vb*{a}}\sigma).$
+        \item \textbf{链复形}。 $i_{\vb*{a}}i_{\vb*{a}} = 0.$
+        \item 实践中，可以将矢量 $\vb*{a}$ 插入到其作用的第一个位置上，即 $(i_{\vb*{a}}\eta)(\vb*{b}_1, \ldots,\vb*{b}_{k-1}) = \eta(\vb*{a}, \vb*{b}_1, \ldots,\vb*{b}_{k-1}). $
+    \end{itemize}
+    
+    \begin{question}{4 (9') (内积)}~\\
+    使用 Leibniz 规则 与三维空间中对应的矢量形式，验证以下结论
+    \begin{itemize}
+        \item [a (4')] $\vb*{a}, \vb*{b}, \vb*{c} \in \RR^3$ 满足 $\vb*{a}\times(\vb*{b} \times \vb*{c}) = (\vb*{a} \vdot \vb*{c})\vb*{b} - (\vb*{a} \vdot \vb*{b})\vb*{c}.$
+        \item [b (5')] $\vb*{a}, \vb*{b}, \vb*{c}, \vb*{d} \in \RR^3$ 满足 $(\vb*{a} \times \vb*{b})\vdot(\vb*{c} \times \vb*{d}) = (\vb*{a} \vdot \vb*{c})(\vb*{b} \vdot \vb*{d}) - (\vb*{b} \vdot \vb*{c})(\vb*{a} \vdot \vb*{d}).$
+    \end{itemize}
+
+    \end{question}
+
+    选取标量场 $f: \RR^3 \to \RR$ 与矢量场 $\vb*{v}: \RR^3 \to \RR^3$，我们可以将 $\vb*{v} = v_1\vb*{e}_1 + v_2\vb*{e}_2 + v_3\vb*{e}_3$ 写成 $1$-形式 $\vb*{v}^b = v_1 \dd{x} + v_2 \dd{y} + u_3\dd{z}$ 或者 $2$-形式 $\star \vb*{v}^b = i_{\vb*{v}} \det = v_1\qty(\dd{y} \wedge \dd{z}) + v_2\qty(\dd{z} \wedge \dd{x}) + v_3\qty(\dd{x} \wedge \dd{y}).$
+    外微分 $\dd{}: \Omega^k(M) \to \Omega^{k+1}(M)$ 由与内积算子一致的方法定义为
+    \begin{itemize}
+        \item 作用在 $0$-形式 $f$ 上得到的 $\dd{f}$ 即为关于其微分。
+        \item \textbf{链复形}。$\dd{} \circ \dd{} = 0.$
+        \item \textbf{Leibniz 规则}。 对于 $\omega \in \bigwedge^k V^*$，$\dd{(\omega  \wedge \sigma)} = (\dd{\omega}) \wedge \sigma + (-1)^k \omega \wedge (\dd{\sigma}).$
+    \end{itemize}
+    那么
+    \begin{itemize}
+        \item $\dd{}$ 作用在 $0$-形式得到梯度
+        \[ \grad f = (\dd{f})^{\sharp}. \]
+        \item $\dd{}$ 作用在 $1$-形式得到旋度
+        \[ \qty(\curl \vb*{v})^{\flat} = \star \dd{\vb*{v}^{\flat}}. \]
+        \item $\dd{}$ 作用在 $2$-形式得到散度
+        \[ \qty(\div \vb*{v}) \det = \dd{\star \vb*{v}^{\flat}} = \dd{i_{\vb*{v}} \det}. \]
+    \end{itemize}
+    
+    \begin{question}{5 (16') (外微分)}~\\
+    选取 $f, g: \RR^3 \to \RR$ 为三维空间中的标量场，$\vb*{a}, \vb*{b}: \RR^3 \to \RR^3$ 为三维空间中的矢量场。请根据以上知识证明：
+    \begin{itemize}
+        \item [a (4')] $\div(\vb*{a} \times \vb*{b}) = (\curl{\vb*{a}}) \vdot \vb*{b} - \vb*{a} \vdot (\curl{\vb*{b}}).$
+        \item [b (4')] $\div(f\vb*{a}) = \qty(\grad f) \vdot \vb*{a} + f\div{\vb*{a}}.$
+        \item [c (4')] $\curl(f\vb*{a}) = \grad f \times \vb*{a} + f \curl{\vb*{a}}.$
+        \item [d (4')] $\curl(f \grad g) = \grad f \times \grad g.$
+    \end{itemize}
+
+    \end{question}
+
+    
+
+\end{document}

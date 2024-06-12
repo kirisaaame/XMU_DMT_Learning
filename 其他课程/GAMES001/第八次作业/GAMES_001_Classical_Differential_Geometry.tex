@@ -1,0 +1,136 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper]{geometry}
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{diagbox}
+\usepackage{amsmath,amsfonts,graphicx,amssymb,bm,amsthm, mathtools}
+\usepackage{algorithm,algorithmicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usetikzlibrary{arrows,automata}
+\usepackage{hyperref}
+\usepackage{soul}
+\usepackage{physics}
+\usepackage{ctex}
+\setlength{\headheight}{14pt}
+\setlength{\parindent}{0 in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{definition*}{Definition}
+
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\hfill$\blacktriangleleft$\end{trivlist}}
+\newenvironment{answer}[1][Answer]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1.}\hskip \labelsep]}{\hfill$\lhd$\end{trivlist}}
+
+\newcommand\E{\mathbb{E}}
+\newcommand{\cov}{\operatorname{cov}}
+\newcommand{\RR}{\mathbb{R}}
+
+
+\title{Homework Set \#8}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+    \pagestyle{fancy}
+    \lhead{Peking University}
+    \chead{}
+    \rhead{GAMES 001, 2024 Spring}
+
+    \begin{center}
+        {\LARGE \bf Homework \#8}\\
+        {Due: 2024-7-2 00:00 \quad$|$\quad 6 Questions, 100 Pts}\\
+        {Name: XXX}
+    \end{center}
+    
+    \begin{question}{1 (25') (曲率、挠率与 Frenet 标架)}~\\
+    求下列曲线的曲率和挠率：
+    \begin{enumerate}
+        \item [a (5')] $\vb*{r}(t) = \qty(at, \sqrt{2}a\log{t}, a/t), \quad a > 0;$
+        \item [b (5')] $\vb*{r}(t) = \qty(a(t - \sin{t}), a(1-\cos{t}), bt), \quad a > 0;$
+        \item [c (5')] $\vb*{r}(t) = (\cos^3{t}, \sin^3{t}, \cos{2t}).$
+    \end{enumerate}
+
+    我们为曲线 $\vb*{r} = \vb*{r}(s)$，其中 $s$ 为弧长参数，得出 Frenet 标架为 $\qty{\vb*{r}(s); \vb*{\alpha}(s), \vb*{\beta}(s), \vb*{\gamma}(s)}.$
+    \begin{enumerate}
+        \item [d (5')] 假定曲线的挠率 $\tau \ne 0$ 为一个常数，求曲线
+        \[ \tilde{\vb*{r}}(s) = \frac{1}{\tau}\vb*{\beta}(s) - \int{\vb*{\gamma}(s) \dd{s}} \]
+        的曲率和挠率。
+        \item [e (5')] 假定曲线的曲率 $\kappa \ne 0$ 为一个常数，挠率 $\tau > 0,$ 求曲线
+        \[ \tilde{\vb*{r}}(s) = \frac{1}{\kappa}\vb*{\beta}(s) + \int{\vb*{\alpha}(s) \dd{s}} \]
+        的曲率和挠率，以及它的 Frenet 标架 $\qty{\tilde{\vb*{r}}(s); \tilde{\vb*{\alpha}}(s), \tilde{\vb*{\beta}}(s), \tilde{\vb*{\gamma}}(s)}.$
+    \end{enumerate}
+    
+    \end{question}
+
+    
+
+    \begin{question}{2 (15') (参数曲线)}~\\
+    假定 $\vb*{r} = \vb*{r}(s)$ 是以 $s$ 为弧长参数的正则参数曲线，它的挠率不为 $0$，曲率不是常数，并且下面的关系式成立：
+    \[ \qty(\frac{1}{\kappa(s)})^2 + \qty(\frac{1}{\tau(s)} \dv{s}\qty(\frac{1}{\kappa(s)}))^2 = R_0^2 = \mathrm{const}, \]
+    请证明该曲线落在一个球面上。
+    
+    \end{question}
+
+    \begin{question}{3 (30') (第一基本形与变换)}~\\
+    在球面 $\Sigma: x^2 + y^2 + z^2 = 1$ 上，取 $N = (0, 0, 1), S = (0, 0, -1).$ 对于赤道平面上的任意一点 $p = (u, v, 0),$ 可以作唯一的一条直线经过 $N, p$ 两点，它与球面有唯一的交点，记为 $p'.$
+    \begin{enumerate}
+        \item [a (5')] 证明：点 $p'$ 的坐标是
+        \[ x = \frac{2u}{u^2+v^2+1}, \quad y = \frac{2v}{u^2+v^2+1}, \quad z = \frac{u^2+v^2-1}{u^2+v^2+1}, \]
+        并且它给出了球面上去掉北极 $N$ 的剩余部分的正则参数表示。
+        \item [b (5')] 求球面上去掉南极 $S$ 的剩余部分的类似地正则参数表示。
+        \item [c (5')] 求上面两种正则参数表示在公共部分的参数变换。
+        \item [d (5')] 证明球面是可定向曲面。
+    \end{enumerate}
+
+    接下来我们要寻找保长对应与保角对应。
+    \begin{enumerate}
+        \item [e (5')] 证明在悬链面
+        \[ \vb*{r} = (a \cosh{t}\cos{\theta}, a \cosh{t}\sin{\theta}, at), \quad -\infty < t < \infty, \quad 0 \leq \theta \leq 2\pi \]
+        和正螺旋面
+        \[ \vb*{r} = (v \cos{u}, v \sin{u}, au), \quad 0 \leq u \leq 2\pi, \quad -\infty < v < \infty \]
+        之间存在保长对应，其中常数 $a > 0.$
+        \item [f (5')] 请建立旋转面
+        \[ \vb*{r} = \qty(f(u)\cos{v}, f(u)\sin{v}, g(u)) \]
+        和平面之间的保角对应。
+    \end{enumerate}
+    
+    \end{question}
+
+    \begin{question}{4 (10') (第三基本型)}~\\
+    定义曲面的第三基本型为 $\dd\vb*{n}\cdot\dd\vb*{n}$. 证明：
+    \[ \dd\vb*{n}\cdot\dd\vb*{n} + 2H\dd\vb*{r}\cdot\dd\vb*{n}+K\dd\vb*{r}\cdot\dd\vb*{r}=0\text{.}\]
+    \end{question}
+
+    \begin{question}{5 (10') (可展曲面)}~
+    \begin{enumerate}
+        \item [a (5')] 证明：没有平点的曲面$\vb*{r}:D\rightarrow \mathbb{R}^3$是可展的当且仅当$K\equiv0$.
+        \item [b (5')] 试构造一个$K\equiv0$的曲面，但它不是可展曲面。
+    \end{enumerate}
+    \end{question}
+
+    \begin{question}{6 (10') (极小曲面)}~\\
+    定义曲面$\vb*{r}:D\rightarrow \mathbb{R}^3$为\textbf{极小曲面}当且仅当$H\equiv0$.
+    \begin{enumerate}
+        \item [a (5')] 
+        考虑由悬链线旋转得到的旋转曲面，即悬链面：
+        \[ \vb*{r} = (c\cosh{\frac{u}{c}}\cos{v},c\cosh{\frac{u}{c}}\sin{v},u) \text{.}\]
+        证明：悬链面是唯一的既是旋转曲面又是极小曲面的曲面。
+        \item [b (5')] [伯恩斯坦定理]证明：如果$\vb*{r} = (u, v, z(u, v))$在$(u, v)\in\mathbb{R}^2$上都有定义且是极小曲面，则$z$一定是线性函数。换句话说如果一个极小曲面是一个平面上的函数图像，则这个极小曲面是个平面。
+        % \item [c (?')] [普拉托问题] 如果写了就到第三页了，所以不出了
+    \end{enumerate}
+    \end{question}
+
+\end{document}

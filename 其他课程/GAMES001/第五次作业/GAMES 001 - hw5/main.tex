@@ -1,0 +1,87 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper]{geometry}
+\geometry{left=2.0cm,right=2.0cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{diagbox}
+\usepackage{amsmath,amsfonts,graphicx,amssymb,bm,amsthm}
+%\usepackage{algorithm,algorithmicx}
+\usepackage[ruled]{algorithm2e}
+\usepackage[noend]{algpseudocode}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usetikzlibrary{arrows,automata}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{ctex}
+
+\makeatletter
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\makeatother
+
+\setlength{\headheight}{14pt}
+\setlength{\parindent}{0 in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\hfill$\blacktriangleleft$\end{trivlist}}
+\newenvironment{answer}[1][Answer]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1.}\hskip \labelsep]}{\hfill$\lhd$\end{trivlist}}
+
+\newcommand\E{\mathbb{E}}
+
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+  }}%
+\def\cdddot#1{% three dots 
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}\hbox{\onedot}%
+  }}%
+}
+
+
+\title{Homework Set \#4}
+\usetikzlibrary{positioning}
+
+\begin{document}
+
+    \pagestyle{fancy}
+    \lhead{}
+    \chead{}
+    \rhead{GAMES 001, 2024 Spring}
+
+    \begin{center}
+        {\LARGE \bf Homework \#5}\\
+        {Due: 2024-5-28 00:00 \quad$|$\quad 1 Questions, 100 Pts}\\
+        {Name: XXX}
+    \end{center}
+
+    \begin{question}{1 (100') (梳状函数)}~
+    如课件26-28页所示，梳状函数被定义为：
+    \begin{equation*}
+        C_T(t) = \sum_{n=-\infty}^{\infty}\delta(t-nT)
+    \end{equation*}
+    \begin{enumerate}
+        \item 试证明周期为$T$的梳状函数的傅里叶变换是周期为$\frac{2\pi}{T}$的梳状函数，即：
+    \begin{equation*}
+        \mathcal{F}(C_T(t)) = \frac{1}{T}C_{\frac{2\pi}{T}}(\omega).
+    \end{equation*}
+    \item 试证明任意函数$F(\omega)$卷积梳状函数$C_{\frac{2\pi}{T}}(\omega)$等价于将$F(\omega)$每隔$\frac{2\pi}{T}$平移复制一份后再叠加。
+
+    \end{enumerate} 
+    
+    \end{question}
+
+\end{document}
