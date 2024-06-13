@@ -1,5 +1,0 @@
-OUTPUT  MACRO  X
-  LEA DX,X
-  MOV AH,9
-  INT 21H
-  ENDM
