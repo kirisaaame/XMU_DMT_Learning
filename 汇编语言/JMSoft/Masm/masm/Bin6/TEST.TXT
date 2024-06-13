@@ -1,0 +1,3 @@
+ Assembling: F:\VC¹²Ïí¿Î\JiaoAn\hello.asm
+F:\VC¹²Ïí¿Î\JiaoAn\hello.asm(17): error A2008: syntax error : CODES
+F:\VC¹²Ïí¿Î\JiaoAn\hello.asm(21): fatal error A1010: unmatched block nesting : CODES

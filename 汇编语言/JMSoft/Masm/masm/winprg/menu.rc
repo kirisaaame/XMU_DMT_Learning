@@ -1,0 +1,32 @@
+#define IDM_OPEN   1
+#define IDM_SAVE   2
+#define IDM_PRINT  3
+#define IDM_SAVEAS 4
+#define IDM_EXIT   5
+#define IDM_CUT    6
+#define IDM_COPY   7
+#define IDM_PASTE  8
+#define IDM_HELP   9
+
+
+MyMenu        MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&OPEN", IDM_OPEN
+        MENUITEM "&Save", IDM_SAVE
+        MENUITEM "", , 0x0800 /*MFT_SEPARATOR*/
+        MENUITEM "&Print", IDM_PRINT
+        MENUITEM "Save &As", IDM_SAVEAS
+        MENUITEM "E&xit", IDM_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "Cu&t", IDM_CUT
+        MENUITEM "&Copy", IDM_COPY
+        MENUITEM "&Paste", IDM_PASTE
+    END
+    MENUITEM "&Help", IDM_HELP
+END
+
+

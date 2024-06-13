@@ -1,0 +1,37 @@
+  ; ===========================================
+  ; version.inc copyright MASM32 1998 - 2005
+  ; ===========================================
+
+IFNDEF VERSION_INC
+VERSION_INC equ <1>
+
+GetFileVersionInfoA PROTO :DWORD,:DWORD,:DWORD,:DWORD
+GetFileVersionInfo equ <GetFileVersionInfoA>
+
+GetFileVersionInfoSizeA PROTO :DWORD,:DWORD
+GetFileVersionInfoSize equ <GetFileVersionInfoSizeA>
+
+GetFileVersionInfoSizeW PROTO :DWORD,:DWORD
+GetFileVersionInfoW PROTO :DWORD,:DWORD,:DWORD,:DWORD
+VerFindFileA PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VerFindFile equ <VerFindFileA>
+
+VerFindFileW PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VerInstallFileA PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VerInstallFile equ <VerInstallFileA>
+
+VerInstallFileW PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VerQueryValueA PROTO :DWORD,:DWORD,:DWORD,:DWORD
+VerQueryValue equ <VerQueryValueA>
+
+VerQueryValueIndexA PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VerQueryValueIndex equ <VerQueryValueIndexA>
+
+VerQueryValueIndexW PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VerQueryValueW PROTO :DWORD,:DWORD,:DWORD,:DWORD
+
+ELSE
+echo -----------------------------------------
+echo WARNING Duplicate include file version.inc
+echo -----------------------------------------
+ENDIF

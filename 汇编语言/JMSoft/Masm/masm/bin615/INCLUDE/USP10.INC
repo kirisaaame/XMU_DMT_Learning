@@ -1,0 +1,44 @@
+  ; ===========================================
+  ; usp10.inc copyright MASM32 1998 - 2005
+  ; ===========================================
+
+IFNDEF USP10_INC
+USP10_INC equ <1>
+
+ScriptApplyDigitSubstitution PROTO :DWORD,:DWORD,:DWORD
+ScriptApplyLogicalWidth PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+ScriptBreak PROTO :DWORD,:DWORD,:DWORD,:DWORD
+ScriptCPtoX PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+ScriptCacheGetHeight PROTO :DWORD,:DWORD,:DWORD
+ScriptFreeCache PROTO :DWORD
+ScriptGetCMap PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+ScriptGetFontProperties PROTO :DWORD,:DWORD,:DWORD
+ScriptGetGlyphABCWidth PROTO :DWORD,:DWORD,:DWORD,:DWORD
+ScriptGetLogicalWidths PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+ScriptGetProperties PROTO :DWORD,:DWORD
+ScriptIsComplex PROTO :DWORD,:DWORD,:DWORD
+ScriptItemize PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+ScriptJustify PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+ScriptLayout PROTO :DWORD,:DWORD,:DWORD,:DWORD
+ScriptPlace PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+ScriptRecordDigitSubstitution PROTO :DWORD,:DWORD
+ScriptShape PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+ScriptStringAnalyse PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+ScriptStringCPtoX PROTO :DWORD,:DWORD,:DWORD,:DWORD
+ScriptStringFree PROTO :DWORD
+ScriptStringGetLogicalWidths PROTO :DWORD,:DWORD
+ScriptStringGetOrder PROTO :DWORD,:DWORD
+ScriptStringOut PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+ScriptStringValidate PROTO :DWORD
+ScriptStringXtoCP PROTO :DWORD,:DWORD,:DWORD,:DWORD
+ScriptString_pLogAttr PROTO :DWORD
+ScriptString_pSize PROTO :DWORD
+ScriptString_pcOutChars PROTO :DWORD
+ScriptTextOut PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+ScriptXtoCP PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+
+ELSE
+echo -----------------------------------------
+echo WARNING Duplicate include file usp10.inc
+echo -----------------------------------------
+ENDIF

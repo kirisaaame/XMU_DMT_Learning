@@ -1,0 +1,31 @@
+[shared-]
+	pmark=
+	version=3
+[debug-]
+	target="d:\hello.exe"
+	synonym=;d:
+	memwin=vm1b DS:0 
+[cv]
+	wndstate=0 80 14 0 1 0 0 0 0 0 0 0 0 0 -1
+	wndstate=1 33 4 0 1 0 0 0 0 0 0 0 0 0 -1
+	wndstate=2 34 4 33 1 0 0 0 0 0 0 0 0 0 -1
+	wndstate=3 62 13 0 1 0 1 0 0 0 7 0 0 0 -1
+	wndstate=4 67 7 3 8 0 0 0 0 0 0 0 0 0 -1
+	wndstate=5 62 5 0 14 0 1 0 0 0 0 0 0 0 -1
+	wndstate=6 67 4 3 15 0 0 0 0 0 0 0 0 0 -1
+	wndstate=7 18 23 62 1 1 1 0 0 0 0 0 0 0 -1
+	wndstate=8 67 4 0 16 0 0 0 0 0 0 0 0 0 -1
+	wndstate=9 62 5 0 19 0 1 0 1 0 3 1 0 0 -1
+	command=use auto
+	command=n10
+	screensize=25
+	command=oh+
+	command=ov+
+	command=oa+
+	command=vs1
+	command=oc+
+	command=of+
+	command=o3+
+	command=os+
+	command=ollf   
+	tracespeed=250

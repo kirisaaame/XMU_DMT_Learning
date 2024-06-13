@@ -1,0 +1,350 @@
+$includelib macro __args:VARARG
+	for __arg,<__args>
+		%include &__arg&.inc
+		%includelib &__arg&.lib
+	endm
+endm
+
+?IsMem macro op:req
+	exitm<( ( (.TYPE (op)) SHR 1 ) AND 1)>
+endm
+
+?IsImm macro op:req
+	exitm<( ( (.TYPE (op)) SHR 2 ) AND 1)>
+endm
+
+?IsReg macro op:req
+	exitm<( ( (.TYPE (op)) SHR 4 ) AND 1)>
+endm
+
+echod macro d
+	%echo @CatStr(%d)
+endm
+
+option nokeyword:<.startup,.exit,this,short>
+option dotname
+
+.startup macro __is_console
+	.data?
+	hInstance dd ?
+	.code
+	start: 
+	invoke GetModuleHandle,0
+	mov hInstance,eax
+	ifidni <__is_console>,<CONSOLE>
+		invoke InitConsole
+	endif
+endm
+
+.exit macro
+	.code
+	invoke ExitProcess,eax
+	end start
+endm
+
+@ArgRev MACRO arglist:REQ
+    LOCAL txt, arg
+    txt TEXTEQU <>
+%   FOR arg, <arglist>
+        txt CATSTR <arg>, <,>, txt      ;; Paste each onto list
+    ENDM
+    txt SUBSTR  txt, 1, @SizeStr( %txt ) - 1;; Remove terminating comma
+    txt CATSTR  <!<>, txt, <!>>         ;; Add angle brackets    
+    EXITM txt
+ENDM
+
+@ArgCount MACRO arglist:VARARG
+    LOCAL count
+    count = 0
+    FOR arg, <arglist>
+        count = count + 1       ;; Count the arguments
+    ENDM
+    EXITM %count
+ENDM
+
+@ArgI MACRO index:REQ, arglist:VARARG
+    LOCAL count, retstr
+    retstr TEXTEQU <>            ;; Initialize count
+    count  = 0                   ;; Initialize return string
+    FOR arg, <arglist>
+        count = count + 1
+        IF count EQ index        ;; Item is found
+            retstr TEXTEQU <arg> ;; Set return string
+            EXITM                ;;   and exit IF
+        ENDIF
+    ENDM
+    EXITM retstr                 ;; Exit function
+ENDM
+
+$call macro func:req, args:vararg
+local argsr,arg
+	ifnb <args>
+	    argsr textequ @ArgRev(args)
+		%for arg,<argsr>
+			push arg
+		endm
+	endif
+	call func
+endm
+
+comment *
+??dxGen macro
+local typ
+	for typ,<b,w,d,q,t>
+		d&typ&? macro __args:VARARG 
+			for arg,<__args>
+				&arg d&typ ?
+			endm
+		endm
+	endm
+endm
+*
+
+db? macro __args:VARARG 
+	for arg,<__args>
+		&arg db ?
+	endm
+endm
+
+dw? macro __args:VARARG 
+	align word
+	for arg,<__args>
+		&arg dw ?
+	endm
+endm
+
+dd? macro __args:VARARG 
+	align dword
+	for arg,<__args>
+		&arg dd ?
+	endm
+endm
+
+dq? macro __args:VARARG 
+	align qword
+	for arg,<__args>
+		&arg dq ?
+	endm
+endm
+
+; if your string contains any of "!","<",">","(",")" put it manually in data!
+;	.data
+;	yoursym db yourqstr,0
+;	.code
+
+T MACRO __qstr:VARARG
+LOCAL __sym
+	.DATA
+		ALIGN 4
+		__sym DB __qstr,0
+		ALIGN 4
+	.CODE
+	EXITM <OFFSET __sym>
+ENDM
+
+L MACRO __qstr:VARARG
+LOCAL __sym,__unq,__q
+	.DATA
+		ALIGN 4
+		__sym LABEL WORD
+		FOR __arg,<__qstr>
+		__qot TEXTEQU @SubStr(<__arg>,1,1)
+		__q = 0
+		IFIDNI __qot,<!'>;'
+			__q = 1
+		ELSEIFIDNI __qot,<!">;"
+			__q = 1
+		ENDIF 
+		IF __q EQ 1
+			__unq TEXTEQU @SubStr(<__arg>,2,@SizeStr(<__arg>)-2)
+			%FORC c,<__unq>
+				DB "&c",0
+			ENDM
+		ELSE
+			DB __arg,0
+		ENDIF
+		ENDM
+		DW 0
+		ALIGN 4
+	.CODE
+	EXITM <OFFSET __sym>
+ENDM
+ 
+m2m macro __M1:req,__M2:req
+	push __M2
+	pop __M1
+endm
+
+m2mr macro __M1:req,__M2:req,__reg; free trash reg
+	ifb <__reg>
+		mov eax,__M2
+		mov __M1,eax
+	else
+		mov __reg,__M2
+		mov __M1,__reg
+	endif
+endm
+
+Abs macro __rm:req
+	.repeat
+		neg __rm	
+	.until !sign?
+endm
+
+;Absr macro
+;	cdq
+;	xor eax,edx
+;	sub eax,edx
+;endm
+
+Min macro rm1:req,rm2:req,signed
+	if ?IsReg(rm1)
+		cmp rm1,rm2
+		ifb <signed>
+		cmova rm1,rm2
+		else
+		cmovg rm1,rm2
+		endif
+		exitm <rm1>
+	else
+		mov eax,rm1
+		cmp eax,rm2
+		ifb <signed>
+		cmova eax,rm2
+		else
+		cmovg eax,rm2
+		endif
+		exitm <eax>
+	endif
+endm
+
+Max macro rm1:req,rm2:req,signed
+	if ?IsReg(rm1)
+		cmp rm1,rm2
+		ifb <signed>
+		cmovb rm1,rm2
+		else
+		cmovl rm1,rm2
+		endif
+		exitm <rm1>
+	else
+		mov eax,rm1
+		cmp eax,rm2
+		ifb <signed>
+		cmovb eax,rm2
+		else
+		cmovl eax,rm2
+		endif
+		exitm <eax>
+	endif
+endm
+
+stosc macro __chr
+	ifb <__chr>
+		mov byte ptr [edi],al
+	else
+		mov byte ptr [edi],__chr
+	endif
+	inc edi
+endm
+
+lodsc macro __chr
+	ifb <__chr>
+		mov al,[esi]
+	else
+		mov __chr,byte ptr [esi]
+	endif
+	inc esi
+endm
+
+return macro __retval
+	ifnb <__retval>
+		if ?IsImm(__retval)
+			if __retval eq 0
+				xor eax,eax
+			elseif __retval eq -1
+				or eax,-1
+			elseiF __retval eq 1
+				xor eax,eax
+				inc eax
+			else
+				mov eax,__retval
+			endif
+		else
+			ifdifi <__retval>,<eax>
+			mov eax,__retval
+			endif
+		endif
+	endif
+	ret
+endm
+
+$invoke macro __args:VARARG
+	invoke __args
+	exitm <eax>
+endm
+
+fld4 macro __fpvalue
+local __name
+.data
+	align 4
+	__name real4 __fpvalue
+.code
+	fld __name
+endm
+
+fp4 macro __fpvalue
+local __name
+.data
+	align 4
+	__name real4 __fpvalue
+.code
+	exitm <real4 ptr [__name]>
+endm
+
+fld8 macro __fpvalue
+local __name
+.data
+	align 8
+	__name real8 __fpvalue
+.code
+	fld __name
+endm
+
+fp8 macro __fpvalue
+local __name
+.data
+	align 8
+	__name real8 __fpvalue
+.code
+	exitm <real4 ptr [__name]>
+endm
+
+fld10 macro __fpvalue
+local __name
+.data
+	align 16
+	__name real10 __fpvalue
+.code
+	fld __name
+endm
+
+fp10 macro __fpvalue
+local __name
+.data
+	align 16
+	__name real10 __fpvalue
+.code
+	exitm <real4 ptr [__name]>
+endm
+
+ChrTestEax macro Flags:REQ
+LOCAL @1
+	cmp eax,7Fh
+	jae @1
+	test byte ptr [ChrFlagTable+eax],Flags
+	setnz ah
+@1:	movzx eax,ah
+	exitm <eax>
+endm
+

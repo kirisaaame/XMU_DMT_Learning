@@ -1,0 +1,169 @@
+   New Build	Sep. 28. 2008
+   Last Build	Nov. 28. 2007
+
+
+			DOSBox CVS 0.72
+			with special features
+
+					For Windows
+					Compiled by Taewoong Yoo
+
+					http://ykhwong.x-y.net
+
+NOTICE
+------------------
+1. The cvs builds are NOT supported by the DOSBox team and developers.
+2. Some experimental features in the CVS builds might affect the performance or compatibility.
+3. I, Taewoong Yoo will enter the army to join military service usually required of males in South Korea.
+    It might take about 22 months to complete the service.
+
+
+WHAT'S NEW
+------------------
+# 9. 28. 2008 - CVS 0.72
+  LONG time no see. As I reset the overall compiler settings and patches, several features are currently disabled.
+  1. New CVS source was used and there are a few noticable changes.
+    - To specify CPU cycles on shell prompt, type "cycles fixed nnnnn"
+    - Added a parameter called "-securemode"
+  2. The following features were removed.
+      - MT32, Direct3D, OpenglHQ, Printer patch, VGAParts, Innovation sound, Overscan
+     To use these features, please use my previous builds or the builds of others(for example, gulikoza's)
+     instead.
+  3. Pressing Alt-tab in fullscreen works fine.
+  4. Some patches like openglide were updated.
+  5. Fixed some minor bugs.
+
+# 11. 28. 2007 - CVS 0.72
+  1. Fixed some bugs related to capture and sound,
+  2. "Pause" is integrated into user interface.
+  3. Fixed some other bugs.
+
+# 10. 19. 2007 - CVS 0.72
+   1. Patch added
+      * Slightly modified version of User Interface (Moe)
+   2. Patch updated
+      * Glide emulation (gulikoza)
+        gidierre developed a hack to display shadow in TombRider
+   3. Fixed some other bugs.
+
+
+What are CVS builds?
+---------------------------
+CVS builds are versions of dosbox.exe that people have built from the latest version of the DOSBox source code,
+which is stored on sourceforge.net in something called a CVS repository. CVS builds contain changes that have been
+made by Qbix and Harekiet since the latest official release.
+Some enhanced CVS builds also contain unofficial features and fixes that have been created by enthusiasts in the
+DOSBox development community.
+
+For more information, go to http://vogons.zetafleet.com
+
+
+
+SUMMARY
+------------------
+CVS 0.72     : 2007/09/03 ~ now
+CVS 0.71     : 2007/07/30 ~ 2007/08/15
+CVS 0.70     : 2007/03/05 ~ 2007/07/29
+CVS 0.66rc3 : 02/25/2007
+CVS 0.66rc1 : 02/06/2007 ~ 02/09/2007
+CVS 0.65     : 03/31/2006 ~ 01/21/2007
+CVS 0.63     : 11/22/2004 ~ 03/21/2006
+CVS 0.62     : 10/01/2004 ~ 11/13/2004
+CVS 0.61     : 01/17/2004 ~ 09/25/2004
+CVS 0.60     : 10/31/2003 ~ 01/13/2004
+
+* 2007
+10/07/2007 : Added support for wildcard substitution in copy, Updated SVGA. A new machine "ega" was added. Added some keyboard layouts to menu.
+09/03/2007 : Based on 0.72 source. Added XGA enhancement and 16550A FIFO. Updated glide, printer emulation, and menu bar.
+08/15/2007 : Removed HU104 due to the change of keyb structure. Direct3D works.
+08/06/2007 : Added Aspect correction fix. Updated menu bar for boot/freesize. Solved a crash when d3d pshader is frequently switched. Updated ETC document. Added -nogui to disable GUI.
+07/30/2007 : Based on 0.71 CVS. Fixed the opposite numlock. Fixed a screen synch trouble that occurs when keyboardlayout is set in dosbox.conf.
+06/16/2007 : Menu bar is based on SDL_WindowID. Added "host" for vsyncmode. Added part of demovga patch. Quick start-up. Dragging an executable into dosbox window is possible. Added dosbox_admin.exe
+04/16/2007 : Removed menu bar patch temoporailly. Does not crash when console window is closed. -ioctl is the default value for WinNT-family OSes.
+04/10/2007 : Changed the overall system of menu bar.
+03/25/2007 : Fixed MT32 broken, Added some DOS commands like XCOPY, APPEND, and EDIT into the internal drive. Moved GLIDE2X.OVL into the internal drive.
+03/17/2007 : Added "Quick Launch" to menu bar, Added support for mounting img/iso/zip files
+03/10/2007 : Added two 3.0 pixel shaders for Direct3D (gulikoza), Updated menu bar for mounting drives, Changed an internal icon.
+03/05/2007 : Support for special characters for dir/file names, Updated glide emulation, Fixed a bug that DOSBox crashes with -fullscreen, Fixed a bug related to menu bar
+02/25/2007 : Based on RC3, Hide hercules startup screen, Added a new option for joystick : buttonwrap, Fixed more possible crashes related to glide patch
+02/09/2007 : Fixed a bug that dosbox crashes, Added hal's one line fix so that screen shows correctly in some games
+02/06/2007 : Based on 0.66rc1 source, IODelay problem was fixed, Megablast's icon, Default cycles value is 3000
+01/21/2007 : Easier UMB management, Improved compatibility of some games, You can turn on/off IO-Delay, Mapper now supports joystick, Fixed a crash when unmounting while running a program
+01/05/2007 : Changed ctrl-alt-f10 to ctrl-alt-f9 (menu) for windows vista, Disables menu bar during paused/keymapper, IO Delay fix
+
+* 2006
+12/03/2006 : Fixed Hungarian KB 104, F10 key does not trigger menu bar any more, Addded config.sys commands
+11/20/2006 : Updated OpenglHQ and some patches, Menu bar can enable/disable XMS, EMS, and UMB
+11/06/2006 : Added Innovation SSI-2001 emulation, DBCS console patch now works, Automount now handles floppy drives, Hide cycles at startup, Fixed a bug in optimization patch
+10/29/2006 : Added 25.COM, 28.COM, and 50.COM for screen modes, Added KEYB.COM, Updated libpng library, DirectDraw support
+10/15/2006 : Added auto/dynamic_dhfpu core into menu bar, Added prompt command, Fixed a problem related to line handling when echo=off
+10/07/2006 : New options for joystick, Modified part of MT-32 emulation
+09/29/2006 : SDL ver updated to 1.2.11, Fix cdrom detection, Removed printer font files, Automount now handles CD-ROM
+09/18/2006 : Menu bar supports automount, Set file date & time, Added CMOS clock patch, Added support for 15/16/24-bit color in Win3
+09/09/2006 : Updated CD image recycling, Fix for JetFighter 2 and Alien Breed, Fixed a crash between glide and menu bar
+08/09/2006 : Modified direct3d patch a little bit for pixel shaders, Some games like wc3 that use JEMM memory manager work again, Timer fix for 1000 Miglia
+08/01/2006 : Fixed bugs in some patches, Added SET VER, Updated SVGA chipset patch
+07/15/2006 : Multiple configfiles support, Moved MOUSE to Z drive, Updated some libraries, Added Mhz indicator
+06/27/2006 : Updated MUNT CVS (mt-32), Added cycles=max (different from cycles=auto), Added CD image disk cycling
+06/16/2006 : Added "Forcescaler", Added a parameter -nomenu to disable menu bar, Divided document directory into EN and KR. Added etc_en.txt and etc_kr.txt, Added runtime icon
+06/06/2006 : Added "Graphics optimization and Time synched", Added an icon from eobet
+05/28/2006 : Joystick polling_reduction, New scalers including Super2xSaI, 2xSaI, SuperEagle, and HQ2X/3X
+05/15/2006 : Added HQ2X/HQ3X, Fixed a bug in physfs, Added some patches related to turbo mode, Show real FPS
+04/27/2006 : Protocos game now works. Added "Joystick (experimental)"
+04/12/2006 : Added "Timer improvements"
+04/07/2006 : Added "Better Up/Down Arrow handling in Shell"
+03/31/2006 : Added "Support socket inheritance"
+03/21/2006 : Added "Virtual Printer" and "Core-switch". Supports Direct3D again. Added new directories "Shaders" and "Fonts"
+03/08/2006 : Updated Native IPX and modem patches. VGA_Parts now works properly. Fixed a strange bug when Ctrl-F7/Ctrl-F8 keys are pressed.
+02/14/2006 : Updated Native IPX. Added "Unaligned memory improvents", and "Improved font", New DOSBox icon, AVI capture support, Auto cycle guessing, vesa 16/24/32bit support
+01/30/2006 : Alt-Pause is now used for pause emulation. Percentage of speed meter is displayed on title bar. Added some new pshaders for Direct3d.
+01/07/2006 : Added "SB DSP" and "Directory iterators for the iso drive"
+
+* 2005
+12/26/2005 : Added "SB MIDI Interface", "Modem improvements", and "Vertical retrace sync"
+12/17/2005 : Modified startup messages in shell. Fixed a bug that opengl doesn't work on nvidia vga cards. Added all of the dx3d pshaders to dll directory.
+12/08/2005 : VGA parts and overscan border work again. Updated scalers performance boost, physfs, etc.
+11/29/2005 : Scalers performance boost patch by Krounz. Fixed a crash in glide emulation with svga. Set aspect=false (default) 
+11/15/2005 : Fixed a bug in 'copy' command (Thanks to Eric Wright). Added a library file 'glide2x.dll' for openglide.
+11/03/2005 : Added "Glide emulation" from gulikoza, Fixed a bug in CD-ROM mount (limited support)
+10/31/2005 : Disables speed-meter in debug mode, Added "Lost surface fix for DirectDraw display path (Win32)" and "chain4 optimization"
+10/13/2005 : Direct3d update, Added "Fix for permanent keyboard lockup (Ctrl+Esc)" and "Backspace and overflow fixes to line input"
+10/04/2005 : Added "Virtual printer support (freetype2)", "Fix for XMS subfunction 0E (GetHandleInformation)", and "chain4"
+09/23/2005 : Added "Native IPX" & "VGA corrections/vgatest accuracy", Updated openglhq and (physfs zip mount) patches
+09/11/2005 : Added "Netbios support", Updated "Overscan border"
+09/04/2005 : Added "CGA composite" and "cga fix"
+08/31/2005 : Intro improvement patch added, Normal4x patch, console patch bug fixes
+08/26/2005 : Added "Blended overscan borders", a new svga type "et4000new" supports
+08/20/2005 : Made codes somewhat smaller (optimized), updated mingw-runtime & w32api
+08/14/2005 : Added "More keyboard commands handled" and "Supress SET statements at the beginning of DOSBox"
+08/11/2005 : CVS refresh
+08/10/2005 : UMB Support, ANSI improvement, SQL clients run from DOSBox on win32, some patches updated
+08/05/2005 : Added Memsize128 (max : 127), Added "More parameters support in internal commands"
+07/30/2005 : Normal3x support, Zip mount support
+07/22/2005 : % var % support, optimization patches
+07/19/2005 : Removed fexs patch for compatibility, Supports ZIP Mount
+07/16/2005 : Added a patch for CON to handle DBCS(Korean/Japanese/Chinese) characters, F11/F12 works, Removed all of svga-excluded builds on my page
+07/14/2005 : Added README_EN.TXT, Added new patches (ADDKEY and Improved Serial port)
+07/11/2005 : Tandy correction, Keyboard Buffer 3x
+07/06/2005 : SVGA supports paradise card (basic), EMS supports VCPI
+07/01/2005 : SDL.DLL now has a feature OpenglHQ, Added two new Direct3D filters
+06/23/2005 : Updated SDL 1.3.x CVS, Added smart screen update & Mapper (for joystick) patches, Uploaded english version of optimization mode for DOSBox
+06/15/2005 : OpenGL works fine again, a little bit faster than previous build
+06/05/2005 : First build uploaded in English page (CVS 0.63)
+
+* 2004
+
+* 2003
+12/08/2003 : First build uploaded on Korean page (since CVS 0.60)
+
+
+--------------------------------------------------------------------------------------------------------------
+* For more information about DOSBox:
+- Official website: http://www.dosbox.com
+- Official forum: http://vogons.zetafleet.com
+--------------------------------------------------------------------------------------------------------------
+* Contacts (ykhwong's website)
+- English: http://ykhwong.x-y.net
+- Korean: http://cafe.daum.net/dosbox
+--------------------------------------------------------------------------------------------------------------
+

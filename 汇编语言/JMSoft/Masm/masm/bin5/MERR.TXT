@@ -1,0 +1,4 @@
+Microsoft (R) Macro Assembler Version 5.00 
+Copyright (C) Microsoft Corp 1981-1985, 1987.  All rights reserved.
+
+Include file windows.inc  not found

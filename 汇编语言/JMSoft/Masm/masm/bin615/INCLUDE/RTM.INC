@@ -1,0 +1,124 @@
+  ; ===========================================
+  ; rtm.inc copyright MASM32 1998 - 2005
+  ; ===========================================
+
+IFNDEF RTM_INC
+RTM_INC equ <1>
+
+BestMatchInTable PROTO :DWORD,:DWORD,:DWORD
+CheckTable PROTO :DWORD
+CreateTable PROTO :DWORD,:DWORD
+DeleteFromTable PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+DestroyTable PROTO :DWORD
+DumpTable PROTO :DWORD,:DWORD
+EnumOverTable PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+InsertIntoTable PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+MgmAddGroupMembershipEntry PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+MgmDeInitialize PROTO 
+MgmDeRegisterMProtocol PROTO :DWORD
+MgmDeleteGroupMembershipEntry PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+MgmGetFirstMfe PROTO :DWORD,:DWORD,:DWORD
+MgmGetFirstMfeStats PROTO :DWORD,:DWORD,:DWORD
+MgmGetMfe PROTO :DWORD,:DWORD,:DWORD
+MgmGetMfeStats PROTO :DWORD,:DWORD,:DWORD
+MgmGetNextMfe PROTO :DWORD,:DWORD,:DWORD,:DWORD
+MgmGetNextMfeStats PROTO :DWORD,:DWORD,:DWORD,:DWORD
+MgmGetProtocolOnInterface PROTO :DWORD,:DWORD,:DWORD,:DWORD
+MgmGroupEnumerationEnd PROTO :DWORD
+MgmGroupEnumerationGetNext PROTO :DWORD,:DWORD,:DWORD,:DWORD
+MgmGroupEnumerationStart PROTO :DWORD,:DWORD,:DWORD
+MgmInitialize PROTO :DWORD,:DWORD
+MgmRegisterMProtocol PROTO :DWORD,:DWORD,:DWORD,:DWORD
+MgmReleaseInterfaceOwnership PROTO :DWORD,:DWORD,:DWORD
+MgmTakeInterfaceOwnership PROTO :DWORD,:DWORD,:DWORD
+NextMatchInTable PROTO :DWORD,:DWORD,:DWORD
+RtmAddNextHop PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmAddRoute PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmAddRouteToDest PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmBlockConvertRoutesToStatic PROTO :DWORD,:DWORD,:DWORD
+RtmBlockDeleteRoutes PROTO :DWORD,:DWORD,:DWORD
+RtmBlockMethods PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmBlockSetRouteEnable PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmCloseEnumerationHandle PROTO :DWORD
+RtmCreateDestEnum PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmCreateEnumerationHandle PROTO :DWORD,:DWORD,:DWORD
+RtmCreateNextHopEnum PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmCreateRouteEnum PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmCreateRouteList PROTO :DWORD,:DWORD
+RtmCreateRouteListEnum PROTO :DWORD,:DWORD,:DWORD
+RtmCreateRouteTable PROTO :DWORD,:DWORD
+RtmDeleteEnumHandle PROTO :DWORD,:DWORD
+RtmDeleteNextHop PROTO :DWORD,:DWORD,:DWORD
+RtmDeleteRoute PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmDeleteRouteList PROTO :DWORD,:DWORD
+RtmDeleteRouteTable PROTO :DWORD
+RtmDeleteRouteToDest PROTO :DWORD,:DWORD,:DWORD
+RtmDequeueRouteChangeMessage PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmDeregisterClient PROTO :DWORD
+RtmDeregisterEntity PROTO :DWORD
+RtmDeregisterFromChangeNotification PROTO :DWORD,:DWORD
+RtmEnumerateGetNextRoute PROTO :DWORD,:DWORD
+RtmFindNextHop PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmGetAddressFamilyInfo PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmGetChangeStatus PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmGetChangedDests PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmGetDestInfo PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmGetEntityInfo PROTO :DWORD,:DWORD,:DWORD
+RtmGetEntityMethods PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmGetEnumDests PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmGetEnumNextHops PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmGetEnumRoutes PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmGetExactMatchDestination PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmGetExactMatchRoute PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmGetFirstRoute PROTO :DWORD,:DWORD,:DWORD
+RtmGetInstanceInfo PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmGetInstances PROTO :DWORD,:DWORD
+RtmGetLessSpecificDestination PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmGetListEnumRoutes PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmGetMostSpecificDestination PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmGetNetworkCount PROTO :DWORD
+RtmGetNextHopInfo PROTO :DWORD,:DWORD,:DWORD
+RtmGetNextHopPointer PROTO :DWORD,:DWORD,:DWORD
+RtmGetNextRoute PROTO :DWORD,:DWORD,:DWORD
+RtmGetOpaqueInformationPointer PROTO :DWORD,:DWORD,:DWORD
+RtmGetRegisteredEntities PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmGetRouteAge PROTO :DWORD
+RtmGetRouteInfo PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmGetRoutePointer PROTO :DWORD,:DWORD,:DWORD
+RtmHoldDestination PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmIgnoreChangedDests PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmInsertInRouteList PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmInvokeMethod PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmIsBestRoute PROTO :DWORD,:DWORD,:DWORD
+RtmIsMarkedForChangeNotification PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmIsRoute PROTO :DWORD,:DWORD,:DWORD
+RtmLockDestination PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmLockNextHop PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmLockRoute PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmLookupIPDestination PROTO :DWORD,:DWORD
+RtmMarkDestForChangeNotification PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmReadAddressFamilyConfig PROTO :DWORD,:DWORD,:DWORD
+RtmReadInstanceConfig PROTO :DWORD,:DWORD
+RtmReferenceHandles PROTO :DWORD,:DWORD,:DWORD
+RtmRegisterClient PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmRegisterEntity PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmRegisterForChangeNotification PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmReleaseChangedDests PROTO :DWORD,:DWORD,:DWORD,:DWORD
+RtmReleaseDestInfo PROTO :DWORD,:DWORD
+RtmReleaseDests PROTO :DWORD,:DWORD,:DWORD
+RtmReleaseEntities PROTO :DWORD,:DWORD,:DWORD
+RtmReleaseEntityInfo PROTO :DWORD,:DWORD
+RtmReleaseNextHopInfo PROTO :DWORD,:DWORD
+RtmReleaseNextHops PROTO :DWORD,:DWORD,:DWORD
+RtmReleaseRouteInfo PROTO :DWORD,:DWORD
+RtmReleaseRoutes PROTO :DWORD,:DWORD,:DWORD
+RtmUpdateAndUnlockRoute PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+RtmWriteAddressFamilyConfig PROTO :DWORD,:DWORD,:DWORD
+RtmWriteInstanceConfig PROTO :DWORD,:DWORD
+SearchInTable PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+
+ELSE
+echo -----------------------------------------
+echo WARNING Duplicate include file rtm.inc
+echo -----------------------------------------
+ENDIF

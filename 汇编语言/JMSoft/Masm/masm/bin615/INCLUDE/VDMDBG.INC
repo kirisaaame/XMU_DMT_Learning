@@ -1,0 +1,41 @@
+  ; ===========================================
+  ; vdmdbg.inc copyright MASM32 1998 - 2005
+  ; ===========================================
+
+IFNDEF VDMDBG_INC
+VDMDBG_INC equ <1>
+
+VDMBreakThread PROTO :DWORD,:DWORD
+VDMDetectWOW PROTO 
+VDMEnumProcessWOW PROTO :DWORD,:DWORD
+VDMEnumTaskWOW PROTO :DWORD,:DWORD,:DWORD
+VDMEnumTaskWOWEx PROTO :DWORD,:DWORD,:DWORD
+VDMGetAddrExpression PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VDMGetContext PROTO :DWORD,:DWORD,:DWORD
+VDMGetDbgFlags PROTO :DWORD
+VDMGetModuleSelector PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VDMGetPointer PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VDMGetSegmentInfo PROTO :DWORD,:DWORD,:DWORD,:DWORD
+VDMGetSegtablePointer PROTO 
+VDMGetSelectorModule PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VDMGetSymbol PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VDMGetThreadContext PROTO :DWORD,:DWORD
+VDMGetThreadSelectorEntry PROTO :DWORD,:DWORD,:DWORD,:DWORD
+VDMGlobalFirst PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VDMGlobalNext PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VDMIsModuleLoaded PROTO :DWORD
+VDMKillWOW PROTO 
+VDMModuleFirst PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VDMModuleNext PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+VDMProcessException PROTO :DWORD
+VDMSetContext PROTO :DWORD,:DWORD,:DWORD
+VDMSetDbgFlags PROTO :DWORD,:DWORD
+VDMSetThreadContext PROTO :DWORD,:DWORD
+VDMStartTaskInWOW PROTO :DWORD,:DWORD,:DWORD
+VDMTerminateTaskWOW PROTO :DWORD,:DWORD
+
+ELSE
+echo -----------------------------------------
+echo WARNING Duplicate include file vdmdbg.inc
+echo -----------------------------------------
+ENDIF

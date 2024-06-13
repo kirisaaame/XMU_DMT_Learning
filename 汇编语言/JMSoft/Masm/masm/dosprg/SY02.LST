@@ -1,0 +1,131 @@
+Microsoft (R) Macro Assembler Version 6.11		    10/13/20 09:56:27
+sy02.asm						     Page 1 - 1
+
+
+				; ******************************************************************************
+				;  * 程序功能:输出乘法口诀表                 
+				;  1*1=1
+				;  1*2=2 2*2=4
+				;  1*3=3 2*3=6 3*3=9
+				;  1*4=4 2*4=8 3*4=12 4*4=16
+				;  1*5=5 2*5=10 3*5=15 4*5=20 5*5=25
+				;  1*6=6 2*6=12 3*6=18 4*6=24 5*6=30 6*6=36
+				;  1*7=7 2*7=14 3*7=21 4*7=28 5*7=35 6*7=42 7*7=49
+				;  1*8=8 2*8=16 3*8=24 4*8=32 5*8=40 6*8=48 7*8=56 8*8=64
+				;  1*9=9 2*9=18 3*9=27 4*9=36 5*9=45 6*9=54 7*9=63 8*9=72 9*9=81
+				;  *编译器：Masm 5.0,ML6.11都可以          
+				;  ******************************************************************************
+ 0000				data segment
+ 0000 00			  a db ?
+ 0001 00			  b db ?
+ 0002 00			  c1 db ?              ;C是关健字不可以用作变量名
+ 0003				data ends
+ 0000				code segment
+				   assume cs:code,ds:data
+ 0000				start:
+ 0000  B8 ---- R		   mov ax,data
+ 0003  8E D8			   mov ds,ax
+ 0005  C6 06 0000 R 01		   mov a,1
+ 000A  C6 06 0001 R 01		lp2:mov b,1
+ 000F  A0 0000 R		lp1:mov al,a   
+ 0012  F6 26 0001 R		    mul b        ;1X1结果保存在AL中
+ 0016  A2 0002 R		    mov c1,al    ;送入C1保存第一个结果
+ 0019  E8 0021			    call disp    ;
+ 001C  80 06 0001 R 01		    add b,1
+ 0021  A0 0001 R		    mov al,b
+ 0024  3A 06 0000 R		    cmp al,a
+ 0028  76 E5			    jbe lp1      ;是否相等
+ 002A  E8 0067			    call dad     ;否则换行
+ 002D  80 06 0000 R 01		    add a,1      ;a+1
+ 0032  80 3E 0000 R 09		    cmp a,9      ;是否等于9
+ 0037  76 D1			    jbe lp2      
+ 0039  B4 4C			    mov ah,4ch   ;大于九则结束
+ 003B  CD 21			    int 21h
+ 003D				disp proc
+ 003D  8A 16 0001 R		     mov dl,b   
+ 0041  80 CA 30			     or dl,30h   ;把DL的内容转成十进制
+ 0044  B4 02			     mov ah,2    
+ 0046  CD 21			     int 21h      ;输出DL内容
+ 0048  B2 2A			     mov dl, '*'   
+ 004A  CD 21			     int 21h      ;输出一个*号
+ 004C  8A 16 0000 R		     mov dl,a     
+ 0050  80 CA 30			     or dl,30h    ;把变量A转成十进制
+ 0053  CD 21			     int 21h       ;输出
+ 0055  B2 3D			     mov dl,'='   ;输出=号
+ 0057  CD 21			     int 21h
+ 0059  8A 16 0002 R		     mov dl,c1    ;把乘积的结果送入DL
+ 005D  80 FA 09			     cmp dl,9     ; CF∨ZF = 0 ？
+ 0060  77 0D			     ja aa1       
+ 0062  80 CA 30			     or dl,30h     ;DL内容转成十进制
+ 0065  B4 02			     mov ah,2        
+ 0067  CD 21			     int 21h        ;输出
+ 0069  B2 20			     mov dl, ' '    ;输出一个空字符
+ 006B  CD 21			     int 21h
+ 006D  EB 24			     jmp over       ;跳转到结束
+ 006F  8A DA			aa1:mov bl,dl      ;  
+ 0071  B2 00			     mov dl,0       
+ 0073  80 FB 0A			aa3:cmp bl,10      ;小于10吗?
+ 0076  72 07			     jb aa2         ;低于10则跳
+ 0078  80 EB 0A			     sub bl,10       ;主要是为了调整大于9的十进制数输出(例如25-10 DL=2 BL=5这样就可以输出结果)
+ 007B  FE C2			     inc dl          ;用dl来保存进位
+ 007D  EB F4			     jmp aa3         ;再次比较是否大于十
+ 007F  80 CA 30			aa2:or dl,30h       ;先输出进位部分
+ 0082  B4 02			     mov ah,2        ;
+ 0084  CD 21			     int 21h         ;
+ 0086  8A D3			     mov dl,bl       ;输出最后的差
+ 0088  80 CA 30			     or dl,30h       ;调整为十进制
+ 008B  B4 02			     mov ah,2        ;
+ 008D  CD 21			     int 21h         ;
+ 008F  B2 20			     mov dl,' '      ;
+ 0091  CD 21			     int 21h         ;
+ 0093  C3			over:ret
+ 0094				disp endp
+ 0094				dad proc
+ 0094  B2 0A			     mov dl,0ah   ;换行
+ 0096  B4 02			     mov ah,2
+ 0098  CD 21			     int 21h
+ 009A  B2 0D			     mov dl,0dh
+ 009C  CD 21			     int 21h     
+ 009E  C3			     ret
+ 009F				dad endp
+ 009F				code ends
+				    end start
+Microsoft (R) Macro Assembler Version 6.11		    10/13/20 09:56:27
+sy02.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+code . . . . . . . . . . . . . .	16 Bit	 009F	  Para	  Private 
+data . . . . . . . . . . . . . .	16 Bit	 0003	  Para	  Private 
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+dad  . . . . . . . . . . . . . .	P Near	 0094	  code	Length= 000B Public
+disp . . . . . . . . . . . . . .	P Near	 003D	  code	Length= 0057 Public
+  aa1  . . . . . . . . . . . . .	L Near	 006F	  code	
+  aa3  . . . . . . . . . . . . .	L Near	 0073	  code	
+  aa2  . . . . . . . . . . . . .	L Near	 007F	  code	
+  over . . . . . . . . . . . . .	L Near	 0093	  code	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+a  . . . . . . . . . . . . . . .	Byte	 0000	  data	
+b  . . . . . . . . . . . . . . .	Byte	 0001	  data	
+c1 . . . . . . . . . . . . . . .	Byte	 0002	  data	
+lp1  . . . . . . . . . . . . . .	L Near	 000F	  code	
+lp2  . . . . . . . . . . . . . .	L Near	 000A	  code	
+start  . . . . . . . . . . . . .	L Near	 0000	  code	
+
+	   0 Warnings
+	   0 Errors

@@ -1,0 +1,323 @@
+<language name="ASM" casesensitive="yes" wordchars="[\w]">
+	<tokenset name="Whitespace" id="whitespace" hidden="yes" inheritfrom="Text">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<validscope name="Attribute Block"/>
+		<tokens>
+			<token regexp="yes">\s+</token>
+		</tokens>
+	</tokenset>
+	
+	<tokenset name="Line Comments" id="linecomments" type="scope" forecolor="green" fontstyle="normal">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Attribute Block"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>;</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Strings" id="strings" type="scope" singlelinescope="yes" forecolor="purple">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Attribute Block"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>"</token>
+			<token>'</token>
+		</tokens>
+		<tokens2>
+			<token>"</token>
+			<token>'</token>
+		</tokens2>
+	</tokenset>
+	<tokenset name="Escape Sequences" id="escapeseqs" hidden="yes" inheritfrom="Strings">
+		<validscope name="Strings"/>
+		<tokens>
+			<token regexp="yes" rule="">\\.</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Statement Delimiters" id="statementdelims" hidden="yes" inheritfrom="Text">
+		<validscope name=""/>
+		<validscope name="Parameter Block"/>
+		<validscope name="Scope Keywords"/>
+		<tokens>
+			<token action="commitmember">;</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Scope Keywords" id="scopekeywords" type="scope" autoindent="yes" hidden="yes" inheritfrom="Keywords">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<tokens>
+			<token>{</token>
+		</tokens>
+		<tokens2>
+			<token>}</token>
+		</tokens2>
+	</tokenset>
+	<tokenset name="Parameter Block" id="parameterblocks" type="scope" hidden="yes" inheritfrom="Text">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+ 			<token action="ParameterInfo">(</token>
+		</tokens>
+		<tokens2>
+ 			<token>)</token>
+		</tokens2>
+	</tokenset>
+	<tokenset name="Argument Separators" id="argseparators" hidden="yes" inheritfrom="Text">
+		<validscope name="Parameter Block"/>
+		<tokens>
+ 			<token>,</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Attribute Block" id="attributeblocks" type="scope">
+		<validscope name=""/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>[</token>
+		</tokens>
+		<tokens2>
+			<token>]</token>
+		</tokens2>
+	</tokenset>
+	<tokenset name="Keywords" id="keywords" forecolor="blue" fontstyle="normal">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>segment</token>
+                        <token>SEGMENT</token>
+			<token>ends</token>
+			<token>ENDS</token>
+			<token>end</token>
+			<token>END</token>
+			<token>assume</token>
+			<token>ASSUME</token>
+			<token>org</token>
+			<token>ORG</token>
+			<token>start</token>
+			<token>START</token>
+			<token>begin</token>
+			<token>BEGIN</token>
+			<token>equ</token>
+			<token>EQU</token>
+			<token>=</token>
+			<token>label</token>
+			<token>LABEL</token>
+			<token>db</token>
+			<token>DB</token>
+			<token>dw</token>
+			<token>DW</token>
+			<token>dd</token>
+			<token>DD</token>
+			<token>dq</token>
+			<token>DQ</token>
+			<token>dt</token>
+			<token>DT</token>
+			<token>dup</token>
+			<token>DUP</token>
+			<token>seg</token>
+			<token>SEG</token>
+			<token>offset</token>
+			<token>OFFSET</token>
+			<token>type</token>
+			<token>TYPE</token>
+			<token>length</token>
+			<token>LENGTH</token>
+			<token>size</token>
+			<token>SIZE</token>
+			<token>mov</token>
+			<token>MOV</token>
+			<token>push</token>
+			<token>PUSH</token>
+			<token>pop</token>
+			<token>POP</token>
+			<token>xchg</token>
+			<token>XCHG</token>
+			<token>lea</token>
+			<token>LEA</token>
+			<token>lds</token>
+			<token>LDS</token>
+			<token>les</token>
+			<token>LES</token>
+			<token>lahf</token>
+			<token>LAHF</token>
+			<token>sahf</token>
+			<token>SAHF</token>
+			<token>pushf</token>
+			<token>PUSHF</token>
+			<token>popf</token>
+			<token>POPF</token>
+			<token>xlat</token>
+			<token>XLAT</token>
+			<token>add</token>
+			<token>ADD</token>
+			<token>adc</token>
+			<token>ADC</token>
+			<token>inc</token>
+			<token>INC</token>
+			<token>sub</token>
+			<token>SUB</token>
+			<token>sbb</token>
+			<token>SBB</token>
+			<token>cmp</token>
+			<token>CMP</token>
+			<token>dec</token>
+			<token>DEC</token>
+			<token>neg</token>
+			<token>NEG</token>
+			<token>mul</token>
+			<token>MUL</token>
+			<token>imul</token>
+			<token>IMUL</token>
+			<token>div</token>
+			<token>DIV</token>
+			<token>idiv</token>
+			<token>IDIV</token>
+			<token>aaa</token>
+			<token>AAA</token>
+			<token>aas</token>
+			<token>AAS</token>
+			<token>aam</token>
+			<token>AAM</token>
+			<token>aad</token>
+			<token>AAD</token>
+			<token>daa</token>
+			<token>DAA</token>
+			<token>das</token>
+			<token>DAS</token>
+			<token>and</token>
+			<token>AND</token>
+			<token>or</token>
+			<token>OR</token>
+                        <token>xor</token>
+                        <token>XOR</token>
+                        <token>EQ</token>
+                        <token>eq</token>
+                        <token>ne</token>
+                        <token>NE</token>
+                        <token>GT</token>
+                        <token>gt</token>
+                        <token>LT</token>
+                        <token>lt</token>
+                        <token>GE</token>
+                        <token>ge</token>
+                        <token>SHL</token>
+                        <token>shl</token>
+                        <token>SHR</token>
+                        <token>shr</token>
+                        <token>LE</token>
+                        <token>le</token>
+                        <token>.if</token>
+                        <token>.IF</token>
+                        <token>.while</token>
+                        <token>.WHILE</token>
+                        <token>.repeat</token>
+                        <token>.REPEAT</token>
+                        <token>.until</token>
+                        <token>.UNTIL</token>
+                        <token>.break</token>
+                        <token>.BREAK</token>
+                        <token>.continue</token>
+                        <token>.CONTINUE</token>
+                        <token>.186</token>
+                        <token>.286</token>
+                        <token>.286P</token>
+                        <token>.287</token>
+                        <token>.386</token>
+                        <token>.386P</token>
+                        <token>.387</token>
+                        <token>.486</token>
+                        <token>.486P</token>
+                        <token>.8086</token>
+                        <token>.8087</token>
+                        <token>.code</token>
+                        <token>.CODE</token>
+                        <token>.data</token>
+                        <token>.DATA</token>
+                        <token>.stack</token>
+                        <token>.STACK</token>
+                        <token>.model</token>
+                        <token>.MODEL</token>
+                        <token>.data?</token>
+                        <token>.DATA?</token>
+                        <token>.const</token>
+                        <token>.CONST</token>
+                        <token>option</token>
+                        <token>OPTION</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Operators" id="operators" forecolor="red">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token>++</token>
+			<token>--</token>
+			<token>*</token>
+			<token>&amp;</token>
+			<token>+</token>
+			<token>-</token>
+			<token>!</token>
+			<token>~</token>
+			<token>.*</token>
+			<token>-&gt;*</token>
+			<token>/</token>
+			<token>%</token>
+			<token>&lt;&lt;</token>
+			<token>&gt;&gt;</token>
+			<token>&lt;</token>
+			<token>&gt;</token>
+			<token>&lt;=</token>
+			<token>&gt;=</token>
+			<token>==</token>
+			<token>!=</token>
+			<token>^</token>
+			<token>|</token>
+			<token>&amp;&amp;</token>
+			<token>||</token>
+			<token>?</token>
+			<token>=</token>
+			<token>*=</token>
+			<token>/=</token>
+			<token>%=</token>
+			<token>+=</token>
+			<token>-=</token>
+			<token>&lt;&lt;=</token>
+			<token>&gt;&gt;=</token>
+			<token>&amp;=</token>
+			<token>|=</token>
+			<token>^=</token>
+			<token action="ListMembers">::</token>
+			<token action="ListMembers">.</token>
+			<token action="ListMembers">-&gt;</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Numbers" id="numbers">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+		
+		<validscope name="Parameter Block"/>
+		<tokens>
+			<token regexp="yes">-?\d+(\.\d*)?(e-?\d+)?</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Hyperlinks" id="hyperlinks" forecolor="blue" fontstyle="underline">
+		<validscope name="Strings"/>
+		<validscope name="Line Comments"/>
+		<tokens regexp="yes">
+			<token>file://((\w:)?\w*)([/\\][\w\s\.]+)+([/\\][\w\.]*)+</token>
+			<token>https?://([\.~:?#=\w]+\w+)(/[\.~:?#=\w]+\w)*</token>
+			<token>(ftp|news|telnet|gopher)://[\.~:?#=\w]*\w(\.[\.~:?#=\w]*\w)+</token>
+			<token>mailto:[\w-]+(@[\w-]+(\.?[\w-])*)?</token>
+		</tokens>
+	</tokenset>
+	<tokenset name="Text" id="text">
+		<validscope name=""/>
+		<validscope name="Scope Keywords"/>
+	</tokenset>
+	
+</language>

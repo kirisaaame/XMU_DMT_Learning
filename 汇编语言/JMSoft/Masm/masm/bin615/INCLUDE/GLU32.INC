@@ -1,0 +1,65 @@
+  ; ===========================================
+  ; glu32.inc copyright MASM32 1998 - 2005
+  ; ===========================================
+
+IFNDEF GLU32_INC
+GLU32_INC equ <1>
+
+gluBeginCurve PROTO :DWORD
+gluBeginPolygon PROTO :DWORD
+gluBeginSurface PROTO :DWORD
+gluBeginTrim PROTO :DWORD
+gluBuild1DMipmaps PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluBuild2DMipmaps PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluCylinder PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluDeleteNurbsRenderer PROTO :DWORD
+gluDeleteQuadric PROTO :DWORD
+gluDeleteTess PROTO :DWORD
+gluDisk PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluEndCurve PROTO :DWORD
+gluEndPolygon PROTO :DWORD
+gluEndSurface PROTO :DWORD
+gluEndTrim PROTO :DWORD
+gluErrorString PROTO :DWORD
+gluErrorUnicodeStringEXT PROTO :DWORD
+gluGetNurbsProperty PROTO :DWORD,:DWORD,:DWORD
+gluGetString PROTO :DWORD
+gluGetTessProperty PROTO :DWORD,:DWORD,:DWORD
+gluLoadSamplingMatrices PROTO :DWORD,:DWORD,:DWORD,:DWORD
+gluLookAt PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluNewNurbsRenderer PROTO 
+gluNewQuadric PROTO 
+gluNewTess PROTO 
+gluNextContour PROTO :DWORD,:DWORD
+gluNurbsCallback PROTO :DWORD,:DWORD,:DWORD
+gluNurbsCurve PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluNurbsProperty PROTO :DWORD,:DWORD,:DWORD
+gluNurbsSurface PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluOrtho2D PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluPartialDisk PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluPerspective PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluPickMatrix PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluProject PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluPwlCurve PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluQuadricCallback PROTO :DWORD,:DWORD,:DWORD
+gluQuadricDrawStyle PROTO :DWORD,:DWORD
+gluQuadricNormals PROTO :DWORD,:DWORD
+gluQuadricOrientation PROTO :DWORD,:DWORD
+gluQuadricTexture PROTO :DWORD,:DWORD
+gluScaleImage PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluSphere PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluTessBeginContour PROTO :DWORD
+gluTessBeginPolygon PROTO :DWORD,:DWORD
+gluTessCallback PROTO :DWORD,:DWORD,:DWORD
+gluTessEndContour PROTO :DWORD
+gluTessEndPolygon PROTO :DWORD
+gluTessNormal PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+gluTessProperty PROTO :DWORD,:DWORD,:DWORD,:DWORD
+gluTessVertex PROTO :DWORD,:DWORD,:DWORD
+gluUnProject PROTO :DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD,:DWORD
+
+ELSE
+echo -----------------------------------------
+echo WARNING Duplicate include file glu32.inc
+echo -----------------------------------------
+ENDIF
