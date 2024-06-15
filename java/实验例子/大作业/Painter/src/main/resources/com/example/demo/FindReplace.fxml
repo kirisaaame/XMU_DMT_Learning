@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.demo.FindReplaceController"
+      spacing="10" alignment="CENTER">
+    <HBox spacing="10">
+        <Label text="查找内容：" />
+        <TextField fx:id="findTextField" />
+    </HBox>
+    <HBox spacing="10">
+        <Label text="替换内容：" />
+        <TextField fx:id="replaceTextField" />
+    </HBox>
+    <HBox spacing="10">
+        <Button text="查找下一个" onAction="#findNextButtonClicked" />
+        <Button text="查找上一个" onAction="#findPreviousButtonClicked" />
+        <Button text="替换" onAction="#replaceButtonClicked" />
+        <Button text="全部替换" onAction="#replaceAllButton" />
+    </HBox>
+</VBox>

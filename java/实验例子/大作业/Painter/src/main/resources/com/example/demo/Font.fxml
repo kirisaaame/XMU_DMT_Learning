@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="222.0" prefWidth="448.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.FontController">
+   <children>
+      <ComboBox fx:id="Cb1" layoutX="50.0" layoutY="16.0" prefHeight="30.0" prefWidth="96.0" promptText="字体" />
+      <ComboBox fx:id="Cb2" layoutX="182.0" layoutY="16.0" prefHeight="30.0" prefWidth="96.0" promptText="字形" />
+      <ComboBox fx:id="Cb3" layoutX="319.0" layoutY="16.0" prefHeight="30.0" prefWidth="88.0" promptText="大小" />
+      <TextArea fx:id="ta" editable="false" focusTraversable="false" layoutX="14.0" layoutY="91.0" mouseTransparent="true" prefHeight="116.0" prefWidth="264.0" text="个人记事本&#10;AaBbYyZz" />
+      <Label layoutX="14.0" layoutY="61.0" text="示例" />
+      <Button fx:id="SureBtn" layoutX="328.0" layoutY="177.0" mnemonicParsing="false" onAction="#onSureBtn" prefHeight="30.0" prefWidth="71.0" text="确定" />
+   </children>
+</AnchorPane>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane alignment="center" hgap="8.0" prefHeight="274.0" prefWidth="354.0" vgap="8.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.demo.PainterController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <VBox spacing="8.0" GridPane.columnIndex="0">
+         <children>
+            <Button onAction="#handleRectangleButton" text="Draw Rectangle" />
+            <Button onAction="#handleCircleButton" text="Draw Circle" />
+            <Button onAction="#handleLineButton" text="Draw Line" />
+            <Button onAction="#handleColorPicker" text="Choose Color" />
+         </children>
+      </VBox>
+      <AnchorPane fx:id="drawingAreaAnchorPane" prefHeight="165.0" prefWidth="100.0" GridPane.columnIndex="1" />
+   </children>
+</GridPane>

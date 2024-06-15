@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <RadioButton layoutX="37.0" layoutY="38.0" mnemonicParsing="false" text="High" />
+      <RadioButton layoutX="37.0" layoutY="62.0" mnemonicParsing="false" text="Medium" />
+      <RadioButton layoutX="37.0" layoutY="87.0" mnemonicParsing="false" text="Low" />
+      <SplitMenuButton layoutX="366.0" layoutY="87.0" mnemonicParsing="false" text="English">
+        <items>
+          <MenuItem mnemonicParsing="false" text="English" />
+          <MenuItem mnemonicParsing="false" text="Chinese" />
+        </items>
+      </SplitMenuButton>
+      <PasswordField layoutX="164.0" layoutY="76.0" promptText="Your Password" />
+      <TextField layoutX="164.0" layoutY="43.0" promptText="Your Name" />
+      <Button layoutX="62.0" layoutY="126.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="81.0" text="Accept" />
+      <Button layoutX="189.0" layoutY="126.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="81.0" text="Decline" />
+      <CheckBox layoutX="25.0" layoutY="168.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" text="Normal" />
+      <CheckBox layoutX="300.0" layoutY="168.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" text="Undefined" />
+      <CheckBox layoutX="164.0" layoutY="168.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" text="Checked" />
+      <Text layoutX="311.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Not Available" wrappingWidth="112.35089111328125" />
+      <Text layoutX="25.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Progress:" wrappingWidth="112.35089111328125" />
+      <Slider layoutX="94.0" layoutY="258.0" />
+      <ProgressIndicator layoutX="259.0" layoutY="252.0" progress="0.0" />
+   </children>
+</AnchorPane>

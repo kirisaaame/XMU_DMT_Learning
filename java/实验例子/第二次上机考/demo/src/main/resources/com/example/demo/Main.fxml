@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.MainController">
+   <children>
+      <Button fx:id="New" layoutX="163.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleAdd" text="新增" />
+      <Button fx:id="Save" layoutX="272.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleSave" text="保存" />
+      <Button fx:id="Delet" layoutX="376.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleDelete" text="删除" />
+      <Button fx:id="Saveas" layoutX="493.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleSaveAs" text="保存至文件" />
+      <ListView fx:id="Show" layoutX="14.0" layoutY="34.0" onMouseClicked="#handleListViewClick" onMouseDragExited="#handleListViewClick" onMouseDragOver="#handleListViewClick" prefHeight="287.0" prefWidth="213.0" />
+      <TextField fx:id="ID" layoutX="323.0" layoutY="65.0" />
+      <Label layoutX="277.0" layoutY="69.0" text="ID:" />
+      <TextField fx:id="Name" layoutX="323.0" layoutY="124.0" />
+      <TextField fx:id="Department" layoutX="323.0" layoutY="193.0" />
+      <TextField fx:id="Level" layoutX="323.0" layoutY="256.0" />
+      <Label layoutX="267.0" layoutY="128.0" text="姓名：" />
+      <Label layoutX="274.0" layoutY="197.0" text="部门：" />
+      <Label layoutX="255.0" layoutY="260.0" text="岗位级别：" />
+   </children>
+</AnchorPane>

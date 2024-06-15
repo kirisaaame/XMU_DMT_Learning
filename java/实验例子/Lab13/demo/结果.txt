@@ -1,0 +1,8 @@
+File: C:\Users\admin\Desktop\1111\新建 文本文档.txt
+a: 3
+b: 4
+c: 8
+d: 4
+e: 1
+f: 5
+
