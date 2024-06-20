@@ -1,80 +1,76 @@
-#include <stdio.h>
-union 
-{
-	int i;
-	short s;
-	char c;
-}t;
-void hex_out(char a)
-{
-	const char HEX[] = "0123456789ABCDEF";
-	printf("%c%c ",HEX[((a&0xf0)>>4)&0x0f],HEX[a&0x0f]);
-}
-void out_1byte(char *addr)
-{
-	hex_out(*(addr+0));
-}
-void out_2byte(char *addr)
-{
-	//小段方式先输出高字节
-	hex_out(*(addr+1));
-	hex_out(*(addr+0));
-}
-void out_4byte(char *addr)
-{
-	hex_out(*(addr+3));
-	hex_out(*(addr+2));
-	hex_out(*(addr+1));
-	hex_out(*(addr+0));
-}
-int f1(unsigned n)
-{
-	int sum=1, power = 1;
-	for (unsigned i =0;,i<=n-1;i++)
-	{
-		power*=2;
-		sum+=power;
-	}
-	return sum;
-}
-int main()
-{
-	t.i = 0xc77fffff;
-	out_4byte((char*)&t.i);
-	printf("  = %d \n",t.i);
-	out_4byte((char*)&t.s);
-	printf("  = %d \n",t.s);
-	out_4byte((char*)&t.c);
-	printf("  = %d \n",t.c);
-}
+#include <iostream>
+using namespace std;
 
-void main1()
-{
-	short s1 = 32767,s2 = -32768,s;
-	unsigned char uc1 = 128,uc2=255,uc;
-	s = s1+1;
-	printf(" %d + 1 = %d\n",s1,s);
-	s = s2-3;
-	printf(" %d - 3 = %d\n",s2,s);
-	uc = uc1+uc2;
-	printf(" %d + %d = %d\n",uc1,uc2,uc);
-	uc = uc1-uc2;
-	printf(" %d - %d = %d\n",uc1,uc2,uc);
-}
+class A {
+public:
+    A() {
+        cout << "A::A()" << endl;
+        f();
+    }
 
-void main2()
-{
-	unsigned char uc1 = 255,uc;
-	char c1 = -127,c;
-	c = (char) uc1;
-	out_1byte(&uc1);
-	printf(" = uc1 = %u  \n",uc1);
-	out_1byte(&c);
-	printf(" = c = %d  \n",c);
+    virtual ~A() {
+        cout << "A::~A()" << endl;
+    }
 
-	uc = c1;
-	out_1byte(&c1);
-	printf(" = c1 = %d  \n",c1);
-	out_1byte(&uc);
-	printf(" = uc = %u  \n",uc);
+    virtual void f() {
+        cout << "A::f()" << endl;
+    }
+
+    void g() {
+        cout << "A::g()" << endl;
+    }
+
+    void h() {
+        cout << "A::h()" << endl;
+        g();
+    }
+};
+
+class B : public A {
+public:
+    B() {
+        cout << "B::B()" << endl;
+    }
+
+    ~B() {
+        cout << "B::~B()" << endl;
+    }
+
+    void f() override {
+        cout << "B::f()" << endl;
+    }
+
+    void g() {
+        cout << "B::g()" << endl;
+    }
+};
+
+int main() {
+    B b; //调用B::B()，A::A()和A::f()
+
+    A *p = &b;
+
+    p->f(); //调用B::f()
+
+    p->A::f(); //调用A::f()
+
+    p->g(); //调用A::g()
+
+    cout << "1:" << endl;
+
+    p->h();
+
+    cout << endl;
+
+    cout << "2:" << endl;
+
+    p = new B; //调用A::A()，A::f(), B::B()
+
+    cout << endl;
+
+    cout << "3:" << endl;
+
+    delete p; //为什么输出了B::~B()，A::~A()，B::~B()，A::~A()
+
+    return 0;
 }
