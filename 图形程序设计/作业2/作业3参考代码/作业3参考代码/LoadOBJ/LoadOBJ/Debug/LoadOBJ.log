@@ -1,0 +1,11 @@
+﻿  main.cpp
+E:\ftpdow\作业2\作业3参考代码\作业3参考代码\LoadOBJ\LoadOBJ\main.cpp(13,23): warning C4305: “初始化”: 从“double”到“GLfloat”截断
+E:\ftpdow\作业2\作业3参考代码\作业3参考代码\LoadOBJ\LoadOBJ\main.cpp(13,28): warning C4305: “初始化”: 从“double”到“GLfloat”截断
+E:\ftpdow\作业2\作业3参考代码\作业3参考代码\LoadOBJ\LoadOBJ\main.cpp(13,33): warning C4305: “初始化”: 从“double”到“GLfloat”截断
+E:\ftpdow\作业2\作业3参考代码\作业3参考代码\LoadOBJ\LoadOBJ\main.cpp(14,23): warning C4305: “初始化”: 从“double”到“GLfloat”截断
+E:\ftpdow\作业2\作业3参考代码\作业3参考代码\LoadOBJ\LoadOBJ\main.cpp(14,28): warning C4305: “初始化”: 从“double”到“GLfloat”截断
+E:\ftpdow\作业2\作业3参考代码\作业3参考代码\LoadOBJ\LoadOBJ\main.cpp(14,33): warning C4305: “初始化”: 从“double”到“GLfloat”截断
+E:\ftpdow\作业2\作业3参考代码\作业3参考代码\LoadOBJ\LoadOBJ\main.cpp(100,22): warning C4305: “+=”: 从“double”到“float”截断
+E:\ftpdow\作业2\作业3参考代码\作业3参考代码\LoadOBJ\LoadOBJ\main.cpp(110,22): warning C4305: “-=”: 从“double”到“float”截断
+E:\ftpdow\作业2\作业3参考代码\作业3参考代码\LoadOBJ\LoadOBJ\main.cpp(111,38): warning C4305: “=”: 从“double”到“float”截断
+  LoadOBJ.vcxproj -> E:\ftpdow\作业2\作业3参考代码\作业3参考代码\LoadOBJ\Debug\LoadOBJ.exe
