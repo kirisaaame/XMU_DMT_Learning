@@ -1,0 +1,31 @@
+﻿  canvas.cpp
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(143): warning C4305: “参数”: 从“double”到“GLfloat”截断
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(145): warning C4244: “参数”: 从“int”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(145): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(150): warning C4244: “参数”: 从“int”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(150): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(156): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(164): warning C4305: “参数”: 从“double”到“GLfloat”截断
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(166): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(171): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(176): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(177): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(185): warning C4305: “参数”: 从“double”到“GLfloat”截断
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(187): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(192): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(197): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(204): warning C4305: “参数”: 从“double”到“GLfloat”截断
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(206): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(210): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(219): warning C4244: “参数”: 从“int”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(235): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(236): warning C4244: “参数”: 从“int”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(236): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(240): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(241): warning C4244: “参数”: 从“double”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(241): warning C4244: “参数”: 从“int”转换到“GLfloat”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(296): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(306): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk2\canvas\canvas.cpp(319): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+  Canvas.vcxproj -> C:\Users\Admin\OneDrive\教学\2022 图形设计实践\wk2\Canvas\Debug\Canvas.exe
+  Canvas.vcxproj -> C:\Users\Admin\OneDrive\教学\2022 图形设计实践\wk2\Canvas\Debug\Canvas.pdb (Full PDB)

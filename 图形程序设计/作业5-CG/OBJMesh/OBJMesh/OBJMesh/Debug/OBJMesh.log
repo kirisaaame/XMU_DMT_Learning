@@ -1,0 +1,15 @@
+﻿  Smoothing.cpp
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk5\objmesh\objmesh\smoothing.cpp(6): warning C4101: “lambda”: 未引用的局部变量
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk5\objmesh\objmesh\smoothing.cpp(7): warning C4101: “iterNum”: 未引用的局部变量
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk5\objmesh\objmesh\smoothing.cpp(17): warning C4101: “sigma_c”: 未引用的局部变量
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk5\objmesh\objmesh\smoothing.cpp(17): warning C4101: “sigma_s”: 未引用的局部变量
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk5\objmesh\objmesh\smoothing.cpp(18): warning C4101: “iterNum”: 未引用的局部变量
+  OBJ.cpp
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk5\objmesh\objmesh\obj.cpp(65): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk5\objmesh\objmesh\obj.cpp(69): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk5\objmesh\objmesh\obj.cpp(88): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\admin\onedrive\教学\2022 图形设计实践\wk5\objmesh\objmesh\obj.cpp(145): warning C4018: “<”: 有符号/无符号不匹配
+  main.cpp
+  正在生成代码...
+  OBJMesh.vcxproj -> C:\Users\Admin\OneDrive\教学\2022 图形设计实践\wk5\OBJMesh\Debug\OBJMesh.exe
+  OBJMesh.vcxproj -> C:\Users\Admin\OneDrive\教学\2022 图形设计实践\wk5\OBJMesh\Debug\OBJMesh.pdb (Full PDB)
