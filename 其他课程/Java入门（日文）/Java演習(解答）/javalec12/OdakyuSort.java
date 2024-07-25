@@ -1,8 +1,22 @@
 package javalec12;
-
+import java.util.Comparator;
 import java.util.List;
 import java.util.ArrayList;
-
+/*
+ * 3年　15組　96番　ゾウジファン
+ * 出力：
+ * 読売ランド前: 27849, 19.20
+向ヶ丘遊園: 45891, 15.80
+百合ヶ丘: 18510, 20.50
+登戸: 131466, 15.20
+和泉多摩川: 12314, 14.40
+----
+東北沢: 6298, 4.20
+代々木八幡: 16841, 2.70
+下北沢: 96539, 4.90
+参宮橋: 9735, 1.50
+世田谷代田: 7983, 5.60
+ */
 
 class Station {
 	String name;
@@ -32,6 +46,28 @@ public class OdakyuSort {
 
 	void printNeighbor(String sname) {
 		// XXX
+		Station targetStation = null;
+		for (Station station : stations) {
+			if (station.name.equals(sname)) {
+				targetStation = station;
+				break;
+			}
+		}
+
+		if (targetStation != null) {
+			final Station target = targetStation;
+			stations.sort(Comparator.comparingDouble(station -> Math.abs(station.pos - target.pos)));
+			int count = 0;
+			for (Station station : stations) {
+				if (!station.name.equals(sname)) {
+					System.out.println(station);
+					count++;
+					if (count == 5) {
+						break;
+					}
+				}
+			}
+		}
 	}
 
 	public static void main(String args[]) {
