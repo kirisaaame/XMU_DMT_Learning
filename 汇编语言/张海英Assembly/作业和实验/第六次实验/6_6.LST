@@ -1,0 +1,79 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/17/23 23:36:43
+6_6.asm							     Page 1 - 1
+
+
+				.model small
+ 0000				.data
+ 0000 06				bytex db 6
+ 0000				.code
+				myMacro MACRO byteX
+				    ifE BYTEX
+				    	rept 10
+				    	add ax,ax
+				    	endm
+				    endif
+				ENDM
+				.startup
+ 0017  BB 0006			mov bx,6
+				mymacro BYTEX
+			     1	    ifE BYTEX
+6_6.asm(14): error A2026: constant expected
+ myMacro(1): Macro Called From
+  6_6.asm(14): Main Line Code
+ 001A  03 C0		     2	    	add ax,ax
+ 001C  03 C0		     2	    	add ax,ax
+ 001E  03 C0		     2	    	add ax,ax
+ 0020  03 C0		     2	    	add ax,ax
+ 0022  03 C0		     2	    	add ax,ax
+ 0024  03 C0		     2	    	add ax,ax
+ 0026  03 C0		     2	    	add ax,ax
+ 0028  03 C0		     2	    	add ax,ax
+ 002A  03 C0		     2	    	add ax,ax
+ 002C  03 C0		     2	    	add ax,ax
+
+
+
+
+
+				.exit 0
+				end
+Microsoft (R) Macro Assembler Version 6.11		    12/17/23 23:36:43
+6_6.asm							     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+myMacro  . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0001	  Word	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0033	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+bytex  . . . . . . . . . . . . .	Byte	 0000	  _DATA	
+
+	   0 Warnings
+	   1 Errors

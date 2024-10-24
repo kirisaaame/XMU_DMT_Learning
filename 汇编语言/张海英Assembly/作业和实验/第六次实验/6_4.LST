@@ -1,0 +1,70 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/15/23 15:14:46
+6_4.asm							     Page 1 - 1
+
+
+				.model small
+				.stack
+ 0000				.data
+ 0000 48 65 6C 6C 6F 24			sstr db "Hello$"
+ 0006 00				dstr db ?
+ 0000				.code
+				movestr macro strN,dstr,sstr
+				.repeat
+				movsb dstr,sstr
+				dec strN
+				.until strN==0
+				endm
+				.startup
+ 0017  B9 0006			mov cx,6
+ 001A  8C DB			mov bx,ds
+ 001C  8E C3			mov es,bx
+ 001E  BE 0000 R		mov si,offset sstr
+ 0021  BF 0006 R		mov di,offset dstr
+				movestr cx,dstr,sstr
+ 0024  A4		     1	movsb dstr,sstr
+ 0025  49		     1	dec cx
+				.exit 0
+
+				end
+Microsoft (R) Macro Assembler Version 6.11		    12/15/23 15:14:46
+6_4.asm							     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+movestr  . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0007	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 002F	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+dstr . . . . . . . . . . . . . .	Byte	 0006	  _DATA	
+sstr . . . . . . . . . . . . . .	Byte	 0000	  _DATA	
+
+	   0 Warnings
+	   0 Errors

@@ -1,0 +1,55 @@
+Microsoft (R) Macro Assembler Version 6.11		    10/18/23 15:07:41
+Hello.asm						     Page 1 - 1
+
+
+				;默认采用ML6.11汇编程序
+ 0000				DATAS SEGMENT
+ 0000 48 65 6C 6C 6F 2C		    MESS	DB 	'Hello,World!' 
+       57 6F 72 6C 64 21
+ 000C				DATAS ENDS
+
+ 0000				STACKS SEGMENT
+				    ;此处输入堆栈段代码
+ 0000  0100 [			    DW 256 DUP(?)
+        0000
+       ]
+ 0200				STACKS ENDS
+
+ 0000				CODES SEGMENT
+				    ASSUME CS:CODES,DS:DATAS,SS:STACKS
+ 0000				BEGIN:
+ 0000  B8 ---- R			MOV AX,DATAS
+ 0003  8E D8			    MOV DS,AX
+				    ;此处输入代码段代码
+ 0005  BA 0000 R		    MOV DX,OFFSET MESS
+ 0008  B4 09			    MOV AH,9
+				    
+ 000A  CD 21			    INT 21H
+ 000C  B4 4C			    MOV AH,4CH
+ 000E  CD 21			    INT 21H
+ 0010				CODES ENDS
+				    END BEGIN
+Microsoft (R) Macro Assembler Version 6.11		    10/18/23 15:07:41
+Hello.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CODES  . . . . . . . . . . . . .	16 Bit	 0010	  Para	  Private 
+DATAS  . . . . . . . . . . . . .	16 Bit	 000C	  Para	  Private 
+STACKS . . . . . . . . . . . . .	16 Bit	 0200	  Para	  Private 
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+BEGIN  . . . . . . . . . . . . .	L Near	 0000	  CODES	
+MESS . . . . . . . . . . . . . .	Byte	 0000	  DATAS	
+
+	   0 Warnings
+	   0 Errors

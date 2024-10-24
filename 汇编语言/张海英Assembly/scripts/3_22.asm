@@ -1,0 +1,33 @@
+DATAS SEGMENT
+    ORG 0                  
+    ADDITIONAL_SEGMENT SEGMENT PUBLIC 'DATA' USE16
+    ARRAY DB 100 DUP(?)    
+    ADDITIONAL_SEGMENT ENDS
+
+DATAS ENDS
+
+STACKS SEGMENT
+    ORG 0                
+   
+STACKS ENDS
+
+CODE SEGMENT
+    ASSUME CS:CODE, DS:DATAS, SS:STACKS
+START:
+	ORG 100H
+    MOV AX, DATAS          
+    MOV DS, AX              
+    MOV CX,100D
+    XOR SI,SI
+    MOV BX, OFFSET ARRAY
+    
+L:  MOV BYTE PTR[BX+SI],64H
+	INC SI
+	LOOP L		;Ñ­»·¸³Öµ
+	
+    MOV AH, 4CH            
+    INT 21H                
+
+CODE ENDS
+
+END START

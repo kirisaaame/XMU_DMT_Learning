@@ -1,0 +1,57 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/27/23 21:50:52
+4_5.asm							     Page 1 - 1
+
+
+				;假定输入的数据为lednum,
+				.MODEL SMALL
+ 0000				.DATA
+ 0000 C0 F9 A4 B0 99 92		     ledtable db 0c0h,0f9h,0a4h,0b0h,99h,92h,82h,0f8h
+       82 F8
+ 0008  80 90 88 83 C6 C1	     		  db 80h,90h,88h,83h,0c6h,0c1h,86h,8eh
+       86 8E
+ 0010 09			     lednum db 9
+				.STACK
+ 0000				.CODE
+				.STARTUP
+ 0017  8D 1E 0000 R		     LEA bx,ledtable
+ 001B  BE 0009			     MOV  si,9
+ 001E  D7			     xlat
+ 001F  B4 4C			     mov ah,4ch
+ 0021  CD 21			     int 21h
+				.EXIT
+				     END
+Microsoft (R) Macro Assembler Version 6.11		    11/27/23 21:50:52
+4_5.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0011	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0027	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+lednum . . . . . . . . . . . . .	Byte	 0010	  _DATA	
+ledtable . . . . . . . . . . . .	Byte	 0000	  _DATA	
+
+	   0 Warnings
+	   0 Errors

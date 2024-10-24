@@ -1,0 +1,90 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/18/23 17:12:31
+5-2.asm							     Page 1 - 1
+
+
+				.model small
+ 0000				.data
+ 0000 0001 0002 0003 0004		number dw 0001,0002,0003,0004,0005
+       0005
+ 000A 11 24 34 35 4E			score db 17,36,52,53,78
+				.stack
+ 0000				.code
+				;排序方法：冒泡排序
+				;传出参数：DX
+				.startup
+ 0017  BA 0005			mov dx,lengthof number
+ 001A  E8 0016			call bubblesort
+ 001D  8B 16 0000 R		mov dx,number
+ 0021  80 C2 30			add dl,30h
+ 0024  B4 02			mov ah,2
+ 0026  CD 21			int 21h
+ 0028  B2 0A			mov dl,10
+ 002A  B4 02			mov ah,2
+ 002C  CD 21			int 21h
+				.exit 0
+
+ 0033				bubblesort proc
+ 0033  8B CA				mov cx,dx
+				.repeat
+ 0035  BE 0000				mov si,0
+ 0038  8B D9				mov bx,cx
+ 003A  4B				dec bx
+					.repeat
+ 003B  8A 84 000B R				mov al,score[si+1]
+						.if al>score[si]
+ 0045  86 84 000A R					xchg score[si],al	;score[si+1]->score[si]
+ 0049  88 84 000B R					mov score[si+1],al	;score[si]->score[si+1]
+							;shl si,1
+							;mov dx,number[si]
+							;xchg number[si+2],dx
+							;mov number[si],dx	;交换number
+							;shr si,1
+						.endif
+ 004D  46					inc si
+					.until si>=bx
+				.untilcxz
+ 0054  C3			ret
+ 0055				bubblesort endp
+				end
+Microsoft (R) Macro Assembler Version 6.11		    12/18/23 17:12:31
+5-2.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 000F	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0055	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+bubblesort . . . . . . . . . . .	P Near	 0033	  _TEXT	Length= 0022 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+number . . . . . . . . . . . . .	Word	 0000	  _DATA	
+score  . . . . . . . . . . . . .	Byte	 000A	  _DATA	
+
+	   0 Warnings
+	   0 Errors

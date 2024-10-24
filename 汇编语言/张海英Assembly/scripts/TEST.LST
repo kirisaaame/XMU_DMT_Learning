@@ -1,0 +1,72 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/18/23 17:42:37
+test.asm						     Page 1 - 1
+
+
+				;默认采用ML6.11汇编程序
+ 0000				DATAS SEGMENT
+ 0000 07 05 03 02 06 09		    DATA1  Db 7,5,3,2,6,9,1,8,4,0dh,0ah,'$'
+       01 08 04 0D 0A 24
+ 000C				DATAS ENDS
+
+ 0000				STACKS SEGMENT
+				    ;此处输入堆栈段代码
+ 0000				STACKS ENDS
+
+ 0000				CODES SEGMENT
+				    ASSUME CS:CODES,DS:DATAS,SS:STACKS
+ 0000				START:
+ 0000  B8 ---- R		    MOV AX,DATAS
+ 0003  8E D8			    MOV DS,AX
+ 0005  B9 0009			     mov cx,9
+				.repeat
+ 0008  BE 0000				mov si,0
+ 000B  8B D9				mov bx,cx
+ 000D  4B				dec bx
+					.repeat
+ 000E  8A 84 0001 R				mov al,DATA1[si+1]
+						.if al>DATA1[si]
+ 0018  86 84 0000 R					xchg DATA1[si],al	;DATA1[si+1]->DATA1[si]
+ 001C  88 84 0001 R					mov DATA1[si+1],al	;DATA1[si]->DATA1[si+1]
+						.endif
+ 0020  46					inc si
+					.until si>=bx
+				.untilcxz
+ 0027  B9 0009				mov cx,9
+ 002A  BE 0000				mov si,0
+				.repeat
+ 002D  8A 94 0000 R			mov dl,DATA1[si]
+ 0031  80 C2 30				add dl,30h
+ 0034  B4 02				mov ah,2
+ 0036  CD 21				int 21h	;cout << DATA1[si]
+ 0038  B2 20				mov dl,32
+ 003A  CD 21				int 21h		;cout << ' ';
+ 003C  46				inc si
+				.untilcxz
+ 003F  B4 4C			    MOV AH,4CH
+ 0041  CD 21			    INT 21H
+ 0043				CODES ENDS
+				    END START
+Microsoft (R) Macro Assembler Version 6.11		    12/18/23 17:42:37
+test.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CODES  . . . . . . . . . . . . .	16 Bit	 0043	  Para	  Private 
+DATAS  . . . . . . . . . . . . .	16 Bit	 000C	  Para	  Private 
+STACKS . . . . . . . . . . . . .	16 Bit	 0000	  Para	  Private 
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+DATA1  . . . . . . . . . . . . .	Byte	 0000	  DATAS	
+START  . . . . . . . . . . . . .	L Near	 0000	  CODES	
+
+	   0 Warnings
+	   0 Errors

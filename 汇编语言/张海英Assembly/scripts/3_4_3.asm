@@ -1,0 +1,28 @@
+;默认采用ML6.11汇编程序
+DATAS SEGMENT
+    a DB 00,06
+    b DB 09,01
+    e DB 08,01
+    d DB 03,01
+DATAS ENDS
+
+STACKS SEGMENT
+    ;此处输入堆栈段代码
+STACKS ENDS
+
+CODES SEGMENT
+    ASSUME CS:CODES,DS:DATAS,SS:STACKS
+START:
+	;思路：列竖式的思路处理，因为本程序都是2位数所以比较简单，存储在DX.AX寄存器中
+	MOV AL,B
+	ADD AL,E
+	AAA
+	PUSH FLAGS
+	MUL AL,D
+	AAA
+	MOV BX,AX ;BX<-21 = 7*3 
+   	MOV DX,OFFSET D   
+   	MOV AH,4CH
+   	INT 21H
+CODES ENDS
+    END START

@@ -1,0 +1,84 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/04/23 22:06:34
+2_45_1.asm						     Page 1 - 1
+
+
+				;默认采用ML6.11汇编程序
+ 0000				DATAS SEGMENT
+ 0000 48 45 4C 4C 4F 2C		   STRING DB 'HELLO, WORLD! ',13,10,'$'
+       20 57 4F 52 4C 44
+       21 20 0D 0A 24
+ 0011 0000			   	RESULT DW ?
+ 0013 0000			   	COUNT DW ?
+ 0015				DATAS ENDS
+
+ 0000				STACKS SEGMENT
+				    
+ 0000				STACKS ENDS
+
+ 0000				CODES SEGMENT
+				    ASSUME CS:CODES,DS:DATAS,SS:STACKS
+ 0000				START:
+ 0000  B8 ---- R		    MOV AX,DATAS
+ 0003  8E D8			    MOV DS,AX
+				    ;此处输入代码段代码
+ 0005  B9 0011			    MOV CX,SIZEOF STRING
+ 0008  BE 0000 R		    MOV SI,OFFSET STRING
+ 000B  33 DB			    XOR BX,BX
+ 000D  E3 0A			    JCXZ DONE
+ 000F  B0 20			    MOV AL,20H
+ 0011  3A 04			AGAIN:CMP AL,[SI]
+ 0013  75 01				JNZ NEXT
+ 0015  43				INC BX
+ 0016  46			NEXT: INC SI
+ 0017  E2 F8				LOOP AGAIN
+					
+ 0019  89 1E 0011 R		DONE: MOV RESULT,BX
+ 001D  A1 0011 R			MOV AX, WORD PTR RESULT
+ 0020  F8				CLC
+ 0021  B1 04				MOV CL,4
+ 0023  D4 0A				AAM
+ 0025  05 3030				ADD AX,3030H
+ 0028  80 FC 30				CMP AH,30H
+ 002B  74 08				JZ JUMP
+ 002D  50				PUSH AX
+ 002E  8A D4				MOV DL,AH
+ 0030  B4 02				MOV AH,2
+ 0032  CD 21				INT 21H
+ 0034  58				POP AX
+ 0035  8A D0			JUMP:MOV DL,AL
+ 0037  B4 02				MOV AH,2
+ 0039  CD 21				INT 21H
+ 003B  B4 4C			    MOV AH,4CH
+ 003D  CD 21			    INT 21H
+ 003F				CODES ENDS
+				    END START
+Microsoft (R) Macro Assembler Version 6.11		    11/04/23 22:06:34
+2_45_1.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CODES  . . . . . . . . . . . . .	16 Bit	 003F	  Para	  Private 
+DATAS  . . . . . . . . . . . . .	16 Bit	 0015	  Para	  Private 
+STACKS . . . . . . . . . . . . .	16 Bit	 0000	  Para	  Private 
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+AGAIN  . . . . . . . . . . . . .	L Near	 0011	  CODES	
+COUNT  . . . . . . . . . . . . .	Word	 0013	  DATAS	
+DONE . . . . . . . . . . . . . .	L Near	 0019	  CODES	
+JUMP . . . . . . . . . . . . . .	L Near	 0035	  CODES	
+NEXT . . . . . . . . . . . . . .	L Near	 0016	  CODES	
+RESULT . . . . . . . . . . . . .	Word	 0011	  DATAS	
+START  . . . . . . . . . . . . .	L Near	 0000	  CODES	
+STRING . . . . . . . . . . . . .	Byte	 0000	  DATAS	
+
+	   0 Warnings
+	   0 Errors

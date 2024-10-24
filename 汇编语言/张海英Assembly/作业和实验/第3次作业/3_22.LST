@@ -1,0 +1,64 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/08/23 19:56:24
+3_22.asm						     Page 1 - 1
+
+
+ 0000				DATAS SEGMENT
+				    ORG 0                  
+ 0000				    ADDITIONAL_SEGMENT SEGMENT PUBLIC 'DATA' USE16
+ 0000  0064 [			    ARRAY DB 100 DUP(?)    
+        00
+       ]
+ 0000				    ADDITIONAL_SEGMENT ENDS
+
+ 0000				DATAS ENDS
+
+ 0000				STACKS SEGMENT
+				    ORG 0                
+				   
+ 0000				STACKS ENDS
+
+ 0000				CODE SEGMENT
+				    ASSUME CS:CODE, DS:DATAS, SS:STACKS
+ 0000				START:
+					ORG 100H
+ 0100  B8 ---- R		    MOV AX, DATAS          
+ 0103  8E D8			    MOV DS, AX              
+ 0105  B9 0064			    MOV CX,100D
+ 0108  33 F6			    XOR SI,SI
+ 010A  BB 0000 R		    MOV BX, OFFSET ARRAY
+				    
+ 010D  C6 00 64			L:  MOV BYTE PTR[BX+SI],64H
+ 0110  46				INC SI
+ 0111  E2 FA				LOOP L
+ 0113  B4 4C			    MOV AH, 4CH             ; 指定退出程序的功能号
+ 0115  CD 21			    INT 21H                 ; 调用 DOS 中断以退出程序
+
+ 0117				CODE ENDS
+
+				END START
+Microsoft (R) Macro Assembler Version 6.11		    11/08/23 19:56:24
+3_22.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+ADDITIONAL_SEGMENT . . . . . . .	16 Bit	 0064	  Para	  Public  'DATA'	
+CODE . . . . . . . . . . . . . .	16 Bit	 0117	  Para	  Private 
+DATAS  . . . . . . . . . . . . .	16 Bit	 0000	  Para	  Private 
+STACKS . . . . . . . . . . . . .	16 Bit	 0000	  Para	  Private 
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+ARRAY  . . . . . . . . . . . . .	Byte	 0000	  ADDITIONAL_SEGMENT	
+L  . . . . . . . . . . . . . . .	L Near	 010D	  CODE	
+START  . . . . . . . . . . . . .	L Near	 0000	  CODE	
+
+	   0 Warnings
+	   0 Errors

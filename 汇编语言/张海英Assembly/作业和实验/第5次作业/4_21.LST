@@ -1,0 +1,100 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/08/23 13:34:44
+4_21.asm						     Page 1 - 1
+
+
+				.model small
+ 0000				.data
+ = 0019				    rows equ 25       ; 总行数
+ = 0050				    cols equ 80       ; 总列数
+ = 07D0				    screen_size equ rows * cols ; 屏幕大小
+
+ 0000				.data
+ 0000  07D0 [			    buffer db screen_size dup(?) ; 用于存储屏幕内容的缓冲区
+        00
+       ]
+
+ 0000				.code
+				    org 100h          ; 程序的起始地址
+
+ 0100				_start:
+ 0100  B8 ---- R		    mov ax, @data     ; 初始化数据段地址
+ 0103  8E D8			    mov ds, ax
+ 0105  8E C0			    mov es, ax        ; 将ES寄存器设置为数据段地址
+
+				    ; 读取光标位置
+ 0107  B4 02			    mov ah, 2
+ 0109  CD 10			    int 10h
+
+ 010B  B9 07D0			    mov cx, screen_size  ; CX为屏幕大小
+
+				    ; 逐行向上滚动
+ 010E  BE 00A0			    mov si, 2 * cols     ; SI指向第二行
+ 0111  BF 0000			    mov di, 0           ; DI指向第一行
+
+ 0114				scroll_up_loop:
+				    ; 逐个字符复制
+ 0114  8A 04			    mov al, [si]
+ 0116  88 05			    mov [di], al
+ 0118  46			    inc si
+ 0119  47			    inc di
+
+ 011A  E2 F8			    loop scroll_up_loop  ; 循环
+
+				    ; 在最后一行填充字母'A'
+ 011C  BE 0F00			    mov si, (rows - 1) * cols * 2 ; SI指向最后一行
+ 011F  B9 0050			    mov cx, cols
+ 0122  B0 41			    mov al, 'A'
+
+ 0124				fill_last_row:
+ 0124  88 04			    mov [si], al
+ 0126  46			    inc si
+ 0127  E2 FB			    loop fill_last_row
+
+				    ; 设置光标位置至新的一行
+ 0129  B4 02			    mov ah, 2
+ 012B  B2 00			    mov dl, 0
+ 012D  B6 18			    mov dh, rows - 1
+ 012F  CD 10			    int 10h
+
+				    ; 退出程序
+ 0131  B4 4C			    mov ah, 4Ch
+ 0133  CD 21			    int 21h
+				end _start
+Microsoft (R) Macro Assembler Version 6.11		    12/08/23 13:34:44
+4_21.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 07D0	  Word	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0135	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+_start . . . . . . . . . . . . .	L Near	 0100	  _TEXT	
+buffer . . . . . . . . . . . . .	Byte	 0000	  _DATA	
+cols . . . . . . . . . . . . . .	Number	 0050h	 
+fill_last_row  . . . . . . . . .	L Near	 0124	  _TEXT	
+rows . . . . . . . . . . . . . .	Number	 0019h	 
+screen_size  . . . . . . . . . .	Number	 07D0h	 
+scroll_up_loop . . . . . . . . .	L Near	 0114	  _TEXT	
+
+	   0 Warnings
+	   0 Errors

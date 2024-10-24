@@ -1,0 +1,82 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/27/23 22:17:23
+4_8.asm							     Page 1 - 1
+
+
+				;比较bufx,bufY和bufZ的大小
+				.MODEL SMALL
+ 0000				.DATA
+ 0000 000C			     bufx dw 12
+ 0002 000C			     bufy dw 12
+ 0004 000B			     bufz dw 11
+ 0006 0D 0A 24			     endstr db 13,10,'$'
+				.STACK
+ 0000				.CODE
+				.STARTUP
+ 0017  B2 00				mov dl,0
+ 0019  A1 0002 R			 mov ax,bufy
+ 001C  39 06 0000 R		     cmp bufx,ax
+ 0020  75 02			     jnz secmp	;不相等，进行下一次比较
+ 0022  FE C2			     inc dl	;相等，dl递增
+ 0024				   secmp:
+ 0024  A1 0004 R		   	 mov ax,bufz
+ 0027  39 06 0002 R		   	 cmp bufy,ax
+ 002B  75 07			   	 jnz judge	;不相等，判断dl是否为1
+ 002D  FE C2			   	 inc dl	;相等,dl递增
+ 002F  80 FA 02			   	 cmp dl,2 ;判断是否三个数相等
+ 0032  74 10			   	 jz output
+ 0034  80 FA 01			   	 judge:cmp dl,1
+ 0037  74 0B			   	 jz output	;dl=1,说明只有两个数相等，直接输出
+ 0039  A1 0000 R		   	 mov ax,bufx
+ 003C  3B 06 0004 R		   	 cmp ax,bufz
+ 0040  75 02			   	 jnz output		;不相等，直接输出
+ 0042  FE C2			   	 inc dl		;相等，dl递增
+				   	 ;输出
+ 0044  80 C2 30			   	 output:add dl,30h
+ 0047  B4 02			   	 mov ah,2
+ 0049  CD 21			   	 int 21h
+ 004B  8D 16 0006 R		   	 lea dx,offset endstr
+ 004F  B4 09			   	 mov ah,9
+ 0051  CD 21			   	 int 21h
+				   	 
+				.EXIT
+				     END
+Microsoft (R) Macro Assembler Version 6.11		    11/27/23 22:17:23
+4_8.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0009	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0057	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+bufx . . . . . . . . . . . . . .	Word	 0000	  _DATA	
+bufy . . . . . . . . . . . . . .	Word	 0002	  _DATA	
+bufz . . . . . . . . . . . . . .	Word	 0004	  _DATA	
+endstr . . . . . . . . . . . . .	Byte	 0006	  _DATA	
+judge  . . . . . . . . . . . . .	L Near	 0034	  _TEXT	
+output . . . . . . . . . . . . .	L Near	 0044	  _TEXT	
+secmp  . . . . . . . . . . . . .	L Near	 0024	  _TEXT	
+
+	   0 Warnings
+	   0 Errors

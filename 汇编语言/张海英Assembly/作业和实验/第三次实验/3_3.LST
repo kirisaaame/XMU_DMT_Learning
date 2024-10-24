@@ -1,0 +1,72 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/01/23 14:46:01
+3_3.asm							     Page 1 - 1
+
+
+				;默认采用ML6.11汇编程序
+ 0000				DATAS SEGMENT
+ 0000 0101			    x dw 0101h
+ 0002 0102			    y dw 0102h
+ 0004 0103			    z dw 0103h
+ 0006 0104			    v dw 0104h  
+ 0008				DATAS ENDS
+
+ 0000				STACKS SEGMENT
+				    ;此处输入堆栈段代码
+ 0000				STACKS ENDS
+
+ 0000				CODES SEGMENT
+				    ASSUME CS:CODES,DS:DATAS,SS:STACKS
+ 0000				START:
+ 0000  B8 ---- R		    MOV AX,DATAS
+ 0003  8E D8			    MOV DS,AX
+				    
+ 0005  A1 0000 R		    MOV AX,WORD PTR x
+ 0008  8B 1E 0002 R		    mov bx,word ptr y
+ 000C  F7 EB			    imul bx
+ 000E  8B C8			    mov cx,ax
+ 0010  8B DA			    mov bx,dx
+ 0012  A1 0004 R		    mov ax,word ptr z
+ 0015  99			    cwd
+ 0016  03 C8			    add cx,ax
+ 0018  03 DA			    add bx,dx
+ 001A  81 E9 0540		    sub cx,0540h
+ 001E  83 DB 00			    sbb bx,0
+ 0021  A1 0006 R		    mov ax,word ptr v
+ 0024  99			    cwd 
+ 0025  2B C1			    sub ax,cx
+ 0027  1B D3			    sbb dx,bx
+ 0029  8B 1E 0000 R		    mov bx,word ptr x
+ 002D  F7 FB			    idiv bx
+				    
+				    ;此处输入代码段代码
+ 002F  B4 4C			    MOV AH,4CH
+ 0031  CD 21			    INT 21H
+ 0033				CODES ENDS
+				    END START
+Microsoft (R) Macro Assembler Version 6.11		    11/01/23 14:46:01
+3_3.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CODES  . . . . . . . . . . . . .	16 Bit	 0033	  Para	  Private 
+DATAS  . . . . . . . . . . . . .	16 Bit	 0008	  Para	  Private 
+STACKS . . . . . . . . . . . . .	16 Bit	 0000	  Para	  Private 
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+START  . . . . . . . . . . . . .	L Near	 0000	  CODES	
+v  . . . . . . . . . . . . . . .	Word	 0006	  DATAS	
+x  . . . . . . . . . . . . . . .	Word	 0000	  DATAS	
+y  . . . . . . . . . . . . . . .	Word	 0002	  DATAS	
+z  . . . . . . . . . . . . . . .	Word	 0004	  DATAS	
+
+	   0 Warnings
+	   0 Errors

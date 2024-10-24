@@ -1,0 +1,63 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/28/23 14:17:04
+4_3_2.asm						     Page 1 - 1
+
+
+				.model small
+ 0000				.data
+ 0000 0009 0008 0007 0006		buffer dw 0009h,0008h,0007h,0006h
+				.stack
+ 0000				.code
+				.startup
+ 0017  A1 0000 R		mov ax,buffer
+ 001A  B1 0C			mov cl,12
+ 001C  D3 E0			shl ax,cl
+ 001E  BE 0002			mov si,2
+ 0021  8B 94 0000 R		mov dx,buffer[si]
+ 0025  B1 08			mov cl,8
+ 0027  D3 E2			shl dx,cl
+ 0029  0B C2			or ax,dx
+ 002B  83 C6 02			add si,2
+ 002E  8B 94 0000 R		mov dx,buffer[si]
+ 0032  B1 04			mov cl,4
+ 0034  D3 E2			shl dx,cl
+ 0036  0B C2			or ax,dx
+ 0038  83 C6 02			add si,2
+ 003B  8B 94 0000 R		mov dx,buffer[si]
+ 003F  0B C2			or ax,dx
+ 0041  8B D0			mov dx,ax
+				.exit
+				end
+Microsoft (R) Macro Assembler Version 6.11		    11/28/23 14:17:04
+4_3_2.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0008	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0047	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+buffer . . . . . . . . . . . . .	Word	 0000	  _DATA	
+
+	   0 Warnings
+	   0 Errors

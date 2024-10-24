@@ -1,0 +1,90 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/02/23 16:27:39
+3_4_2.asm						     Page 1 - 1
+
+
+				;默认采用ML6.11汇编程序
+ 0000				DATAS SEGMENT
+ 0000 FFFF			    a dw 0ffffh
+ 0002 0101			    b dw 0101h
+ 0004 0102			    e dw 0102h
+ 0006 0103			    d dw 0103h
+ 0008				DATAS ENDS
+
+ 0000				STACKS SEGMENT
+				    ;此处输入堆栈段代码
+ 0000				STACKS ENDS
+
+ 0000				CODES SEGMENT
+				    ASSUME CS:CODES,DS:DATAS,SS:STACKS
+ 0000				START:
+ 0000  B8 ---- R		    MOV AX,DATAS
+ 0003  8E D8			    MOV DS,AX
+				    ;此处输入代码段代码
+ 0005  A1 0002 R		    mov ax,word ptr b
+ 0008  8B 1E 0004 R		    mov bx,word ptr e
+ 000C  03 C3			    add ax,bx
+ 000E  83 D2 00			    adc dx,0
+ 0011  8B 1E 0006 R		    mov bx,word ptr d
+ 0015  F7 EB			    imul bx
+ 0017  8B CA			    mov cx,dx
+ 0019  8B D8			    mov bx,ax
+				    ;cx.bx<-(b+c)*d
+ 001B  A1 0000 R		    mov ax,word ptr a
+ 001E  BA 0000			    mov dx,0000h
+ 0021  2B C3			    sub ax,bx
+ 0023  1B D1			    sbb dx,cx
+ 0025  A3 0100			    mov word ptr ds:[0100h],ax
+ 0028  89 16 0102		    mov word ptr ds:[0102h],dx
+				    ;ds:0100h<-a-(b+c)*d
+				    ;第一个算式计算完成
+ 002C  A1 0006 R		   	mov ax,d
+ 002F  99			   	cwd 
+ 0030  2B 06 0004 R		   	sub ax,e
+ 0034  8B D8			   	mov bx,ax
+				   	;bx<-d-c
+ 0036  A1 0002 R		   	mov ax,b
+ 0039  BA 0000			    mov dx,0000h
+ 003C  F7 FB			    idiv bx
+ 003E  8B D8			    mov bx,ax
+				    ;bx<-b/(d-c)
+ 0040  A1 0002 R		    mov ax,b
+ 0043  BA 0000			    mov dx,0000h
+ 0046  03 06 0004 R		    add ax,e
+ 004A  83 D2 00			    adc dx,0
+ 004D  2B C3			    sub ax,bx
+ 004F  83 DA 00			    sbb dx,0
+ 0052  A3 0104			    mov word ptr ds:[0104h],ax
+ 0055  89 16 0106		    mov word ptr ds:[0106h],dx
+				    
+				    
+ 0059  B4 4C			    MOV AH,4CH
+ 005B  CD 21			    INT 21H
+ 005D				CODES ENDS
+				    END START
+Microsoft (R) Macro Assembler Version 6.11		    11/02/23 16:27:39
+3_4_2.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CODES  . . . . . . . . . . . . .	16 Bit	 005D	  Para	  Private 
+DATAS  . . . . . . . . . . . . .	16 Bit	 0008	  Para	  Private 
+STACKS . . . . . . . . . . . . .	16 Bit	 0000	  Para	  Private 
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+START  . . . . . . . . . . . . .	L Near	 0000	  CODES	
+a  . . . . . . . . . . . . . . .	Word	 0000	  DATAS	
+b  . . . . . . . . . . . . . . .	Word	 0002	  DATAS	
+d  . . . . . . . . . . . . . . .	Word	 0006	  DATAS	
+e  . . . . . . . . . . . . . . .	Word	 0004	  DATAS	
+
+	   0 Warnings
+	   0 Errors

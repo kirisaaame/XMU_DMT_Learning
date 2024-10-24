@@ -1,0 +1,62 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/08/23 20:10:36
+3_24.asm						     Page 1 - 1
+
+
+
+ 0000				DATAS SEGMENT
+ 0000 12 45 F3 6A 20 FE		   array db 12h,45h,0f3h,6ah,20h,0feh,90h,0c8h,57h,34h
+       90 C8 57 34
+ 000A 00			   sum db ?
+ 000B				DATAS ENDS
+
+ 0000				STACKS SEGMENT
+				    
+ 0000				STACKS ENDS
+
+ 0000				CODES SEGMENT
+				    ASSUME CS:CODES,DS:DATAS,SS:STACKS
+ 0000				START:
+ 0000  B8 ---- R		    MOV AX,DATAS
+ 0003  8E D8			    MOV DS,AX
+				    
+ 0005  33 C0			    xor ax,ax
+ 0007  BB 0000 R		    mov bx,offset array
+ 000A  33 F6			    xor si,si
+ 000C  B9 000A			    mov cx,10
+				    ;¿ªÊ¼Ñ­»·
+ 000F  02 00			  l:add al,byte ptr[bx+si]
+ 0011  46			  	inc si
+ 0012  E2 FB			  	loop l
+				    
+ 0014  BB 000A R		    mov bx,offset sum
+ 0017  88 07			    mov [bx],al
+ 0019  B4 4C			    MOV AH,4CH
+ 001B  CD 21			    INT 21H
+ 001D				CODES ENDS
+				    END START
+Microsoft (R) Macro Assembler Version 6.11		    11/08/23 20:10:36
+3_24.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CODES  . . . . . . . . . . . . .	16 Bit	 001D	  Para	  Private 
+DATAS  . . . . . . . . . . . . .	16 Bit	 000B	  Para	  Private 
+STACKS . . . . . . . . . . . . .	16 Bit	 0000	  Para	  Private 
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+START  . . . . . . . . . . . . .	L Near	 0000	  CODES	
+array  . . . . . . . . . . . . .	Byte	 0000	  DATAS	
+l  . . . . . . . . . . . . . . .	L Near	 000F	  CODES	
+sum  . . . . . . . . . . . . . .	Byte	 000A	  DATAS	
+
+	   0 Warnings
+	   0 Errors

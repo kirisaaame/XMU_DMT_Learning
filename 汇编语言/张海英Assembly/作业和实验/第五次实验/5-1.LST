@@ -1,0 +1,129 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/13/23 13:09:16
+5-1.asm							     Page 1 - 1
+
+
+				;使用变量传参
+				;打印下标
+				.MODEL SMALL
+ 0000				.DATA
+ 0000 24			     STRING  DB '$'
+ 0001 57 45			     tar db 'WE'
+ 0003 30 31 32 33 34 35		     ascii db 30h,31h,32h,33h,34h,35h,36h,37h,38h,39h
+       36 37 38 39
+ 000D  41 42 43 44 45 46	     		db 41h,42h,43h,44h,45h,46h
+ 0013 4E 4F 54 20 46 4F		     msg db 'NOT FOUND',13,10,'$'
+       55 4E 44 0D 0A 24
+				.STACK
+ 0000				.CODE
+				.STARTUP
+ 0017  50				push ax
+ 0018  56				push si
+ 0019  52				push dx
+ 001A  51				push cx
+ 001B  33 C0				xor ax,ax	;清空AX
+ 001D  33 F6				xor si,si
+ 001F  33 D2				xor dx,dx
+ 0021  BB 0000 R		    mov bx,offset string
+ 0024  E8 0008			    call findtar
+ 0027  59			    pop cx
+ 0028  5A			    pop dx
+ 0029  5E			    pop si
+ 002A  58			    pop ax
+				.EXIT
+
+ 002F				findtar proc
+ 002F  B9 0001				mov cx,lengthof string	;设置循环次数
+ 0032  BE 0000				mov si,0	;设置目标串偏移
+					;暴力搜索
+ 0035  8A 00			try:mov al,byte ptr[bx+si]
+ 0037  3A 84 0001 R			cmp al,tar[si]
+ 003B  75 08				jne clr
+ 003D  46				inc si	;若相等，递增si
+ 003E  83 FE 02				cmp si,2
+ 0041  74 0C				je break
+ 0043  EB F0				jmp try	;继续比较下一个字符
+ 0045  33 F6			clr:xor si,si	;不相等，SI置0
+ 0047  43				inc bx	;
+ 0048  E2 EB				loop try	;下标递增，循环
+					;循环完了未找到子串
+ 004A  B8 FFFF R			mov ax,offset string-1	;AX=-1
+ 004D  EB 02				jmp finally
+ 004F  8B C3			break:mov ax,bx
+ 0051				finally:
+ 0051  2D 0000 R		    sub ax,offset string
+ 0054  83 F8 FF			    cmp ax,-1
+ 0057  75 09			    jne print
+ 0059  BA 0013 R		    mov dx,offset msg
+ 005C  B4 09			    mov ah,9
+ 005E  CD 21			    int 21h
+ 0060  EB 20			    jmp endl
+ 0062  BB 0003 R		print:mov bx,offset ascii
+				    
+ 0065  8A D0			    mov dl,al
+ 0067  B1 04			    mov cl,4
+ 0069  D2 EA			    shr dl,cl
+ 006B  8B F2			    mov si,dx
+ 006D  8A 10			    mov dl,byte ptr[bx+si]
+ 006F  50			    push ax
+ 0070  B4 02			    mov ah,2
+ 0072  CD 21			    int 21h
+ 0074  58			    pop ax
+ 0075  8A D0			    mov dl,al
+ 0077  80 E2 0F			    and dl,0fh
+ 007A  8B F2			    mov si,dx
+ 007C  8A 10			    mov dl,[bx+si]
+ 007E  B4 02			    mov ah,2
+ 0080  CD 21			    int 21h
+ 0082  C3			endl:ret
+ 0083				findtar endp
+				END
+Microsoft (R) Macro Assembler Version 6.11		    12/13/23 13:09:16
+5-1.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 001F	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0083	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+findtar  . . . . . . . . . . . .	P Near	 002F	  _TEXT	Length= 0054 Public
+  try  . . . . . . . . . . . . .	L Near	 0035	  _TEXT	
+  clr  . . . . . . . . . . . . .	L Near	 0045	  _TEXT	
+  break  . . . . . . . . . . . .	L Near	 004F	  _TEXT	
+  finally  . . . . . . . . . . .	L Near	 0051	  _TEXT	
+  print  . . . . . . . . . . . .	L Near	 0062	  _TEXT	
+  endl . . . . . . . . . . . . .	L Near	 0082	  _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+STRING . . . . . . . . . . . . .	Byte	 0000	  _DATA	
+ascii  . . . . . . . . . . . . .	Byte	 0003	  _DATA	
+msg  . . . . . . . . . . . . . .	Byte	 0013	  _DATA	
+tar  . . . . . . . . . . . . . .	Byte	 0001	  _DATA	
+
+	   0 Warnings
+	   0 Errors

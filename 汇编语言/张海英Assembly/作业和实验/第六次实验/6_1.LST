@@ -1,0 +1,55 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/15/23 13:48:33
+6_1.asm							     Page 1 - 1
+
+
+				.model small
+				.stack
+ 0000				.data
+ 0000 05				x db 5
+ 0000				.code 
+				.startup
+ 0017  B8 0000			mov ax,0
+ 001A  BB 0001			mov bx,1
+				.if x==5
+				.if ax!=bx
+ 0028  40			inc ax
+				.endif
+				.endif
+
+
+				.exit 0
+				end
+Microsoft (R) Macro Assembler Version 6.11		    12/15/23 13:48:33
+6_1.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0001	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 002E	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+x  . . . . . . . . . . . . . . .	Byte	 0000	  _DATA	
+
+	   0 Warnings
+	   0 Errors

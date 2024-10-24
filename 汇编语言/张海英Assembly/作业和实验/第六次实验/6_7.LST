@@ -1,0 +1,98 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/15/23 15:44:16
+6_7.asm							     Page 1 - 1
+
+
+				Change      macro  buffer
+				            lea bx,buffer
+				again:      mov al,[bx]
+				            cmp al,'$'	;若到达字符串结尾，退出
+				            je done
+				            cmp al,'A'	;判断是否大于A
+				            jae next1
+				            jmp done1
+				next1:      cmp al,'Z'	;判断是否小于Z
+				            ja  done1
+				            add al,20h	;满足，大写转小写
+				            mov byte ptr [bx],al
+				done1:      inc bx	;进入下一个字符
+				            jmp again
+				done:
+				            endm
+				            
+				 
+ 0000				stack     segment
+ 0000  0400 [				db 1024 dup(?)
+        00
+       ]
+ 0400				stack     ends
+				 
+ 0000				data      segment
+ 0000 48 65 6C 6C 6F 2C			string db 'Hello, Everybody!$'
+       20 45 76 65 72 79
+       62 6F 64 79 21 24
+ 0012				data      ends
+				 
+ 0000				code      segment
+					assume cs:code,ss:stack,ds:data
+					
+ 0000				start:
+ 0000  B8 ---- R		          mov ax,data
+ 0003  8E D8			          mov ds,ax
+				          Change string
+ 0005  8D 1E 0000 R	     1	            lea bx,string
+ 0009  8A 07		     1	again:      mov al,[bx]
+ 000B  3C 24		     1	            cmp al,'$'	;若到达字符串结尾，退出
+ 000D  74 11		     1	            je done
+ 000F  3C 41		     1	            cmp al,'A'	;判断是否大于A
+ 0011  73 02		     1	            jae next1
+ 0013  EB 08		     1	            jmp done1
+ 0015  3C 5A		     1	next1:      cmp al,'Z'	;判断是否小于Z
+ 0017  77 04		     1	            ja  done1
+ 0019  04 20		     1	            add al,20h	;满足，大写转小写
+ 001B  88 07		     1	            mov byte ptr [bx],al
+ 001D  43		     1	done1:      inc bx	;进入下一个字符
+ 001E  EB E9		     1	            jmp again
+ 0020			     1	done:
+ 0020  B4 09			          mov ah,09h
+ 0022  BA 0000 R		          mov dx,offset string
+ 0025  CD 21			          int 21h
+ 0027  B4 4C			          mov ah,4ch
+ 0029  CD 21			          int 21h
+				          
+ 002B				code      ends
+				end       start
+Microsoft (R) Macro Assembler Version 6.11		    12/15/23 15:44:16
+6_7.asm							     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+Change . . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+code . . . . . . . . . . . . . .	16 Bit	 002B	  Para	  Private 
+data . . . . . . . . . . . . . .	16 Bit	 0012	  Para	  Private 
+stack  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Private 
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+again  . . . . . . . . . . . . .	L Near	 0009	  code	
+done1  . . . . . . . . . . . . .	L Near	 001D	  code	
+done . . . . . . . . . . . . . .	L Near	 0020	  code	
+next1  . . . . . . . . . . . . .	L Near	 0015	  code	
+start  . . . . . . . . . . . . .	L Near	 0000	  code	
+string . . . . . . . . . . . . .	Byte	 0000	  data	
+
+	   0 Warnings
+	   0 Errors

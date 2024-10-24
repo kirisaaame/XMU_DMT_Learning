@@ -1,0 +1,87 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/08/23 13:40:14
+4-17.asm						     Page 1 - 1
+
+
+				.model small
+ 0000				.data
+ 0000 3039			    target dw 12345       ; 16位无符号二进制数，示例值为12345
+ 0002  0005 [			    array db 5 dup(?)     ; 用于存储BCD码的数组，初始化为空
+        00
+       ]
+
+ 0000				.code
+				    org 100h
+				.startup
+				    ; 初始化数组
+ 0117  B9 0005			    mov cx, 5
+ 011A  BF 0000			    mov di, 0
+ 011D  B0 00			    mov al, 0
+ 011F				init_array:
+ 011F  88 85 0002 R		    mov [array + di], al
+ 0123  47			    inc di
+ 0124  E2 F9			    loop init_array
+
+				    ; 将16位无符号二进制数转换为BCD码
+ 0126  A1 0000 R		    mov ax, target
+ 0129  B9 0005			    mov cx, 5
+ 012C  BF 0004			    mov di, 4
+
+ 012F				convert_loop:
+				    ; 将二进制数的低4位转换为BCD码
+ 012F  BA 0000			    mov dx, 0
+ 0132  BB 000A			    mov bx, 10
+ 0135  F7 F3			    div bx
+ 0137  80 C2 30			    add dl, '0'
+ 013A  88 95 0002 R		    mov [array + di], dl
+
+				    ; 将二进制数右移4位
+ 013E  B1 04			    mov cl,4
+ 0140  D3 E8			    shr ax,cl
+
+ 0142  4F			    dec di
+ 0143  E2 EA			    loop convert_loop
+
+				    ; 输出BCD码数组
+ 0145  B4 09			    mov ah, 9
+ 0147  8D 16 0002 R		    lea dx, array
+ 014B  CD 21			    int 21h
+
+				    ; 退出程序
+				.exit 0
+				end 
+Microsoft (R) Macro Assembler Version 6.11		    12/08/23 13:40:14
+4-17.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0007	  Word	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0152	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0100	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+array  . . . . . . . . . . . . .	Byte	 0002	  _DATA	
+convert_loop . . . . . . . . . .	L Near	 012F	  _TEXT	
+init_array . . . . . . . . . . .	L Near	 011F	  _TEXT	
+target . . . . . . . . . . . . .	Word	 0000	  _DATA	
+
+	   0 Warnings
+	   0 Errors

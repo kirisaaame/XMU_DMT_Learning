@@ -1,0 +1,62 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/15/23 14:15:48
+6_3.asm							     Page 1 - 1
+
+
+				.model small
+ 0000				.data
+				logical macro op,r1,r2
+					op r1,r2
+				endm
+ 0000				.code
+				.startup
+ 0017  B8 0001			mov ax,1
+ 001A  BB 0002			mov bx,2
+				logical or,ax,bx
+ 001D  0B C3		     1		or ax,bx
+				logical test,ax,bx
+ 001F  85 C3		     1		test ax,bx
+				logical xor,ax,bx
+ 0021  33 C3		     1		xor ax,bx
+				logical and,ax,bx
+ 0023  23 C3		     1		and ax,bx
+				.exit 0
+				end
+Microsoft (R) Macro Assembler Version 6.11		    12/15/23 14:15:48
+6_3.asm							     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+logical  . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	16 Bit	 002A	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+
+	   0 Warnings
+	   0 Errors

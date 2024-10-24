@@ -1,0 +1,101 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/08/23 13:20:54
+5-4.asm							     Page 1 - 1
+
+
+				.model small
+				.stack
+ 0000				.data
+ 0000 02 04 06 08 0A 0C			array db 2,4,6,8,10,12,14,16,18,20
+       0E 10 12 14
+ 000A 15				target db 21
+ 0000				.code
+				.startup
+
+ 0017  58			pop ax
+ 0018  5B			pop bx
+ 0019  59			pop cx
+ 001A  5A			pop dx
+ 001B  5E			pop si
+ 001C  E8 000A			call insert
+ 001F  5E			pop si
+ 0020  5A			pop dx
+ 0021  59			pop cx
+ 0022  5B			pop bx
+ 0023  58			pop ax
+				.exit 0
+
+				;使用变量传参
+ 0029				insert proc
+ 0029  B9 000A				mov cx,lengthof array
+ 002C  8A 16 000A R			mov dl,target
+ 0030  BB 0000 R			mov bx,offset array
+ 0033  BE 0000				mov si,0
+					.while si<cx
+ 0038  8A 00				mov al,[bx+si]
+					.if al==dl 	;找到对应元素，直接打印'Y'返回
+ 003E  B2 59				mov dl,'Y'
+ 0040  B4 02				mov ah,2
+ 0042  CD 21				int 21h
+ 0044  B2 0A				mov dl,10
+ 0046  B4 02				mov ah,2
+ 0048  CD 21				int 21h
+ 004A  C3				ret
+					.endif
+					.if al>dl	;元素大于target，直接插入
+					.while si<=cx
+ 0051  86 10				xchg dl,[bx+si]
+ 0053  46				inc si
+					.endw
+ 0058  C3				ret
+					.endif
+					;当前元素小于target,查看下一个元素
+ 0059  46				inc si
+					.endw
+					.if si==cx	;若target大于所有数组中的数
+ 0062  88 10				mov [bx+si],dl	;将target放在末尾
+ 0064  C3				ret
+					.endif
+ 0065				insert endp
+					end
+Microsoft (R) Macro Assembler Version 6.11		    12/08/23 13:20:54
+5-4.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 000B	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0065	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+insert . . . . . . . . . . . . .	P Near	 0029	  _TEXT	Length= 003C Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+array  . . . . . . . . . . . . .	Byte	 0000	  _DATA	
+target . . . . . . . . . . . . .	Byte	 000A	  _DATA	
+
+	   0 Warnings
+	   0 Errors

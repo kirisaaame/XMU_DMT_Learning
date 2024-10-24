@@ -1,0 +1,60 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/08/23 19:33:32
+3_21.asm						     Page 1 - 1
+
+
+				.MODEL SMALL
+ 0000				.DATA
+ 0000 0005			    NUM DW 5              ; 定义常量NUM，值为5
+ 0002 FFFF 0000 0002 0005	    DATALIST DW -1, 0, 2, 5, 4, ?  ; 定义字数组DATALIST，包括前5个字单元和一个未初始化的字单元
+       0004 0000
+				.STACK
+ 0000				.CODE
+				.STARTUP
+ 0017  8B 0E 0000 R		    MOV CX, NUM          ; 将常量NUM加载到CX寄存器
+ 001B  8D 36 0002 R		    LEA SI, DATALIST     ; 将DATALIST的起始地址加载到SI寄存器
+ 001F  33 C0			    XOR AX, AX           ; 清零累加和 AX 寄存器
+
+ 0021				SUM_LOOP:
+ 0021  03 04			    ADD AX, [SI]         ; 将DATALIST中当前元素的值加到累加和中
+ 0023  83 C6 02			    ADD SI, 2            ; 移动到下一个字单元
+ 0026  E2 F9			    LOOP SUM_LOOP        ; 循环NUM次
+
+ 0028  89 04			    MOV [SI], AX         ; 将累加和存入DATALIST的最后一个字单元
+				.EXIT
+				END
+Microsoft (R) Macro Assembler Version 6.11		    11/08/23 19:33:32
+3_21.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 000E	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 002E	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+DATALIST . . . . . . . . . . . .	Word	 0002	  _DATA	
+NUM  . . . . . . . . . . . . . .	Word	 0000	  _DATA	
+SUM_LOOP . . . . . . . . . . . .	L Near	 0021	  _TEXT	
+
+	   0 Warnings
+	   0 Errors

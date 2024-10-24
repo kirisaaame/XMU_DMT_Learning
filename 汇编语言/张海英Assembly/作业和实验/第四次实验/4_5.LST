@@ -1,0 +1,101 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/28/23 17:19:09
+4_5.asm							     Page 1 - 1
+
+
+				;双指针算法汇编实现
+				;如果可以输出两个数，不可以输出空
+				.MODEL SMALL
+ 0000				.DATA
+ 0000 02 07 0B 0F 13 1C		    array db 02h,07h,0bh,0fh,13h,1ch,24h,39h,40h,57h,68h
+       24 39 40 57 68
+ 000B 37			    target db 37h
+				.STACK
+ 0000				.CODE
+				.STARTUP
+ 0017  8D 2E 0000 R		   lea bp,array		;bp左指针
+ 001B  8D 1E 000A R		   lea bx,array+sizeof array-1	;bx右指针
+ 001F  8A 46 00			 try:mov al,[bp]
+ 0022  02 07			 	add al,[bx]
+ 0024  3A 06 000B R		 	cmp al,target	;比较bp+bx和target
+ 0028  72 09			 	jb bpp		;若小于，则bp++
+ 002A  74 0E			 	jz quit		;若等于，则输出
+ 002C  4B			 	dec bx
+ 002D  3B DD			 	cmp bx,bp
+ 002F  72 47			 	jb ending		;大于target时，bx--，当bx小于bp，说明找不到
+ 0031  EB EC			 	jmp try		;继续比较
+ 0033  45			bpp:inc bp
+ 0034  3B EB				cmp bp,bx
+ 0036  77 40				jnbe ending	;当bp大于bx,说明找不到，直接退出
+ 0038  EB E5			 	jmp try		;继续比较
+ 003A				quit:
+ 003A  8A 56 00				mov dl,[bp]
+ 003D  B1 04				mov cl,4
+ 003F  D2 EA				shr dl,cl
+ 0041  80 C2 30				add dl,30h
+ 0044  B4 02				mov ah,2
+ 0046  CD 21				int 21h
+ 0048  8A 56 00				mov dl,[bp]
+ 004B  80 E2 0F				and dl,0fh
+ 004E  80 C2 30				add dl,30h
+ 0051  B4 02				mov ah,2
+ 0053  CD 21				int 21h
+ 0055  B2 0A				mov dl,10
+ 0057  B4 02				mov ah,2
+ 0059  CD 21				int 21h
+ 005B  8A 17				mov dl,[bx]
+ 005D  D2 EA				shr dl,cl
+ 005F  80 C2 30				add dl,30h
+ 0062  B4 02				mov ah,2
+ 0064  CD 21				int 21h
+ 0066  8A 17				mov dl,[bx]
+ 0068  80 E2 0F				and dl,0fh
+ 006B  80 C2 30				add dl,30h
+ 006E  B4 02				mov ah,2
+ 0070  CD 21				int 21h
+ 0072  B2 0A				mov dl,10
+ 0074  B4 02				mov ah,2
+ 0076  CD 21				int 21h
+ 0078				ending:
+ 0078  B4 4C				mov ah,4ch
+ 007A  CD 21				int 21h
+				.EXIT
+				     END
+Microsoft (R) Macro Assembler Version 6.11		    11/28/23 17:19:09
+4_5.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 000C	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0080	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+array  . . . . . . . . . . . . .	Byte	 0000	  _DATA	
+bpp  . . . . . . . . . . . . . .	L Near	 0033	  _TEXT	
+ending . . . . . . . . . . . . .	L Near	 0078	  _TEXT	
+quit . . . . . . . . . . . . . .	L Near	 003A	  _TEXT	
+target . . . . . . . . . . . . .	Byte	 000B	  _DATA	
+try  . . . . . . . . . . . . . .	L Near	 001F	  _TEXT	
+
+	   0 Warnings
+	   0 Errors

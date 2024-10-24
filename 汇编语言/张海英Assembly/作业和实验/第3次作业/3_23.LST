@@ -1,0 +1,65 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/08/23 20:02:53
+3_23.asm						     Page 1 - 1
+
+
+				;默认采用ML6.11汇编程序
+ 0000				DATAS SEGMENT
+ 0000 12345678			    a dd 12345678h
+ 0004 87654321			    b dd 87654321h  
+ 0008 00000000			    sum dd ?
+ 000C				DATAS ENDS
+
+ 0000				STACKS SEGMENT
+				    ;此处输入堆栈段代码
+ 0000				STACKS ENDS
+
+ 0000				CODES SEGMENT
+				    ASSUME CS:CODES,DS:DATAS,SS:STACKS
+ 0000				START:
+ 0000  B8 ---- R		    MOV AX,DATAS
+ 0003  8E D8			    MOV DS,AX
+				    ;此处输入代码段代码
+ 0005  A1 0000 R		    mov ax,word ptr a
+ 0008  BE 0000 R		    mov si,offset a
+ 000B  83 C6 02			    add si,2
+ 000E  8B 14			    mov dx,word ptr[si]
+ 0010  8B 1E 0004 R		    mov bx,word ptr b
+ 0014  BE 0004 R		    mov si,offset b
+ 0017  83 C6 02			    add si,2
+ 001A  8B 0C			    mov cx,word ptr[si]
+ 001C  03 C3			    add ax,bx
+ 001E  13 D1			    adc dx,cx
+ 0020  A3 0008 R		    mov word ptr sum,ax
+ 0023  BE 0008 R		    mov si,offset sum
+ 0026  83 C6 02			    add si,2
+ 0029  89 14			    mov word ptr [si],dx
+ 002B  B4 4C			    MOV AH,4CH
+ 002D  CD 21			    INT 21H
+ 002F				CODES ENDS
+				    END START
+Microsoft (R) Macro Assembler Version 6.11		    11/08/23 20:02:53
+3_23.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CODES  . . . . . . . . . . . . .	16 Bit	 002F	  Para	  Private 
+DATAS  . . . . . . . . . . . . .	16 Bit	 000C	  Para	  Private 
+STACKS . . . . . . . . . . . . .	16 Bit	 0000	  Para	  Private 
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+START  . . . . . . . . . . . . .	L Near	 0000	  CODES	
+a  . . . . . . . . . . . . . . .	DWord	 0000	  DATAS	
+b  . . . . . . . . . . . . . . .	DWord	 0004	  DATAS	
+sum  . . . . . . . . . . . . . .	DWord	 0008	  DATAS	
+
+	   0 Warnings
+	   0 Errors

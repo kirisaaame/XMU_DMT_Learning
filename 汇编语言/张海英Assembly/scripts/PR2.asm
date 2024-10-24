@@ -1,0 +1,30 @@
+;默认采用ML6.11汇编程序
+DATAS SEGMENT
+    ;此处输入数据段代码  
+DATAS ENDS
+
+STACKS SEGMENT
+    ;此处输入堆栈段代码
+STACKS ENDS
+
+CODES SEGMENT
+    ASSUME CS:CODES,DS:DATAS,SS:STACKS
+START:
+    MOV AX,DATAS
+    ;此处输入代码段代码
+    MOV AX,2000H
+    MOV DS,AX
+    MOV BX,0100H
+    MOV SI,0002H
+    MOV AX,1200H
+    MOV AX,BX
+    MOV AX,DS:[1200h]
+    MOV AX,[BX]
+    MOV AX,[BX+1100H]
+    MOV AX,[BX+SI]
+    MOV AX,[BX][SI+1100H]
+    
+    MOV AH,4CH
+    INT 21H
+CODES ENDS
+    END START

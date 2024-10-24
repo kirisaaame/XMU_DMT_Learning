@@ -1,0 +1,68 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/28/23 17:12:08
+4_4.asm							     Page 1 - 1
+
+
+				;
+				.MODEL SMALL
+ 0000				.DATA
+ 0000 0123 1234 2345 6789	    PACKED dw 0123h,1234h,2345h,6789h,7890h
+       7890
+ 000A  000A [			    unpacked dw 10 dup(?)
+        0000
+       ]
+				.STACK
+ 0000				.CODE
+				.STARTUP
+ 0017  BA 000A			     mov dx,10	;设置循环次数
+ 001A  B1 04			     mov cl,4	;循环移位位数为4
+ 001C  BE 0000			     mov si,0
+ 001F  BF 0000			     mov di,0	;起始偏移量为0
+ 0022  8A 84 0000 R		     convert:mov al,byte ptr[si+packed]
+ 0026  8A E0			     mov ah,al
+ 0028  24 0F			     and al,0fh		
+ 002A  D2 EC			     shr ah,cl	;高四位要移到低四位
+ 002C  89 85 000A R		     mov [di+unpacked],ax	;整个字传送
+ 0030  83 C7 02			     add di,2	;对应非压缩要移动2字节
+ 0033  B8 0000			     mov ax,0
+ 0036  46			     inc si	
+ 0037  4A			     dec dx	;压缩移动1字节
+ 0038  75 E8			     jnz convert
+				     
+				.EXIT
+				     END
+Microsoft (R) Macro Assembler Version 6.11		    11/28/23 17:12:08
+4_4.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 001E	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 003E	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+PACKED . . . . . . . . . . . . .	Word	 0000	  _DATA	
+convert  . . . . . . . . . . . .	L Near	 0022	  _TEXT	
+unpacked . . . . . . . . . . . .	Word	 000A	  _DATA	
+
+	   0 Warnings
+	   0 Errors

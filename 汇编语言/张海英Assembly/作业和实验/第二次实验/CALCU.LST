@@ -1,0 +1,87 @@
+Microsoft (R) Macro Assembler Version 6.11		    10/18/23 15:50:33
+Calcu.asm						     Page 1 - 1
+
+
+				;默认采用ML6.11汇编程序
+ 0000				DATAS SEGMENT
+				    ;此处输入数据段代码  
+ 0000 04			    X DB 4
+ 0001 05			    Y DB 5
+ 0002 00			    Z DB ?
+ 0003 00			    Z1 DB ?
+ 0004 74 68 65 20 72 65		    MESS DB 'the result is:' ,0DH,0AH,24H
+       73 75 6C 74 20 69
+       73 3A 0D 0A 24
+ 0015				DATAS ENDS
+
+ 0000				STACKS SEGMENT
+				    ;此处输入堆栈段代码
+ 0000  0100 [			    DW 256 DUP(?)
+        0000
+       ]
+ 0200				STACKS ENDS
+
+ 0000				CODES SEGMENT
+				    ASSUME CS:CODES,DS:DATAS,SS:STACKS
+ 0000				START:
+ 0000  B8 ---- R		    MOV AX,DATAS
+ 0003  8E D8			    MOV DS,AX
+				    ;此处输入代码段代码
+ 0005  A0 0000 R		    MOV AL,X
+ 0008  02 06 0001 R		    ADD AL,Y
+ 000C  B3 08			    MOV BL,8H
+ 000E  F6 EB			    IMUL BL
+ 0010  8A 1E 0000 R		    MOV BL,X
+ 0014  B7 00			    MOV BH,0H
+ 0016  2B C3			    SUB AX,BX
+ 0018  B3 02			    MOV BL,2
+ 001A  F6 FB			    IDIV BL
+ 001C  A2 0002 R		    MOV Z,AL
+ 001F  88 26 0003 R		    MOV Z1,AH
+				    
+ 0023  A0 0002 R		    MOV AL,Z
+ 0026  B4 00			    MOV AH,0
+ 0028  B3 0A			    MOV BL,10
+ 002A  F6 F3			    DIV BL
+ 002C  BA 0004 R		    MOV DX,OFFSET MESS
+ 002F  B4 09			    MOV AH,9
+ 0031  CD 21			    INT 21H
+ 0033  8B D0			    MOV DX,AX
+ 0035  81 C2 3030		    ADD DX,3030H
+ 0039  B4 02			    MOV AH,2
+ 003B  CD 21			    INT 21H
+				   
+				    
+				    
+ 003D  B4 4C			    MOV AH,4CH
+ 003F  CD 21			    INT 21H
+ 0041				CODES ENDS
+				    END START
+Microsoft (R) Macro Assembler Version 6.11		    10/18/23 15:50:33
+Calcu.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+CODES  . . . . . . . . . . . . .	16 Bit	 0041	  Para	  Private 
+DATAS  . . . . . . . . . . . . .	16 Bit	 0015	  Para	  Private 
+STACKS . . . . . . . . . . . . .	16 Bit	 0200	  Para	  Private 
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+MESS . . . . . . . . . . . . . .	Byte	 0004	  DATAS	
+START  . . . . . . . . . . . . .	L Near	 0000	  CODES	
+X  . . . . . . . . . . . . . . .	Byte	 0000	  DATAS	
+Y  . . . . . . . . . . . . . . .	Byte	 0001	  DATAS	
+Z1 . . . . . . . . . . . . . . .	Byte	 0003	  DATAS	
+Z  . . . . . . . . . . . . . . .	Byte	 0002	  DATAS	
+
+	   0 Warnings
+	   0 Errors

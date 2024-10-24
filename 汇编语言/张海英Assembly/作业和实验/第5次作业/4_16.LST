@@ -1,0 +1,94 @@
+Microsoft (R) Macro Assembler Version 6.11		    11/28/23 13:47:23
+4_16.asm						     Page 1 - 1
+
+
+				;暴力字符串匹配算法
+				;int brutal_search(char * str,char * pattern)
+				;{
+				;	for (int i=0;i<length;i++)
+				;	{
+				;		count=0;
+				; 		for (int j=0;j<5,j++)
+				;	{
+				;		
+				;		if(str[i+j]==pattern[j])
+				;		{	
+				;			count++;
+				;;		if(count >= 5)
+				;			return i;
+				;		}
+				;		else continue;
+				.model small
+ 0000				.data
+ 0000 44 45 42 55 47			string db 'DEBUG'
+				.stack
+ 0000				.code
+				.startup
+ 0017  B8 0070				mov ax,0070h
+ 001A  8E C0				mov es,ax
+ 001C  B9 1000				mov cx,1000h
+ 001F  BB 0000				mov bx,0000h
+ 0022  BE 0000				mov si,0	;初始化
+ 0025  BE 0000				STARTc:mov si,0
+ 0028  51					push cx
+ 0029  B9 0005					mov cx,5
+ 002C  8A 84 0000 R			comp:mov al,byte ptr string[si]
+ 0030  26: 8A 10				mov dl,byte ptr es:[bx+si]
+ 0033  38 D0					cmp al,dl
+ 0035  75 08					jnz conti	;不匹配，进入下一个循环
+ 0037  46					inc si	;匹配，si++
+ 0038  83 FE 05					cmp si,5
+ 003B  74 06					jz quit
+ 003D  E2 ED					loop comp	;如果得到匹配结果，退出
+ 003F  59					conti: pop cx
+ 0040  43					inc bx	;i++
+ 0041  E2 E2					loop startc
+ 0043  83 FE 05				quit: cmp si,5
+ 0046  74 04					jz next
+ 0048  B2 30					mov dl,30h
+ 004A  EB 02					jmp output
+ 004C  B2 31				next: mov dl,31h
+ 004E  B4 02				output:mov ah,2
+ 0050  CD 21					int 21h
+				.exit
+				 end
+Microsoft (R) Macro Assembler Version 6.11		    11/28/23 13:47:23
+4_16.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0005	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 0400	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0056	  Word	  Public  'CODE'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+STARTc . . . . . . . . . . . . .	L Near	 0025	  _TEXT	
+comp . . . . . . . . . . . . . .	L Near	 002C	  _TEXT	
+conti  . . . . . . . . . . . . .	L Near	 003F	  _TEXT	
+next . . . . . . . . . . . . . .	L Near	 004C	  _TEXT	
+output . . . . . . . . . . . . .	L Near	 004E	  _TEXT	
+quit . . . . . . . . . . . . . .	L Near	 0043	  _TEXT	
+string . . . . . . . . . . . . .	Byte	 0000	  _DATA	
+
+	   0 Warnings
+	   0 Errors

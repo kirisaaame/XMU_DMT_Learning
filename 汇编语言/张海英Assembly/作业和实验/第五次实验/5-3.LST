@@ -1,0 +1,85 @@
+Microsoft (R) Macro Assembler Version 6.11		    12/18/23 17:02:57
+5-3.asm							     Page 1 - 1
+
+
+				.model small
+ 0000				.data
+ 0000				.code
+				.startup
+ 0017  B8 0003			main:mov ax,3	;设n=3
+ 001A  E8 0007				 call fact
+ 001D  8B DA			xi:	 mov bx,dx
+				.exit 0
+				;阶乘子程序
+				;入口参数：AL中存放n
+				;出口参数：DX中存放n!
+				;所用寄存器： CX
+
+ 0024				fact proc
+ 0024  3C 00				cmp al,0
+ 0026  75 03				jnz iia		;AL!=0,iia
+ 0028  B2 01				mov dl,1	;AL==0,DL=1
+ 002A  C3				ret		;(1)
+ 002B  50			iia:push ax		
+ 002C  FE C8			dec al		;
+ 002E  E8 FFF3				call fact
+ 0031  59			x2:pop cx
+ 0032  E8 0003				call mult
+ 0035  8B D0			x3: mov dx,ax
+ 0037  C3				ret		;
+ 0038				fact endp
+				;无符号字节数乘法子程序
+				;入口参数：CL、DL中各为一乘数
+				;出口参数：AX中为乘积
+
+ 0038				mult proc
+ 0038  8A C2				mov al,dl
+ 003A  F6 E1				mul cl
+ 003C  C3				ret	;(3)
+ 003D				mult endp
+					end
+Microsoft (R) Macro Assembler Version 6.11		    12/18/23 17:02:57
+5-3.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	16 Bit	 003D	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+fact . . . . . . . . . . . . . .	P Near	 0024	  _TEXT	Length= 0014 Public
+  iia  . . . . . . . . . . . . .	L Near	 002B	  _TEXT	
+  x2 . . . . . . . . . . . . . .	L Near	 0031	  _TEXT	
+  x3 . . . . . . . . . . . . . .	L Near	 0035	  _TEXT	
+mult . . . . . . . . . . . . . .	P Near	 0038	  _TEXT	Length= 0005 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@Startup . . . . . . . . . . . .	L Near	 0000	  _TEXT	
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+main . . . . . . . . . . . . . .	L Near	 0017	  _TEXT	
+xi . . . . . . . . . . . . . . .	L Near	 001D	  _TEXT	
+
+	   0 Warnings
+	   0 Errors
