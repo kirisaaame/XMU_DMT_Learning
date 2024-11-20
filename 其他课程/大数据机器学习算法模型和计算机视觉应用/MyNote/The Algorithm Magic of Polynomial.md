@@ -91,7 +91,7 @@ $$
 
 已知 $P(x) \cdot E(x)$ 和 $E(x)$ ，相除就可以求出 $P(x)$。
 
-## Polynomials for Finding Maximum Matching 多项式在最大值匹配中的应用
+## Polynomials for Finding Maximum Matching 多项式在最大匹配中的应用
 
 ### Schwarz-Zippel Lemma Schwarz-Zippel 引理
 
@@ -105,7 +105,19 @@ $$
 
 ### Tutte Matrix
 
-每个顶点数$v$的简单无向图都对应一个Tutte Matrix，简单来说如图所示：
+每个顶点数$v$的简单无向图都对应一个Tutte Matrix $M(G)$，简单来说如图所示：
 ![Tutte Matrix](./img/Tutte%20Matrix.png)
 
-.
+### Tutte Determinant Theorem Tutte行列式定理
+
+一个图有完美匹配当且仅当$M(G)$的行列式不是零多项式。
+（注：匹配指的找到图中一组边集，其中任意两条边都没有公共点。如果这组边集包括了图中所有的顶点，那么就说该匹配是完美匹配。）
+
+那么剩下的就是选取$F$的大小了，$F$的基数越大，这张图有完美匹配的概率就越高。
+
+### Finding a Perfect Matching
+
+上面我们知道了有完美匹配的概率，但是我们如何找到一个完美匹配呢？下面是一个方法:
+
+对于每个边，将图中的该边删去，判断剩下的图中是否还存在完美匹配。如果没有完美匹配，那么将该边加回来；否则丢弃该边。
+最后一定剩下$\frac{V}{2}$条边，这些边就是一个完美匹配。
