@@ -1,4 +1,4 @@
-# Linear Programming
+# Lecture2: Linear Programming
 
 - **Definition of linear programming**
 - **max and min-cost max flow**

@@ -1,4 +1,4 @@
-# The Algorithm Magic of Polynomial
+# Lecture4: The Algorithm Magic of Polynomial
 
 - **Polynomials**
 - **The Root of Polynomial**

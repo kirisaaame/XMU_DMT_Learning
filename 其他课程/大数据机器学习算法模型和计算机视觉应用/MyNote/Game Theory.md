@@ -1,4 +1,4 @@
-# Game Theory
+# Lecture1: Game Theory
 
 - **2-player Zero Sum Game**
 - **Minimax Optimal  Strategies**

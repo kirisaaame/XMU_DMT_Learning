@@ -1,4 +1,4 @@
-# Data Stream
+# Lecture 3: Data Stream
 
 - **Streaming Model**
 - **Example Streaming Questions**
