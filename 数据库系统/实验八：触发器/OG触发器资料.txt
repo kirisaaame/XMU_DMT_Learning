@@ -1,0 +1,104 @@
+openGauss中的触发器要先定义一个触发器函数，再利用这个函数，定义触发器。
+
+
+1.创建触发器函数:
+CREATE OR REPLACE FUNCTION 触发器名称() 
+RETURNS TRIGGER AS 
+$$ 
+DECLARE 
+BEGIN 
+   <标准SQL或过程化SQL>
+RETURN <NEW或OLD>; 
+END;
+$$ LANGUAGE PLPGSQL;
+
+2.创建触发器，其中调用上面创建的触发器函数
+CREATE TRIGGER 触发器名称
+<BEFORE|AFTER|INSTEAD OF>  <INSERT|UPDATE|DELETE>  ON  表名
+<FOR EACH ROW | FOR EACH STATEMENT>
+EXECUTE PROCEDURE 触发器函数名();
+BEFORE：触发器函数是在触发事件发生前执行。
+
+AFTER：触发器函数是在触发事件发生后执行，约束触发器只能指定为AFTER。
+
+INSTEAD OF：触发器函数直接替代触发事件。
+
+FOR EACH ROW：指该触发器是受触发事件影响的每一行触发一次。
+
+FOR EACH STATEMENT：指该触发器是每个SQL语句只触发一次。
+
+（未指定时默认值为FOR EACH STATEMENT。约束触发器只能指定为FOR EACH ROW ）
+————————————————
+版权声明：本文为CSDN博主「Gauss松鼠会」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/GaussDB/article/details/118422225
+
+举例：
+CREATE OR REPLACE FUNCTION tri_insert_订货项目_func() 
+RETURNS TRIGGER AS $$ DECLARE 
+BEGIN 
+UPDATE 产品 SET 产品订单数=产品订单数+1,库存量=库存量-NEW.订购数量 WHERE 产品编号=NEW.产品编号; 
+RETURN NEW; 
+END;
+$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER after_insert_订货项目
+AFTER insert ON 订货项目
+FOR EACH ROW
+EXECUTE PROCEDURE tri_insert_订货项目_func();
+
+善于用过程化SQL书写存储过程和函数：往赛程表中插入一条比赛信息，若比分1大于比分2，则球队1的总场数、总胜场+1，球队2的总场数+1…
+--
+REATE OR REPLACE FUNCTION insert_func2() 
+RETURNS TRIGGER AS $$ DECLARE 
+BEGIN 
+if new.比分1>new.比分2 then
+	update 球队 set 总场数=总场数+1,总胜场=总胜场+1 where 球队名称=new.球队1名称;
+	update 球队 set 总场数=总场数+1 where 球队名称=new.球队2名称;
+else
+	if new.比分1<new.比分2 then
+		update 球队 set 总场数=总场数+1 where 球队名称=new.球队1名称;
+		update 球队 set 总场数=总场数+1,总胜场=总胜场+1 where 球队名称=new.球队2名称;
+	else
+		update 球队 set 总场数=总场数+1 where 球队名称=new.球队1名称;
+		update 球队 set 总场数=总场数+1 where 球队名称=new.球队2名称;
+	end if;
+end if;
+RETURN NEW; 
+END;
+$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER after_insert2
+AFTER INSERT ON 赛程
+FOR EACH ROW
+EXECUTE PROCEDURE insert_func2() ;
+--
+如果比赛类型为小组赛，且比分1大于比分2，那么意味着球队1胜，球队2负，然后更新球队有关属性信息…
+CREATE OR REPLACE FUNCTION insert_func() 
+RETURNS TRIGGER AS $$ DECLARE 
+BEGIN 
+if new.比赛类型='小组赛' then
+    if new.比分1>new.比分2 then
+	update 球队 set 小组赛胜场=小组赛胜场+1,小组赛进球数=小组赛进球数+new.比分1,小组赛失球数=小组赛失球数+new.比分2,小组赛积分=小组赛积分+3 where 球队名称=new.球队1名称;
+	update 球队 set 小组赛负场=小组赛负场+1,小组赛进球数=小组赛进球数+new.比分2,小组赛失球数=小组赛失球数+new.比分1 where 球队名称=new.球队2名称;
+   else
+	if new.比分1<new.比分2 then
+                    update 球队 set 小组赛负场=小组赛负场+1,小组赛进球数=小组赛进球数+new.比分1,小组赛失球数=小组赛失球数+new.比分2 where 球队名称=new.球队1名称;
+	    update 球队 set 小组赛胜场=小组赛胜场+1,小组赛进球数=小组赛进球数+new.比分2,小组赛失球数=小组赛失球数+new.比分1,小组赛积分=小组赛积分+3 where 球队名称=new.球队2名称;
+	else
+	    update 球队 set 小组赛平场=小组赛平场+1,小组赛进球数=小组赛进球数+new.比分1,小组赛失球数=小组赛失球数+new.比分2,小组赛积分=小组赛积分+1 where 球队名称=new.球队1名称;
+	    update 球队 set 小组赛平场=小组赛平场+1,小组赛进球数=小组赛进球数+new.比分2,小组赛失球数=小组赛失球数+new.比分1,小组赛积分=小组赛积分+1 where 球队名称=new.球队2名称;
+	end if;
+    end if;
+end if;
+RETURN NEW; 
+END;
+$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER after_insert
+AFTER INSERT ON 赛程
+FOR EACH ROW
+EXECUTE PROCEDURE insert_func() ;
+
+
+
+

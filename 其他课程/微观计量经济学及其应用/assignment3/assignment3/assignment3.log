@@ -1,0 +1,80 @@
+--------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\kirisaaame\Downloads\assignment3\assignment3\assignment3.log
+  log type:  text
+ opened on:  30 Nov 2024, 17:32:00
+
+. use "HunanCntyYr.dta",clear
+
+. /******************************************************************************/
+. /* Consider the paper "Web of Power" by Bai et al. They try to analyze how elite networks influence soldiers' death during Taiping movemen
+> t (1851-1864). Elite network is captured by Zeng Guofan's personal network based mainly on his connections via kinship or civil service ex
+> amination. 
+> Data: HunanCntyYr.dta
+> Key variables: 
+> - The number of soldier death: martyr
+> - define the post-treatment indicator: Hunan Army joined the Taiping movement in 1854, so years after 1854 are the post-treatment years
+> - connection density: Zeng_all0_invdist
+> - countyid: cntyid
+> - year: year
+> */
+. /******************************************************************************/
+. 
+. /*Q1: Take Hunan counties with connection density above average as the treatment group, and those in Hunan with less-than-average connecti
+> on density with Zeng as control. Please replicate Figure 3 with dependent variable being the the number of soldier death. 
+> */
+. /* -------------------------------------------------------------------------- */
+. /*A10: */
+. preserve
+
+. summarize Zeng_all0_invdist
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+Zeng_all0_~t |      1,125    1.231111    2.533128          0   15.83333
+
+. local avg_density = r(mean)
+
+. 
+. /* Define treatment and control groups */
+. gen treatment = (Zeng_all0_invdist > `avg_density')
+
+. 
+. /* Post-treatment indicator */
+. gen post = (year > 1854)
+
+. 
+. /* Create interaction term for DiD */
+. gen interaction = treatment * post
+
+. 
+. /* Q1: Calculate average soldier deaths for each group by year */
+. collapse (mean) avg_martyr = martyr, by(year treatment)
+
+. 
+. /* Plotting average soldier deaths */
+. twoway (line avg_martyr year if treatment == 1, mcolor(red) lcolor(red) msymbol(O)) ///
+>        (line avg_martyr year if treatment == 0, mcolor(blue) lcolor(blue) msymbol(X)) ///
+>        , legend(label(1 "Treatment") label(2 "Control")) ///
+>        title("Average Soldier Deaths by Treatment Group") ///
+>        xtitle("Year") ytitle("Average Number of Soldier Deaths")
+
+. restore
+
+. /* -------------------------------------------------------------------------- */
+. 
+. /*Q2: Following the definition of treatment and control group in Q1, please implement a DiD to estimate ATET. 
+>  */
+. /* -------------------------------------------------------------------------- */
+. /*A11: */
+. /* -------------------------------------------------------------------------- */
+. /* DiD estimation */
+. reg martyr treatment post interaction, robust cluster(cntyid)
+variable treatment not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. exit, clear
