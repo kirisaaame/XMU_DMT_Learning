@@ -1,0 +1,166 @@
+---------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\kirisaaame\Downloads\assignment4_answer\assignment4\assignm
+> ent4.log
+  log type:  text
+ opened on:  28 Dec 2024, 16:07:15
+
+. /******************************************************************************
+> /
+. /* Consider the paper - MULTINATIONALS, MONOPSONY, AND LOCAL DEVELOPMENT. 
+> Data: Astua_Pirie_HH.dta
+> Key variables: 
+> - censusblock: the geographic unit
+> - housing: the number of unsatisified basic needs in housing
+> - slope
+> - lon, lat: longitude and attitute
+> - UFCo: the dummy variable that indicate if the census block is within the conc
+> ession of the united fruit company
+> */
+. /******************************************************************************
+> /
+. 
+. /*Q1: Please implement an RD analysis. 
+> Hint: 1. this is a SHARP RD!
+>       2. please cluster at censusblock level
+>           3. please implement a parametric estimation. You are free to choose w
+> hat f() to use. 
+> */
+. /* -------------------------------------------------------------------------- *
+> /
+. /*A1: please write your code below. Please cluster at census block level */
+. /* -------------------------------------------------------------------------- *
+> /
+. *Load dataset
+. use "Astua_Pirie_HH.dta", clear
+
+. reg housing UFCo lon lat, cluster(censusblock) robust
+
+Linear regression                               Number of obs     =     10,000
+                                                F(3, 999)         =      83.61
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.1175
+                                                Root MSE          =       .144
+
+                        (Std. err. adjusted for 1,000 clusters in censusblock)
+------------------------------------------------------------------------------
+             |               Robust
+     housing | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        UFCo |  -.0979053    .008526   -11.48   0.000    -.1146363   -.0811743
+         lon |  -.0255953   .0294496    -0.87   0.385    -.0833855    .0321949
+         lat |   1.059697   .1218105     8.70   0.000     .8206632    1.298731
+       _cons |  -.2107319   2.815714    -0.07   0.940    -5.736124    5.314661
+------------------------------------------------------------------------------
+
+. 
+. 
+. /*Q2: Suppose that people within the concession NOT mean that the person lives 
+> in the concession long enough to get treated - they may just moved in recently.
+>  To accurately make causal inference, we should implement a fuzzy RD. 
+> Now suppose the whether a person gets treated is denoted as "treat". Note that 
+> in a sharp RD setting, treat = UFCo. 
+>  */
+. /* -------------------------------------------------------------------------- *
+> /
+. /*A2: Please write your code here: */
+. /* -------------------------------------------------------------------------- *
+> /
+. ivreg2 housing (treat = UFCo) lon lat, cluster(censusblock)
+
+IV (2SLS) estimation
+--------------------
+
+Estimates efficient for homoskedasticity only
+Statistics robust to heteroskedasticity and clustering on censusblock
+
+Number of clusters (censusblock) =   1000             Number of obs =    10000
+                                                      F(  3,   999) =    83.53
+                                                      Prob > F      =   0.0000
+Total (centered) SS     =  234.8627671                Centered R2   =   0.0847
+Total (uncentered) SS   =  1500359.575                Uncentered R2 =   0.9999
+Residual SS             =  214.9657729                Root MSE      =    .1466
+
+------------------------------------------------------------------------------
+             |               Robust
+     housing | Coefficient  std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       treat |  -.1377271   .0119469   -11.53   0.000    -.1611426   -.1143116
+         lon |  -.0243888   .0294876    -0.83   0.408    -.0821835    .0334059
+         lat |   1.057674   .1217152     8.69   0.000      .819117    1.296232
+       _cons |  -.0897573   2.819384    -0.03   0.975    -5.615647    5.436133
+------------------------------------------------------------------------------
+Underidentification test (Kleibergen-Paap rk LM statistic):            317.235
+                                                   Chi-sq(1) P-val =    0.0000
+------------------------------------------------------------------------------
+Weak identification test (Cragg-Donald Wald F statistic):              1.8e+04
+                         (Kleibergen-Paap rk Wald F statistic):       4456.944
+Stock-Yogo weak ID test critical values: 10% maximal IV size             16.38
+                                         15% maximal IV size              8.96
+                                         20% maximal IV size              6.66
+                                         25% maximal IV size              5.53
+Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Cragg-Donald F statistic and i.i.d. errors.
+------------------------------------------------------------------------------
+Hansen J statistic (overidentification test of all instruments):         0.000
+                                                 (equation exactly identified)
+------------------------------------------------------------------------------
+Instrumented:         treat
+Included instruments: lon lat
+Excluded instruments: UFCo
+------------------------------------------------------------------------------
+
+.         
+. /*Q3: What control variables do you include? Why do you include them? */
+. /* -------------------------------------------------------------------------- *
+> /
+. /*A3: I include longitude and latitute. This is because I am implementing a par
+> ametric estimation, and I need to eliminate the systematic difference of observ
+> ations between those treated and those not treated. Whether an individual gets 
+> treated or not depends on his/her location (i.e., lat and lon), therefore, I co
+> ntrol for lat and lon. I adopt a linear specification for lat and lon, assuming
+>  a linear specification is enough to delete the systematic difference. */
+. /* -------------------------------------------------------------------------- *
+> /
+. 
+. 
+. /*Q4: Professor Smart: housing facitilies also depend on the slope. Steep place
+> s are also hard to do any constructions. Moreover, the slope is correlated with
+>  UFCo, because the company must have wisely chosen the concession to suitably p
+> lant bananas. Therefore, we should include slope, as well as the squared slope,
+>  as controls. Do you agree? Please implement this regression. */
+. /* -------------------------------------------------------------------------- *
+> /
+. /*A4: Yes. If the treatment is random CONDITIONAL ON slope, then we should incl
+> ude slope as a control to ensure unbiased estimation. */
+. /* -------------------------------------------------------------------------- *
+> /
+. gen slope2 = slope^2
+
+. reg housing UFCo lon lat slope slope2, cluster(censusblock)
+
+Linear regression                               Number of obs     =     10,000
+                                                F(5, 999)         =      60.06
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.1213
+                                                Root MSE          =      .1437
+
+                        (Std. err. adjusted for 1,000 clusters in censusblock)
+------------------------------------------------------------------------------
+             |               Robust
+     housing | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        UFCo |  -.1021425   .0084989   -12.02   0.000    -.1188203   -.0854647
+         lon |  -.0252308   .0294458    -0.86   0.392    -.0830135     .032552
+         lat |   1.063341   .1220107     8.72   0.000     .8239139    1.302767
+       slope |   .7556344   .1266002     5.97   0.000     .5072014    1.004067
+      slope2 |   17.55299   10.50142     1.67   0.095    -3.054374    38.16035
+       _cons |  -.2179342   2.816046    -0.08   0.938    -5.743978     5.30811
+------------------------------------------------------------------------------
+
+. 
+. 
+. 
+end of do-file
+
+. exit, clear
