@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html language="zh-cn">
+  <head>
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>豆瓣电影数据列表</title>
+  </head>
+  <body>  
+    <h1>豆瓣电影</h1>
+    <div class="navigtion">
+        <ul class="nav">
+            <li><a href="http://127.0.0.1:8000/">首页</a></li>
+            <li class="last"><a href="http://127.0.0.1:8000/questionAnswering/">问答</a></li>
+        </ul>
+        <ul class="nav-admin">
+            <li><a href=http://127.0.0.1:8000/admin>管理入口</a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div>
+        <table border="1" cellspacing="1" cellpadding="1" >
+            <tr>
+                <th>电影名称</th>
+                <th>导演</th>
+                <th>演员</th>
+                <th>简介</th>
+            </tr>
+            {% for data in data_list %}
+                <tr>
+                    <td>{{ data.movie_title }}</td>
+                    <td>{{ data.movie_directors }}</td>
+                    <td>{{ data.movie_actors }}</td>
+                    <td>{{ data.movie_description }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+        <ul class="pagination">
+            {% if page_object.has_previous %}
+                <li>
+                <a href="?page={{ page_object.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                </li>
+            {% endif %}
+
+           {% for pg in page_object.paginator.page_range %}
+            {% if page_object.number == pg %}
+            <li class="active"><a href="?page={{ pg }}">{{ pg }}</a></li>
+            {% else %}
+            <li><a href="?page={{ pg }}">{{ pg }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if page_object.has_next %}
+                <li>
+                    <a href="?page={{ page_object.next_page_number }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+            {% endif %}
+        </ul>
+    </div>
+  </body>  
+</html>

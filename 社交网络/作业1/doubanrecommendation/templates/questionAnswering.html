@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    {% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" type="text/javascript"></script>
+    <script src="{% static 'js/mysearch.js' %}"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>李林江豆瓣项目</title>
+</head>
+<body>
+    <h1>问答系统</h1>
+    <div class="navigation">
+        <ul class="nav">
+            <li><a href="http://127.0.0.1:8000/">首页</a></li>
+            <li class="last"><a href="http://127.0.0.1:8000/questionAnswering/">问答</a></li>
+        </ul>
+        <ul class="nav-admin">
+            <li><a href="http://127.0.0.1:8000/admin">管理入口</a></li>
+        </ul>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="container">
+        <div class="content">
+            <div class="item item-left">
+                <div class="avatar avatar-bot"></div>
+                <div class="bubble bubble-left">您好！我是LitBot，很高兴为您服务。</div>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <textarea name="text" id="chattextarea"></textarea>
+            <div class="button-area">
+                <button id="chatbotsendbtn">发送</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

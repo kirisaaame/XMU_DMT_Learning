@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{860fd10b-a660-428f-b8da-a79208cc33ff}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{fa058352-adaa-4fd7-b31a-313d458138a5}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{b9afdfdf-5fae-4a9b-acfc-32aa4bf47e07}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AStarPathFind.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStarZbb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStarZbbDoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AStarZbbView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AStarZbb.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AStarPathFind.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarZbb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarZbbDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarZbbView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\AStarZbb.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\AStarZbbDoc.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\back.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\DL.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\DOWN.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\DR.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\goal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\LEFT.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\path.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\PNBlack.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\RIGHT.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\start.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\stone.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\UL.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\UP.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\UR.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\AStarZbb.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>

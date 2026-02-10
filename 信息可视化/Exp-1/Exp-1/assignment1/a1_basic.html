@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>实验1:hello d3.js</title>
+    <link rel="stylesheet" href="./static/css/nCov.css"> 
+    <script src="./static/js/d3.min.js"></script>
+  </head>
+  <body style="text-align: center">
+    <svg width="1650" height="920" id="mainsvg" class="svgs" style="background-color: #333333;"></svg>
+    <script>
+        // @设置画布
+        const svg = d3.select('#mainsvg');
+        const width = +svg.attr('width');
+        const height = +svg.attr('height');
+        const margin = {top: 100, right: 200, bottom: 100, left: 120};
+        const innerWidth = width - margin.left - margin.right;
+        const innerHeight = height - margin.top - margin.bottom;
+
+        const g = svg.append('g')
+            .attr('transform', `translate(${margin.left}, ${margin.top})`)
+            .attr('id', 'maingroup');
+        
+        // @渲染
+        const renderinit = function(data, seq){
+            var legend_color = ["#ff1c12", //武汉
+                "#EA7E53", //黄石
+                "#E69D87", //十堰
+                "#759AA0", //荆州
+                "#386F38", //宜昌
+                "#ff6131", //襄阳
+                "#c25ec3", //鄂州
+                "#EEDD78", //荆门
+                "#ffde1d", //孝感
+                "#52f3a9", //黄冈
+                "#4B8E6F", //咸宁
+                "#73A373", //恩施州
+                "#47c0d4", //随州
+                "#ff8603", //仙桃
+                "#d54873", //天门
+                "#1e9d95", //潜江
+                "#7289AB", //神农架
+            ];
+
+            var legend_name1 = ["Wuhan",
+                "Huangshi",
+                "Shiyan",
+                "Jingzhou",
+                "Yichang",
+                "Xiangyang",
+                "Ezhou",
+                "Jingmen",
+                "Xiaogan",
+                "Huanggang",
+                "Xianning",
+                "Enshi",
+                "Suizhou",
+                "Xiantao",
+                "Tianmen",
+                "Qianjiang",
+                "Shennongjia",
+            ];
+
+            // draw legend
+            var legend = d3.select('#maingroup').selectAll(".legend")
+                .data(seq, d => d['地区'])
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function(d, i) { return "translate(" + (innerWidth + 10) + "," + (i * 25 + 290) + ")"; });
+
+            // draw legend colored rectangles
+             legend.append("rect")
+             .data(seq) 
+             .attr("x", 0)
+             .attr("y", 0)
+             .attr("width", 30)
+             .attr("height", 20)
+             .style("fill", function (d,i) { return legend_color[i];});
+			
+            // draw legend text
+            legend.append("text")
+            .data(seq) 
+            .attr('class', 'legend_text')
+            .attr("x", 40)
+            .attr("y", 9)
+            .attr("dy", ".5em")
+            .attr("fill", 'white')
+            .style("text-anchor", "start")
+            .text(function (d,i) {return legend_name1[i];});
+        };
+
+        // @数据处理
+        d3.csv('./static/data/hubei_data.csv').then(function(data){
+            data = data.filter(datum => {return datum['地区'] !== '总计'});
+
+            // remove duplicated items; 
+            alldates = Array.from(new Set(data.map( datum => datum['日期'])));
+
+            // make sure dates are listed according to real time order; 
+            alldates = alldates.sort(function(a,b){
+                // turn your strings into dates, and then subtract them
+                // to get a value that is either negative, positive, or zero.
+                return new Date(b.date) - new Date(a.date);
+            });
+            dates = alldates;
+
+            // re-arrange the data sequentially; 
+            sequential = []; 
+            alldates.forEach(datum => {
+                sequential.push([]);
+            });
+            data.forEach(datum => {
+                sequential[alldates.indexOf(datum['日期'])].push(datum);
+            });
+
+            // initialize the chart; 
+            renderinit(data, sequential[0]);
+        });
+    </script>
+  </body>
+</html>

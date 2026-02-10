@@ -1,0 +1,81 @@
+--------------------Configuration: GA算法实数 - Win32 Debug--------------------
+Begining build with project "D:\yjf\MyProjects\转炉程序\优化操作\GA算法实数\GA算法实数.DSP", at root.
+Active configuration is Win32 (x86) Console Application (based on Win32 (x86) Console Application)
+
+Project's tools are:
+			"32-bit C/C++ Compiler for 80x86" with flags "/nologo /MLd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/GA算法实数.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /c "
+			"Win32 Resource Compiler" with flags "/l 0x804 /d "_DEBUG" "
+			"Browser Database Maker" with flags "/nologo /o"Debug/GA算法实数.bsc" "
+			"COFF Linker for 80x86" with flags "kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/GA算法实数.pdb" /debug /machine:I386 /out:"Debug/GA算法实数.exe" /pdbtype:sept "
+			"Custom Build" with flags ""
+			"<Component 0xa>" with flags ""
+
+Creating temp file "C:\WINDOWS\TEMP\RSP9064.TMP" with contents </nologo /MLd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/GA算法实数.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /c 
+"D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp"
+>
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP9064.TMP" 
+Creating temp file "C:\WINDOWS\TEMP\RSP9065.TMP" with contents <kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/GA算法实数.pdb" /debug /machine:I386 /out:"Debug/GA算法实数.exe" /pdbtype:sept 
+".\Debug\Ga算法实数.obj">
+Creating command line "link.exe @C:\WINDOWS\TEMP\RSP9065.TMP" 
+Compiling...
+Ga算法实数.cpp
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(95) : warning C4102: 'ff' : unreferenced label
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(95) : warning C4101: 'i' : unreferenced local variable
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(95) : warning C4101: 'z' : unreferenced local variable
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(102) : error C2065: 'Rnd' : undeclared identifier
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(159) : error C2040: 'Rnd' : 'int (int)' differs in levels of indirection from 'int'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(160) : error C2296: '/' : bad left operand
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(181) : error C2040: 'Rnd' : 'int (int)' differs in levels of indirection from 'int'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(182) : error C2296: '/' : bad left operand
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(202) : error C2040: 'Rnd' : 'int (int)' differs in levels of indirection from 'int'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(212) : error C2440: '=' : cannot convert from 'int (__cdecl *)(int)' to 'int'
+                                                                  This conversion requires a reinterpret_cast, a C-style cast or function-style cast
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(214) : error C2440: '=' : cannot convert from 'int (__cdecl *)(int)' to 'int'
+                                                                  This conversion requires a reinterpret_cast, a C-style cast or function-style cast
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(222) : error C2440: '=' : cannot convert from 'int (__cdecl *)(int)' to 'int'
+                                                                  This conversion requires a reinterpret_cast, a C-style cast or function-style cast
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(233) : error C2440: '=' : cannot convert from 'int (__cdecl *)(int)' to 'int'
+                                                                  This conversion requires a reinterpret_cast, a C-style cast or function-style cast
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(239) : error C2065: 'random' : undeclared identifier
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(244) : error C2143: syntax error : missing ';' before '}'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(252) : error C2556: 'initialize' : overloaded functions only differ by return type
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(253) : error C2556: 'sort' : overloaded functions only differ by return type
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(254) : error C2501: 'power' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(254) : error C2371: 'power' : redefinition; different basic types
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(255) : error C2501: 'cop' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(255) : error C2371: 'cop' : redefinition; different basic types
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(256) : error C2143: syntax error : missing ';' before 'do'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(260) : error C2501: 'cop' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(260) : error C2371: 'cop' : redefinition; different basic types
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(261) : error C2501: 'power' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(261) : error C2371: 'power' : redefinition; different basic types
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(262) : error C2501: 'cop' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(262) : error C2371: 'cop' : redefinition; different basic types
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(263) : error C2143: syntax error : missing ';' before '}'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(265) : error C2501: 'power' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(265) : error C2371: 'power' : redefinition; different basic types
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(266) : error C2143: syntax error : missing ';' before 'for'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(266) : error C2501: 'q' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(266) : error C2239: unexpected token '<=' following declaration of 'q'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(266) : error C2059: syntax error : '<='
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(266) : error C2501: 'q' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(266) : error C2086: 'q' : redefinition
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(266) : error C2239: unexpected token '++' following declaration of 'q'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(266) : error C2059: syntax error : '++'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(266) : error C2059: syntax error : ')'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(269) : error C2501: 'g' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(269) : error C2371: 'g' : redefinition; different basic types
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(270) : error C2501: 'printf' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(270) : error C2040: 'printf' : 'int' differs in levels of indirection from 'int (const char *,...)'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(271) : error C2501: 'power' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(271) : error C2371: 'power' : redefinition; different basic types
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(272) : error C2501: 'g' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(272) : error C2371: 'g' : redefinition; different basic types
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(273) : error C2501: 'printf' : missing decl-specifiers
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(273) : error C2040: 'printf' : 'int' differs in levels of indirection from 'int (const char *,...)'
+D:\yjf\MyProjects\转炉程序\优化操作\Ga算法实数\Ga算法实数.cpp(274) : error C2143: syntax error : missing ';' before '}'
+Error executing cl.exe.
+
+
+
+GA算法实数.exe - 48 error(s), 3 warning(s)

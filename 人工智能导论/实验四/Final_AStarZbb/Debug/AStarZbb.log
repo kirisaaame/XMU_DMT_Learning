@@ -1,0 +1,30 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1126,5): warning MSB4211: 正在首次将属性“GetTargetPathDependsOn”设置为某个值，但已在“C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets (2243,5)”处使用了该属性。
+cl : 命令行  warning D9035: “Gm”选项已否决，并将在将来的版本中移除
+  StdAfx.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+cl : 命令行  warning D9035: “Gm”选项已否决，并将在将来的版本中移除
+  MainFrm.cpp
+  AStarZbbView.cpp
+  AStarZbbDoc.cpp
+  AStarZbb.cpp
+  AStarPathFind.cpp
+  正在生成代码...
+C:\Users\admin\Desktop\作业\人工智能导论\实验四\Final_AStarZbb\AStarZbbView.cpp(375,21): warning C4018: “<”: 有符号/无符号不匹配
+  (编译源文件“/AStarZbbView.cpp”)
+  
+C:\Users\admin\Desktop\作业\人工智能导论\实验四\Final_AStarZbb\AStarZbbView.cpp(396,21): warning C4018: “<”: 有符号/无符号不匹配
+  (编译源文件“/AStarZbbView.cpp”)
+  
+C:\Users\admin\Desktop\作业\人工智能导论\实验四\Final_AStarZbb\AStarZbbView.cpp(489,21): warning C4018: “<”: 有符号/无符号不匹配
+  (编译源文件“/AStarZbbView.cpp”)
+  
+C:\Users\admin\Desktop\作业\人工智能导论\实验四\Final_AStarZbb\AStarZbbView.cpp(595,21): warning C4018: “<”: 有符号/无符号不匹配
+  (编译源文件“/AStarZbbView.cpp”)
+  
+C:\Users\admin\Desktop\作业\人工智能导论\实验四\Final_AStarZbb\AStarZbb.cpp(60,2): warning C4996: 'CWinApp::Enable3dControls': CWinApp::Enable3dControls is no longer needed. You should remove this call.
+  (编译源文件“/AStarZbb.cpp”)
+  
+C:\Users\admin\Desktop\作业\人工智能导论\实验四\Final_AStarZbb\AStarPathFind.cpp(183,1): warning C4715: “CAStarPathFind::GetDir”: 不是所有的控件路径都返回值
+C:\Users\admin\Desktop\作业\人工智能导论\实验四\Final_AStarZbb\AStarZbbView.cpp(561,1): warning C4715: “CAStarZbbView::GetDirToParent”: 不是所有的控件路径都返回值
+AStarPathFind.obj : warning LNK4075: 忽略“/EDITANDCONTINUE”(由于“/SAFESEH”规范)
+  AStarZbb.vcxproj -> C:\Users\admin\Desktop\作业\人工智能导论\实验四\Final_AStarZbb\Debug\AStarZbb.exe
